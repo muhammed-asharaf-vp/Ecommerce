@@ -1,0 +1,82 @@
+{
+  "users": [
+    {
+      "id": "d712",
+      "firstname": "mohamed",
+      "lastname": " asharaf vp",
+      "email": "dell123afi@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": "ec05",
+      "firstname": "mohamed",
+      "lastname": "nabhan",
+      "email": "nabhan@gmail.com",
+      "password": "zxcvbnm"
+    },
+    {
+      "id": "848d",
+      "firstname": "zxcvbnm",
+      "lastname": "mnbvcxz",
+      "email": "zxcvbnm@gmail.com",
+      "password": "zxcvbnm"
+    },
+    {
+      "id": "6b67",
+      "firstname": "rashid",
+      "lastname": "mohd",
+      "email": "rashid@123",
+      "password": "123"
+    },
+    {
+      "id": "f07f",
+      "firstname": "brid",
+      "lastname": "o",
+      "email": "bridgeon@gmail.com",
+      "password": "12345678"
+    },
+    {
+      "id": "51e9",
+      "firstname": "mohamed",
+      "lastname": "nabhan",
+      "email": "birdd@gmail.com",
+      "password": "12345678"
+    },
+    {
+      "id": "e753",
+      "firstname": "brrri",
+      "lastname": "rrr",
+      "email": "brrrid@gmail.com",
+      "password": "12345678",
+      "cart": [],
+      "wishlist": [],
+      "shippingAddress": {}
+    },
+    {
+      "id": "711e",
+      "email": "brrrid@gmail.com",
+      "password": "zxcvbnm"
+    },
+    {
+      "id": "4433",
+      "firstname": "zxcvbnm",
+      "lastname": " asharaf vp",
+      "email": "dell123@gmail.com",
+      "password": "ashraf",
+      "cart": [],
+      "wishlist": [],
+      "shippingAddress": {}
+    }
+  ],
+
+      "products":[
+        {
+            "name":"",
+            "price":"",
+            "image":""
+        }
+
+      ]
+  
+  
+}
