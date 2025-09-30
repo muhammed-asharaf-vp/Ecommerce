@@ -162,96 +162,402 @@
       "role": "user"
     }
   ],
+
   "products": [
     {
+      "id": "001",
       "name": "Rado Captain Cook",
-      "price": "1950",
-      "image": "https://www.rado.com/media/catalog/product/c/a/captaincook_r32190153_sld_web_1.png?im=AspectCrop=(1300,1300),allowExpansion,location=(0.5,0.5);Resize=(1300,1300),aspect=fill;Crop=(0,0,1300,1300),gravity=Center",
-      "id": "082c",
+      "description": "Rado Captain Cook revives a vintage diving icon with modern flair. Featuring a rotating bezel, domed sapphire crystal, and automatic movement, it's a bold blend of heritage design and contemporary craftsmanship—perfect for adventure seekers with style.",
+      "price": 1950,
+      "count": 10,
+      "category": "men's",
+      "images": [
+        "https://i.pinimg.com/736x/a2/94/13/a29413f772e2e96332b8ab51a073573f.jpg"
+      ],
       "warranty": "2 year",
-      "description": "Rado Captain Cook revives a vintage diving icon with modern flair. Featuring a rotating bezel, domed sapphire crystal, and automatic movement, it’s a bold blend of heritage design and contemporary craftsmanship—perfect for adventure seekers with style.",
-      "catogary": "men's"
+      "isActive": true,
+      "created_at": "2025-09-30T11:00:00Z"
     },
     {
-      "id": "101a",
+      "id": "002",
+      "name": "Rado True Thinline",
+      "description": "Sleek, ultra-thin ceramic watch from Rado's True collection, perfect for minimalists.",
+      "price": 2200,
+      "count": 10,
+      "category": "men's",
+      "images": [
+        "https://i.pinimg.com/736x/06/58/51/06585185ff65485ed2139462fe653f6c.jpg"
+      ],
+      "warranty": "2 year",
+      "isActive": true,
+      "created_at": "2025-09-30T11:00:00Z"
+    },
+    {
+      "id": "003",
+      "name": "Rado HyperChrome",
+      "description": "Dynamic sports watch with ceramic and stainless steel case, combining style and durability.",
+      "price": 2500,
+      "count": 10,
+      "category": "men's",
+      "images": [
+        "https://i.pinimg.com/736x/fb/66/69/fb6669571a89381cf37f5c360f0c16db.jpg"
+      ],
+      "warranty": "3 year",
+      "isActive": true,
+      "created_at": "2025-09-30T11:00:00Z"
+    },
+    {
+      "id": "w001",
+      "name": "Rado True Thinline Ladies",
+      "description": "Ultra-thin ceramic watch for women, elegant and minimalist design.",
+      "price": 2100,
+      "count": 10,
+      "category": "women's",
+      "images": [
+        "https://i.pinimg.com/736x/2e/a7/51/2ea751c0ac37a64a28f4883351e29ac8.jpg"
+      ],
+      "warranty": "2 year",
+      "isActive": true,
+      "created_at": "2025-09-30T11:15:00Z"
+    },
+    {
+      "id": "w002",
+      "name": "Rado Coupole Classic Ladies",
+      "description": "Classic design with a touch of elegance, perfect for everyday wear.",
+      "price": 1800,
+      "count": 10,
+      "category": "women's",
+      "images": [
+       "https://i.pinimg.com/1200x/54/df/4f/54df4fec1f4b0c7fd233c622522e662e.jpg"
+      ],
+      "warranty": "2 year",
+      "isActive": true,
+      "created_at": "2025-09-30T11:15:00Z"
+    },
+    {
+      "id": "w003",
+      "name": "Rado Centrix Automatic Ladies",
+      "description": "Stylish and functional, features automatic movement with a sleek bracelet.",
+      "price": 2200,
+      "count": 10,
+      "category": "women's",
+      "images": [
+      "https://i.pinimg.com/1200x/54/df/4f/54df4fec1f4b0c7fd233c622522e662e.jpg"      ],
+      "warranty": "3 year",
+      "isActive": true,
+      "created_at": "2025-09-30T11:15:00Z"
+    },
+    {
+      "id": "r001",
       "name": "Rolex Submariner",
-      "price": "8500",
-      "image": "https://content.rolex.com/dam/2020/upright-bba-with-shadow/m124060-0001.png",
+      "description": "Legendary dive watch, waterproof Oyster case, timeless design.",
+      "price": 8500,
+      "count": 10,
+      "category": "men's",
+      "images": [
+"https://i.pinimg.com/736x/b9/fa/6a/b9fa6a9e6807e061355073effc94f688.jpg"      ],
       "warranty": "5 year",
-      "description": "The Rolex Submariner is the legendary dive watch, renowned for its waterproof Oyster case and timeless design.",
-      "category": "men's"
+      "isActive": true,
+      "created_at": "2025-09-30T11:45:00Z"
     },
     {
-      "id": "102b",
-      "name": "Omega Speedmaster Moonwatch",
-      "price": "5200",
-      "image": "https://www.omegawatches.com/media/catalog/product/cache/1/image/800x/040ec09b1e35df139433887a97daa66f/o/m/omega-speedmaster-moonwatch-professional-31030425001001-l.png",
+      "id": "r002",
+      "name": "Rolex Daytona",
+      "description": "Iconic chronograph with high-performance automatic movement.",
+      "price": 12000,
+      "count": 10,
+      "category": "men's",
+      "images": [
+"https://i.pinimg.com/736x/e7/9b/07/e79b07190fe42c8f9691a8212d96385a.jpg"      ],
       "warranty": "5 year",
-      "description": "Famous for being the first watch worn on the moon, the Omega Speedmaster Moonwatch blends history with precision.",
-      "category": "men's"
+      "isActive": true,
+      "created_at": "2025-09-30T11:45:00Z"
     },
     {
-      "id": "103c",
-      "name": "TAG Heuer Carrera",
-      "price": "3900",
-      "image": "https://www.tagheuer.com/on/demandware.static/-/Sites-tagheuer-master/default/dwce6df5c2/TAG_HEUER_CARRERA_CBN2011.BA0642_0913.png",
+      "id": "r003",
+      "name": "Rolex GMT-Master II",
+      "description": "Dual time zone functionality, classic sporty design.",
+      "price": 10500,
+      "count": 10,
+      "category": "men's",
+      "images": [
+"https://i.pinimg.com/1200x/54/fd/c8/54fdc8122732e3f6f879eccb4f0a8676.jpg"      ],
+      "warranty": "5 year",
+      "isActive": true,
+      "created_at": "2025-09-30T11:45:00Z"
+    },
+    {
+      "id": "rw001",
+      "name": "Rolex Lady-Datejust 28",
+      "description": "Elegant 28mm Lady-Datejust with stainless steel and gold finish, perfect for everyday luxury.",
+      "price": 7500,
+      "count": 10,
+      "category": "women's",
+      "images": [
+"https://i.pinimg.com/1200x/04/f1/60/04f160a7c81914ed378fd1fd281d9aba.jpg"      ],
+      "warranty": "5 year",
+      "isActive": true,
+      "created_at": "2025-09-30T12:00:00Z"
+    },
+    {
+      "id": "rw002",
+      "name": "Rolex Pearlmaster 34",
+      "description": "Pearlmaster series with diamond-set bezel and exquisite elegance.",
+      "price": 12000,
+      "count": 10,
+      "category": "women's",
+      "images": [
+"https://i.pinimg.com/1200x/71/5e/f7/715ef7b6f66ecc63438a1f76358c7e87.jpg"      ],
+      "warranty": "5 year",
+      "isActive": true,
+      "created_at": "2025-09-30T12:00:00Z"
+    },
+    {
+      "id": "rw003",
+      "name": "Rolex Datejust 31",
+      "description": "Classic Datejust for women with fluted bezel and polished bracelet.",
+      "price": 8000,
+      "count": 10,
+      "category": "women's",
+      "images": [
+"https://i.pinimg.com/736x/b9/fa/6a/b9fa6a9e6807e061355073effc94f688.jpg"      ],
+      "warranty": "5 year",
+      "isActive": true,
+      "created_at": "2025-09-30T12:00:00Z"
+    },
+    {
+      "id": "o001",
+      "name": "Omega Speedmaster Professional",
+      "description": "Famous for being the first watch worn on the moon, a classic chronograph.",
+      "price": 5200,
+      "count": 10,
+      "category": "men's",
+      "images": [
+"https://i.pinimg.com/1200x/ee/16/d4/ee16d4aa63e9fab12684b9246e91c8f4.jpg"      ],
+      "warranty": "5 year",
+      "isActive": true,
+      "created_at": "2025-09-30T12:00:00Z"
+    },
+    {
+      "id": "o002",
+      "name": "Omega Seamaster Diver 300M",
+      "description": "Professional diving watch with helium escape valve and ceramic bezel.",
+      "price": 4800,
+      "count": 10,
+      "category": "men's",
+      "images": [
+"https://i.pinimg.com/1200x/53/2e/5e/532e5e3043422660816baec164414331.jpg"      ],
+      "warranty": "5 year",
+      "isActive": true,
+      "created_at": "2025-09-30T12:00:00Z"
+    },
+    {
+      "id": "o003",
+      "name": "Omega Seamaster Aqua Terra",
+      "description": "Elegant sports watch with clean design and water resistance.",
+      "price": 4500,
+      "count": 10,
+      "category": "men's",
+      "images": [
+"https://i.pinimg.com/1200x/b1/ed/53/b1ed53d96dc5251deb62a327e0af30f2.jpg"      ],
+      "warranty": "5 year",
+      "isActive": true,
+      "created_at": "2025-09-30T12:00:00Z"
+    },
+    {
+      "id": "ow001",
+      "name": "Omega Constellation Ladies",
+      "description": "Elegant Constellation series with mother-of-pearl dial.",
+      "price": 4800,
+      "count": 10,
+      "category": "women's",
+      "images": [
+"https://i.pinimg.com/1200x/df/22/8d/df228df8d7a92a06d2343173c173b3b1.jpg"      ],
+      "warranty": "5 year",
+      "isActive": true,
+      "created_at": "2025-09-30T12:00:00Z"
+    },
+    {
+      "id": "ow002",
+      "name": "Omega De Ville Ladymatic",
+      "description": "Luxury automatic watch with diamond-set bezel for women.",
+      "price": 7500,
+      "count": 10,
+      "category": "women's",
+      "images": [
+"https://i.pinimg.com/1200x/94/9d/cd/949dcda29c74ad012a18bc6d7ea22715.jpg"      ],
+      "warranty": "5 year",
+      "isActive": true,
+      "created_at": "2025-09-30T12:00:00Z"
+    },
+    {
+      "id": "ow003",
+      "name": "Omega Seamaster Aqua Terra Ladies",
+      "description": "Sporty yet elegant, perfect for everyday wear.",
+      "price": 5000,
+      "count": 10,
+      "category": "women's",
+      "images": [
+"https://i.pinimg.com/1200x/1a/9b/67/1a9b67f5f29001aeceb61ab8366663a1.jpg"      ],
+      "warranty": "5 year",
+      "isActive": true,
+      "created_at": "2025-09-30T12:00:00Z"
+    },
+    {
+      "id": "thm001",
+      "name": "TAG Heuer Carrera Calibre 16",
+      "description": "Motorsport-inspired chronograph with automatic movement.",
+      "price": 4200,
+      "count": 10,
+      "category": "men's",
+      "images": [
+"https://i.pinimg.com/1200x/bf/ff/d6/bfffd66cc36a9c9ca81d0cbd0ee1dfc4.jpg"      ],
       "warranty": "3 year",
-      "description": "The Carrera is a motorsport-inspired chronograph with a clean dial and high-performance movement.",
-      "category": "men's"
+      "isActive": true,
+      "created_at": "2025-09-30T12:00:00Z"
     },
     {
-      "id": "104d",
-      "name": "Cartier Tank Solo",
-      "price": "3100",
-      "image": "https://www.cartier.com/content/dam/cartier/sku/WSTA0029-cartier-tank-solo-watch.png",
-      "warranty": "2 year",
-      "description": "Cartier’s Tank Solo is an elegant timepiece with its iconic rectangular case and refined design.",
-      "category": "women's"
-    },
-    {
-      "id": "105e",
-      "name": "Seiko Presage Cocktail Time",
-      "price": "450",
-      "image": "https://seikousa.com/cdn/shop/products/SRPB43_1.png",
-      "warranty": "2 year",
-      "description": "Inspired by cocktail bars, this Seiko Presage offers fine mechanical watchmaking at an accessible price.",
-      "category": "men's"
-    },
-    {
-      "id": "106f",
-      "name": "Citizen Eco-Drive Chronograph",
-      "price": "375",
-      "image": "https://www.citizenwatch.com/us/en/product_images/CA0649-06X.png",
+      "id": "thm002",
+      "name": "TAG Heuer Monaco",
+      "description": "Square-cased racing chronograph with iconic design.",
+      "price": 5100,
+      "count": 10,
+      "category": "men's",
+      "images": [
+"https://i.pinimg.com/1200x/f2/d1/a3/f2d1a314e8f0267b54659aaa49196457.jpg"      ],
       "warranty": "3 year",
-      "description": "Powered by light, Citizen Eco-Drive watches never need a battery change, combining style with sustainability.",
-      "category": "men's"
+      "isActive": true,
+      "created_at": "2025-09-30T12:00:00Z"
     },
     {
-      "id": "107g",
-      "name": "Casio G-Shock Mudmaster",
-      "price": "300",
-      "image": "https://productimages.g-shock.com/715x800/GG-B100-1A3.png",
+      "id": "thm003",
+      "name": "TAG Heuer Aquaracer",
+      "description": "Professional diving watch with 300m water resistance.",
+      "price": 2500,
+      "count": 10,
+      "category": "men's",
+      "images": [
+"https://i.pinimg.com/736x/ff/c8/c4/ffc8c4592c8f2a9992113f61aebbc1d5.jpg"      ],
+      "warranty": "3 year",
+      "isActive": true,
+      "created_at": "2025-09-30T12:00:00Z"
+      },
+    {
+      "id": "thw001",
+      "name": "TAG Heuer Carrera Lady",
+      "description": "Elegant ladies Carrera watch with polished steel bracelet.",
+      "price": 3800,
+      "count": 10,
+      "category": "women's",
+      "images": [
+"https://i.pinimg.com/1200x/b3/40/8c/b3408c151187dd2fc744645e42857875.jpg"      ],
+      "warranty": "3 year",
+      "isActive": true,
+      "created_at": "2025-09-30T12:30:00Z"
+    },
+    {
+      "id": "thw002",
+      "name": "TAG Heuer Aquaracer Lady",
+      "description": "Water-resistant diving watch with feminine design.",
+      "price": 2500,
+      "count": 10,
+      "category": "women's",
+      "images": [
+"https://i.pinimg.com/1200x/d8/76/d9/d876d9df0caa12f918521274d39758a3.jpg"      ],
+      "warranty": "3 year",
+      "isActive": true,
+      "created_at": "2025-09-30T12:30:00Z"
+    },
+    {
+      "id": "thw003",
+      "name": "TAG Heuer Formula 1 Lady",
+      "description": "Colorful sporty watch designed for active women.",
+      "price": 1800,
+      "count": 10,
+      "category": "women's",
+      "images": [
+"https://i.pinimg.com/1200x/b3/40/8c/b3408c151187dd2fc744645e42857875.jpg"      ],
+      "warranty": "3 year",
+      "isActive": true,
+      "created_at": "2025-09-30T12:30:00Z"
+    },
+    {
+      "id": "cm001",
+      "name": "Cartier Santos de Cartier",
+      "description": "Iconic square watch with leather strap and automatic movement.",
+      "price": 6000,
+      "count": 10,
+      "category": "men's",
+      "images": [
+"https://i.pinimg.com/1200x/ee/f0/2e/eef02e93a515a01dded10c2ec47006cf.jpg"      ],
       "warranty": "2 year",
-      "description": "Built for the toughest environments, the G-Shock Mudmaster is shock-resistant, mud-resistant, and adventure-ready.",
-      "category": "men's"
+      "isActive": true,
+      "created_at": "2025-09-30T12:45:00Z"
     },
     {
-      "id": "108h",
-      "name": "Fossil Jacqueline",
-      "price": "120",
-      "image": "https://fossil.scene7.com/is/image/FossilPartners/ES3546_main?$sfcc_fos_large$",
+      "id": "cm002",
+      "name": "Cartier Ballon Bleu",
+      "description": "Elegant round watch with blue sapphire crown.",
+      "price": 7200,
+      "count": 10,
+      "category": "men's",
+      "images": [
+"https://i.pinimg.com/1200x/b5/b5/64/b5b56429d5cad33375cda1173af5f3b4.jpg"      ],
       "warranty": "2 year",
-      "description": "A feminine and versatile timepiece with a slim leather strap and clean dial, perfect for everyday wear.",
-      "category": "women's"
+      "isActive": true,
+      "created_at": "2025-09-30T12:45:00Z"
     },
     {
-      "id": "109i",
-      "name": "Apple Watch Series 9",
-      "price": "399",
-      "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MQKX3ref_VW_34FR+watch-case-45-aluminum-starlight-cell-9s_VW_34FR+watch-face-45-aluminum-starlight-cell-9s_VW_34FR_GEO_EMEA_LANG_EN?wid=940&hei=1112&fmt=png-alpha&.v=1693491182086",
-      "warranty": "1 year",
-      "description": "Apple’s latest smartwatch with advanced health tracking, fitness features, and seamless iPhone integration.",
-      "category": "unisex"
+      "id": "cm003",
+      "name": "Cartier Calibre de Cartier",
+      "description": "Luxury men's chronograph with refined mechanical movement.",
+      "price": 8500,
+      "count": 10,
+      "category": "men's",
+      "images": [
+"https://i.pinimg.com/1200x/de/9b/bc/de9bbc229a9cecb0ce83ce7c634f256a.jpg"      ],
+      "warranty": "2 year",
+      "isActive": true,
+      "created_at": "2025-09-30T12:45:00Z"
+    },
+    {
+      "id": "cw001",
+      "name": "Cartier Ballon Bleu Lady",
+      "description": "Round watch for women with delicate design and blue sapphire crown.",
+      "price": 5200,
+      "count": 10,
+      "category": "women's",
+      "images": [
+"https://i.pinimg.com/1200x/a8/e5/77/a8e57741aa83ac05b320fb90ead12432.jpg"      ],
+      "warranty": "2 year",
+      "isActive": true,
+      "created_at": "2025-09-30T12:55:00Z"
+    },
+    {
+      "id": "cw002",
+      "name": "Cartier Panthère de Cartier",
+      "description": "Iconic square watch with flexible bracelet.",
+      "price": 6800,
+      "count": 10,
+      "category": "women's",
+      "images": [
+"https://i.pinimg.com/1200x/8d/e1/d4/8de1d423a0643b1a390c74bb23be81f5.jpg"      ],
+      "warranty": "2 year",
+      "isActive": true,
+      "created_at": "2025-09-30T12:55:00Z"
+    },
+    {
+      "id": "cw003",
+      "name": "Cartier Tank Française",
+      "description": "Elegant rectangular watch with steel bracelet.",
+      "price": 5400,
+      "count": 10,
+      "category": "women's",
+      "images": [
+"https://i.pinimg.com/1200x/7d/1e/65/7d1e65a5b7190a1ab0e3f0d9449658e0.jpg"      ],
+      "warranty": "2 year",
+      "isActive": true,
+      "created_at": "2025-09-30T12:55:00Z"
     }
   ]
 }

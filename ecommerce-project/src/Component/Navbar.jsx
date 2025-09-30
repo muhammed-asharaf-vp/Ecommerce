@@ -13,16 +13,14 @@ function Navbar() {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-    // If you have a logout function in AuthContext, use it here
-    // For example: logout();
     navigate("/login");
-    setIsOpen(false); // Close modal after logout
-    setIsProfileDropdownOpen(false); // Close dropdown after logout
+    setIsOpen(false);
+    setIsProfileDropdownOpen(false);
   };
 
   const handleNavigation = (path) => {
     navigate(path);
-    setIsOpen(false); // Close modal after navigation
+    setIsOpen(false);
   };
 
   const toggleProfileDropdown = () => {
@@ -32,7 +30,6 @@ function Navbar() {
   return (
     <nav className="w-full bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between py-4 px-6">
-        
         {/* Logo */}
         <div
           className="flex items-center cursor-pointer"
@@ -73,14 +70,29 @@ function Navbar() {
           </li>
         </ul>
 
-        {/* Icons + Login (Desktop) */}
+        {/* Icons + Profile (Desktop) */}
         <div className="hidden md:flex items-center space-x-6 text-xl text-gray-700">
           <FaSearch className="cursor-pointer hover:text-yellow-600 transition-colors" />
-          
+
+          {/* Wishlist */}
+          <div className="relative cursor-pointer hover:text-yellow-600 transition-colors">
+            <FaHeart />
+            <span className="absolute -top-2 -right-2 bg-yellow-600 text-white text-xs px-[6px] rounded-full shadow">
+              0
+            </span>
+          </div>
+
+          {/* Cart */}
+          <div className="relative cursor-pointer hover:text-yellow-600 transition-colors">
+            <FaShoppingBag />
+            <span className="absolute -top-2 -right-2 bg-yellow-600 text-white text-xs px-[6px] rounded-full shadow">
+              0
+            </span>
+          </div>
+
           {/* Profile or Login */}
           {user ? (
             <div className="relative">
-              {/* Profile Icon with Dropdown */}
               <div 
                 className="flex items-center space-x-2 cursor-pointer hover:text-yellow-600 transition-colors"
                 onClick={toggleProfileDropdown}
@@ -132,22 +144,6 @@ function Navbar() {
               Login
             </button>
           )}
-
-          {/* Wishlist */}
-          <div className="relative cursor-pointer hover:text-yellow-600 transition-colors">
-            <FaHeart />
-            <span className="absolute -top-2 -right-2 bg-yellow-600 text-white text-xs px-[6px] rounded-full shadow">
-              0
-            </span>
-          </div>
-
-          {/* Cart */}
-          <div className="relative cursor-pointer hover:text-yellow-600 transition-colors">
-            <FaShoppingBag />
-            <span className="absolute -top-2 -right-2 bg-yellow-600 text-white text-xs px-[6px] rounded-full shadow">
-              0
-            </span>
-          </div>
         </div>
 
         {/* Mobile Menu Button */}
@@ -210,69 +206,64 @@ function Navbar() {
               </ul>
 
               {/* Icons Section */}
-              <div className="p-4 border-t">
-                <div className="flex justify-around text-xl text-gray-700 mb-4">
-                  <FaSearch className="cursor-pointer hover:text-yellow-600 transition-colors p-2" />
-                  <FaUser className="cursor-pointer hover:text-yellow-600 transition-colors p-2" />
-                  <div className="relative cursor-pointer hover:text-yellow-600 transition-colors p-2">
-                    <FaHeart />
-                    <span className="absolute -top-1 -right-1 bg-yellow-600 text-white text-xs px-[6px] rounded-full shadow">
-                      0
-                    </span>
+              <div className="p-4 border-t flex justify-around text-xl text-gray-700 mb-4">
+                <FaSearch className="cursor-pointer hover:text-yellow-600 transition-colors p-2" />
+                <div className="relative cursor-pointer hover:text-yellow-600 transition-colors p-2">
+                  <FaHeart />
+                  <span className="absolute -top-1 -right-1 bg-yellow-600 text-white text-xs px-[6px] rounded-full shadow">
+                    0
+                  </span>
+                </div>
+                <div className="relative cursor-pointer hover:text-yellow-600 transition-colors p-2">
+                  <FaShoppingBag />
+                  <span className="absolute -top-1 -right-1 bg-yellow-600 text-white text-xs px-[6px] rounded-full shadow">
+                    0
+                  </span>
+                </div>
+              </div>
+
+              {/* Profile Section (Mobile, always last) */}
+              {user ? (
+                <div className="space-y-3 p-4">
+                  <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                    <div className="flex items-center justify-center w-10 h-10 bg-yellow-600 text-white rounded-full">
+                      <FaUser className="text-sm" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-gray-800">{user.firstname} {user.lastname}</p>
+                      <p className="text-sm text-gray-500">Welcome back!</p>
+                    </div>
                   </div>
-                  <div className="relative cursor-pointer hover:text-yellow-600 transition-colors p-2">
-                    <FaShoppingBag />
-                    <span className="absolute -top-1 -right-1 bg-yellow-600 text-white text-xs px-[6px] rounded-full shadow">
-                      0
-                    </span>
+                  <div className="space-y-2">
+                    <button
+                      onClick={() => handleNavigation("/profile")}
+                      className="w-full text-left py-2 px-4 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                    >
+                      My Profile
+                    </button>
+                    <button
+                      onClick={() => handleNavigation("/orders")}
+                      className="w-full text-left py-2 px-4 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                    >
+                      My Orders
+                    </button>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left py-2 px-4 text-red-600 hover:bg-red-50 rounded-lg transition-colors flex items-center space-x-2"
+                    >
+                      <FaSignOutAlt className="text-xs" />
+                      <span>Logout</span>
+                    </button>
                   </div>
                 </div>
-
-                {/* User Section */}
-                {user ? (
-                  <div className="space-y-3">
-                    <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
-                      <div className="flex items-center justify-center w-10 h-10 bg-yellow-600 text-white rounded-full">
-                        <FaUser className="text-sm" />
-                      </div>
-                      <div>
-                        <p className="font-medium text-gray-800">
-                          {user.firstname} {user.lastname}
-                        </p>
-                        <p className="text-sm text-gray-500">Welcome back!</p>
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <button
-                        onClick={() => handleNavigation("/profile")}
-                        className="w-full text-left py-2 px-4 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
-                      >
-                        My Profile
-                      </button>
-                      <button
-                        onClick={() => handleNavigation("/orders")}
-                        className="w-full text-left py-2 px-4 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
-                      >
-                        My Orders
-                      </button>
-                      <button
-                        onClick={handleLogout}
-                        className="w-full text-left py-2 px-4 text-red-600 hover:bg-red-50 rounded-lg transition-colors flex items-center space-x-2"
-                      >
-                        <FaSignOutAlt className="text-xs" />
-                        <span>Logout</span>
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  <button
-                    onClick={() => handleNavigation("/")}
-                    className="w-full py-3 bg-yellow-600 text-white font-medium rounded-lg shadow-md hover:bg-yellow-700 transition-colors"
-                  >
-                    Login
-                  </button>
-                )}
-              </div>
+              ) : (
+                <button
+                  onClick={() => handleNavigation("/login")}
+                  className="w-full py-3 bg-yellow-600 text-white font-medium rounded-lg shadow-md hover:bg-yellow-700 transition-colors"
+                >
+                  Login
+                </button>
+              )}
             </div>
           </div>
 
