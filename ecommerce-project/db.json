@@ -65,18 +65,193 @@
       "password": "ashraf",
       "cart": [],
       "wishlist": [],
+      "order": [],
+      "shippingAddress": []
+    },
+    {
+      "id": "acac",
+      "email": "xsssdxnx@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": "0b8a",
+      "email": "nabhan@gmail.com",
+      "password": "zxcvbnm"
+    },
+    {
+      "id": "aa4f",
+      "email": "nabhan@gmail.com",
+      "password": "zxcvbnm"
+    },
+    {
+      "id": "fb38",
+      "firstname": "zxcvbnm",
+      "lastname": " asharaf vp",
+      "email": "davis@gmail.com",
+      "password": "12345678",
+      "cart": [],
+      "wishlist": [],
       "shippingAddress": {}
+    },
+    {
+      "id": "2958",
+      "firstname": "briddd",
+      "lastname": "on",
+      "email": "bridgeon123@gmail.com",
+      "password": "12345678",
+      "cart": [],
+      "wishlist": [],
+      "shippingAddress": {}
+    },
+    {
+      "id": "2a8b",
+      "firstname": "mohamed",
+      "lastname": "nabhan",
+      "email": "raashid@gmail.com",
+      "password": "12345678",
+      "cart": [],
+      "wishlist": [],
+      "shippingAddress": {}
+    },
+    {
+      "id": "55a3",
+      "firstname": "mohamed",
+      "lastname": "mnbvcxz",
+      "email": "bbbrid@gmail.com",
+      "password": "12345678",
+      "cart": [],
+      "wishlist": [],
+      "shippingAddress": [],
+      "order": [],
+      "role": "user"
+    },
+    {
+      "id": "8819",
+      "firstname": "mohamed",
+      "lastname": "Rinshad",
+      "email": "rinshad@gmail.com",
+      "password": "12345678",
+      "cart": [],
+      "wishlist": [],
+      "shippingAddress": [],
+      "order": [],
+      "role": "user"
+    },
+    {
+      "id": "7a37",
+      "firstname": "hii",
+      "lastname": "wow",
+      "email": "hy@gmail.com",
+      "password": "12345678",
+      "cart": [],
+      "wishlist": [],
+      "shippingAddress": [],
+      "order": [],
+      "role": "user"
+    },
+    {
+      "id": "3426",
+      "firstname": "sahilll",
+      "lastname": "kc",
+      "email": "sahil@gmail.com",
+      "password": "12345678",
+      "cart": [],
+      "wishlist": [],
+      "shippingAddress": [],
+      "order": [],
+      "role": "user"
     }
   ],
-
-      "products":[
-        {
-            "name":"",
-            "price":"",
-            "image":""
-        }
-
-      ]
-  
-  
+  "products": [
+    {
+      "name": "Rado Captain Cook",
+      "price": "1950",
+      "image": "https://www.rado.com/media/catalog/product/c/a/captaincook_r32190153_sld_web_1.png?im=AspectCrop=(1300,1300),allowExpansion,location=(0.5,0.5);Resize=(1300,1300),aspect=fill;Crop=(0,0,1300,1300),gravity=Center",
+      "id": "082c",
+      "warranty": "2 year",
+      "description": "Rado Captain Cook revives a vintage diving icon with modern flair. Featuring a rotating bezel, domed sapphire crystal, and automatic movement, it’s a bold blend of heritage design and contemporary craftsmanship—perfect for adventure seekers with style.",
+      "catogary": "men's"
+    },
+    {
+      "id": "101a",
+      "name": "Rolex Submariner",
+      "price": "8500",
+      "image": "https://content.rolex.com/dam/2020/upright-bba-with-shadow/m124060-0001.png",
+      "warranty": "5 year",
+      "description": "The Rolex Submariner is the legendary dive watch, renowned for its waterproof Oyster case and timeless design.",
+      "category": "men's"
+    },
+    {
+      "id": "102b",
+      "name": "Omega Speedmaster Moonwatch",
+      "price": "5200",
+      "image": "https://www.omegawatches.com/media/catalog/product/cache/1/image/800x/040ec09b1e35df139433887a97daa66f/o/m/omega-speedmaster-moonwatch-professional-31030425001001-l.png",
+      "warranty": "5 year",
+      "description": "Famous for being the first watch worn on the moon, the Omega Speedmaster Moonwatch blends history with precision.",
+      "category": "men's"
+    },
+    {
+      "id": "103c",
+      "name": "TAG Heuer Carrera",
+      "price": "3900",
+      "image": "https://www.tagheuer.com/on/demandware.static/-/Sites-tagheuer-master/default/dwce6df5c2/TAG_HEUER_CARRERA_CBN2011.BA0642_0913.png",
+      "warranty": "3 year",
+      "description": "The Carrera is a motorsport-inspired chronograph with a clean dial and high-performance movement.",
+      "category": "men's"
+    },
+    {
+      "id": "104d",
+      "name": "Cartier Tank Solo",
+      "price": "3100",
+      "image": "https://www.cartier.com/content/dam/cartier/sku/WSTA0029-cartier-tank-solo-watch.png",
+      "warranty": "2 year",
+      "description": "Cartier’s Tank Solo is an elegant timepiece with its iconic rectangular case and refined design.",
+      "category": "women's"
+    },
+    {
+      "id": "105e",
+      "name": "Seiko Presage Cocktail Time",
+      "price": "450",
+      "image": "https://seikousa.com/cdn/shop/products/SRPB43_1.png",
+      "warranty": "2 year",
+      "description": "Inspired by cocktail bars, this Seiko Presage offers fine mechanical watchmaking at an accessible price.",
+      "category": "men's"
+    },
+    {
+      "id": "106f",
+      "name": "Citizen Eco-Drive Chronograph",
+      "price": "375",
+      "image": "https://www.citizenwatch.com/us/en/product_images/CA0649-06X.png",
+      "warranty": "3 year",
+      "description": "Powered by light, Citizen Eco-Drive watches never need a battery change, combining style with sustainability.",
+      "category": "men's"
+    },
+    {
+      "id": "107g",
+      "name": "Casio G-Shock Mudmaster",
+      "price": "300",
+      "image": "https://productimages.g-shock.com/715x800/GG-B100-1A3.png",
+      "warranty": "2 year",
+      "description": "Built for the toughest environments, the G-Shock Mudmaster is shock-resistant, mud-resistant, and adventure-ready.",
+      "category": "men's"
+    },
+    {
+      "id": "108h",
+      "name": "Fossil Jacqueline",
+      "price": "120",
+      "image": "https://fossil.scene7.com/is/image/FossilPartners/ES3546_main?$sfcc_fos_large$",
+      "warranty": "2 year",
+      "description": "A feminine and versatile timepiece with a slim leather strap and clean dial, perfect for everyday wear.",
+      "category": "women's"
+    },
+    {
+      "id": "109i",
+      "name": "Apple Watch Series 9",
+      "price": "399",
+      "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MQKX3ref_VW_34FR+watch-case-45-aluminum-starlight-cell-9s_VW_34FR+watch-face-45-aluminum-starlight-cell-9s_VW_34FR_GEO_EMEA_LANG_EN?wid=940&hei=1112&fmt=png-alpha&.v=1693491182086",
+      "warranty": "1 year",
+      "description": "Apple’s latest smartwatch with advanced health tracking, fitness features, and seamless iPhone integration.",
+      "category": "unisex"
+    }
+  ]
 }

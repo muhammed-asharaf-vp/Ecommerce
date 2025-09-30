@@ -1,48 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios"; // import axios
+import api from "../Api/Axios"; // axios instance
 import logo from "../assets/new.png";
-import api from "../Api/Axios";
+import { AuthContext } from "../Context/AuthContext"; // import context
+import { FaEye,FaEyeSlash } from "react-icons/fa";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext); // get login from context
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validation
     if (!email.includes("@")) {
       setError("Enter a valid email");
       return;
     }
-
     if (password.length < 6) {
       setError("Password must be at least 6 characters");
       return;
     }
 
-     try {
-    const response = await api.post("/users", {
-      email,
-      password,
-      
-    });
-          
-
-    console.log(response.data)
-
+    try {
+      // Fetch users matching email & password
+      const response = await api.get(`/users?email=${email}&password=${password}`);
       const data = response.data;
 
       if (data.length === 0) {
-        setError("User not found. Please Sign Up first.");
+        setError("Invalid email or password. Please Sign Up first.");
         return;
       }
 
-      // Success
+      // ✅ Save user in Context + localStorage
+      login(data[0]);
+
+      // Clear error & redirect
       setError("");
-      navigate("/home");
+      navigate("/");
     } catch (err) {
       console.error(err);
       setError("Something went wrong. Try again.");
@@ -52,7 +50,7 @@ function Login() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-600">
       <div className="w-full max-w-4xl bg-white rounded-2xl shadow-2xl flex overflow-hidden">
-        {/* Left Side - Branding/Illustration */}
+        {/* Left Side - Branding */}
         <div className="hidden md:flex w-1/2 bg-yellow-600 items-center justify-center p-10">
           <div className="text-center text-white">
             <h2 className="text-4xl font-bold mb-4">Welcome Back!</h2>
@@ -84,21 +82,7 @@ function Login() {
             {/* Password */}
             <div>
               <label className="block text-gray-700 font-medium mb-1">Password</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                placeholder="Enter your password"
-              />
-              <div className="text-right mt-1">
-                <a
-                  href="/forget"
-                  className="text-yellow-600 font-medium text-sm hover:underline"
-                >
-                  Forgot Password?
-                </a>
-              </div>
+              <input    type="password"    value={password}    onChange={(e) => setPassword(e.target.value)}  className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"    placeholder="Enter your password"  />
             </div>
 
             {/* Error Message */}
@@ -115,9 +99,12 @@ function Login() {
 
           <p className="text-center text-gray-600 text-sm mt-5">
             Don't have an account?{" "}
-            <a href="/signup" className="text-yellow-600 font-medium hover:underline">
+            <span
+              onClick={() => navigate("/signup")}
+              className="text-yellow-600 font-medium hover:underline cursor-pointer"
+            >
               SignUp
-            </a>
+            </span>
           </p>
         </div>
       </div>

@@ -1,35 +1,24 @@
-import React from 'react'
-import {Routes,Route} from 'react-router-dom'
-import Footer from './Component/Footer'
-import Navbar from './Component/Navbar'
-import Home from './Component/Home'
-import Login from './Pages/Login'
-import SignUp from './Pages/signUp'
-import ForgetPass from './Pages/ForgetPass'
-
-
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Footer from "./Component/Footer";
+import Navbar from "./Component/Navbar";
+import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+import SignUp from "./Pages/signUp";
+import Shop from "./Pages/Shop";
 
 function App() {
   return (
     <div>
-             <Navbar /> 
-     
-             <Routes>
-
-      <Route path='/' element={<Home />} />
-      <Route path='/login' element={<Login />} />
-      <Route path='/signup' element={<SignUp />} />
-      <Route path='/forget' element={<ForgetPass />}/>
-     
-      
- 
-           </Routes>
-      
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/shop" element={<Shop />} />
+      </Routes>
       <Footer />
-   
-      
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
