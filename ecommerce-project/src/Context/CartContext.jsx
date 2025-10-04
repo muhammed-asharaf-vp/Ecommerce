@@ -2,10 +2,13 @@
 import React, { createContext, useState, useEffect } from "react";
 import api from "../Api/Axios";
 import { toast } from "react-toastify";
+import { Navigate, useNavigate } from "react-router-dom";
+
 
 export const CartContext = createContext();
-
 export const CartProvider = ({ children }) => {
+
+
   const user = JSON.parse(localStorage.getItem("user"));
   const userId = user ? user.id : null;
 
@@ -13,7 +16,7 @@ export const CartProvider = ({ children }) => {
 
   useEffect(() => {
     if (!userId) {
-      setCart([]);
+        toast.warning("please login")
       return;
     }
     api
@@ -22,12 +25,13 @@ export const CartProvider = ({ children }) => {
       .catch((err) => console.error("Error loading cart:", err));
   }, [userId]);
 
+
   const addToCart = async (product) => {
     if (!userId) {
       toast.warning("Please login to add items to your cart.");
       return;
     }
-
+toast.success("item add to cart")
     const exists = cart.find((i) => i.id === product.id);
     const updatedCart = exists
       ? cart.map((i) =>
@@ -59,7 +63,7 @@ export const CartProvider = ({ children }) => {
       toast.warning(`Product not found in cart.`);
       return;
     }
-
+toast.warning("item removed")
     const updatedCart = cart.filter((i) => i.id !== id);
     setCart(updatedCart);
 

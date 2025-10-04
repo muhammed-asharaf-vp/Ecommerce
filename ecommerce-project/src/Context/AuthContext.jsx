@@ -1,5 +1,5 @@
 // AuthContext.jsx
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect,useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 // 1. Create the context
@@ -36,3 +36,12 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   );
 }
+
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};

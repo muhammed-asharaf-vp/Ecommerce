@@ -12,6 +12,7 @@ import Shop from "./Pages/Shop";
 import Wishlist from "./Pages/Wishlist";
 import Cart from "./Pages/Cart";
 import About from "./Pages/About";
+import Product from "./Pages/Products";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/cart" element={<Cart/>}/>
          <Route path="/about" element={<About />} />
+         <Route path="/product/:id" element={<Product />}/>
       </Routes>
        {/* ✅ Toast Notification Container */}
       <ToastContainer

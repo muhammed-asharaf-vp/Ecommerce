@@ -111,23 +111,54 @@
       "lastname": "nabhan",
       "email": "nabhan123@gmail.com",
       "password": "12345678",
-      "cart": [],
-      "wishlist": [
+      "cart": [
         {
-          "id": "cm002",
-          "name": "Cartier Ballon Bleu",
-          "description": "Elegant round watch with blue sapphire crown.",
-          "price": 7200,
+          "id": "002",
+          "name": "Rado True Thinline",
+          "description": "Sleek, ultra-thin ceramic watch from Rado's True collection, perfect for minimalists.",
+          "price": 2200,
           "count": 10,
           "category": "men's",
           "images": [
-            "https://i.pinimg.com/1200x/b5/b5/64/b5b56429d5cad33375cda1173af5f3b4.jpg"
+            "https://i.pinimg.com/736x/06/58/51/06585185ff65485ed2139462fe653f6c.jpg"
           ],
           "warranty": "2 year",
           "isActive": true,
-          "created_at": "2025-09-30T12:45:00Z"
+          "created_at": "2025-09-30T11:00:00Z",
+          "quantity": 4
+        },
+        {
+          "id": "cw003",
+          "name": "Cartier Tank Française",
+          "description": "Elegant rectangular watch with steel bracelet.",
+          "price": 5400,
+          "count": 10,
+          "category": "women's",
+          "images": [
+            "https://i.pinimg.com/1200x/7d/1e/65/7d1e65a5b7190a1ab0e3f0d9449658e0.jpg"
+          ],
+          "warranty": "2 year",
+          "isActive": true,
+          "created_at": "2025-09-30T12:55:00Z",
+          "quantity": 1
+        },
+        {
+          "id": "thw002",
+          "name": "TAG Heuer Aquaracer Lady",
+          "description": "Water-resistant diving watch with feminine design.",
+          "price": 2500,
+          "count": 10,
+          "category": "women's",
+          "images": [
+            "https://i.pinimg.com/1200x/d8/76/d9/d876d9df0caa12f918521274d39758a3.jpg"
+          ],
+          "warranty": "3 year",
+          "isActive": true,
+          "created_at": "2025-09-30T12:30:00Z",
+          "quantity": 1
         }
       ],
+      "wishlist": [],
       "shippingAddress": [],
       "order": [],
       "role": "user"

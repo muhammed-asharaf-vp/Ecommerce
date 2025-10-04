@@ -36,17 +36,16 @@ function Navbar() {
   return (
     <nav className="w-full bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between py-4 px-6">
-        {/* Logo */}
-        <div
-          className="flex items-center cursor-pointer"
-          onClick={() => navigate("/")}
-        >
-          <img
-            src={logo}
-            alt="Chrono Mart Logo"
-            className="h-12 w-auto object-contain transition-transform duration-300 hover:scale-105"
-          />
-        </div>
+{/* Logo */}
+<div
+  className="flex items-center cursor-pointer"
+  onClick={() => navigate("/")}
+>
+  <h1 className="text-3xl md:text-4xl font-serif font-bold tracking-widest text-yellow-600 hover:text-yellow-500 transition-colors duration-300">
+    Veloce
+  </h1>
+</div>
+
 
         {/* Desktop Nav Links */}
         <ul className="hidden md:flex space-x-10 font-medium text-gray-700">
@@ -91,7 +90,7 @@ function Navbar() {
          {/* Wishlist Icon */}
         <div
           className="relative cursor-pointer hover:text-yellow-600 transition-colors"
-          onClick={() => navigate("/wishlist")}
+          onClick={()=>{user ? navigate("/wishlist") : navigate("/login")} }
         >
           <FaHeart className="text-xl" />
           {Wishlist.length > 0 && (
@@ -104,7 +103,7 @@ function Navbar() {
 
           {/* Cart */}
           <div 
-          onClick={()=>navigate('/cart')}
+          onClick={()=>{user ? navigate("/cart") : navigate("/login")} }
            className="relative cursor-pointer hover:text-yellow-600 transition-colors">
             <FaShoppingBag />
             {cartcount > 0 && (

@@ -61,8 +61,7 @@ function Cart() {
                     </button>
                   </div>
 
-                 <button onClick={() => { console.log('removing', item.id); removeFromCart(item.id) 
-                    toast.success("Remove from cart")
+                 <button onClick={() => { console.log('removing', item.id); removeFromCart(item.id)
                   }}>
                      Remove
                 </button>

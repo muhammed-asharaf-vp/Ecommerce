@@ -5,6 +5,8 @@ import Navbar from '../Component/Navbar';
 const About = () => {
   return (
     <div className="min-h-screen bg-white">
+      <Navbar />
+      
       {/* Premium Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden bg-black">
         <div className="absolute inset-0">
@@ -161,66 +163,119 @@ const About = () => {
         </div>
       </section>
 
-      {/* Master Craftsmen Section */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-20">
-            <div className="flex justify-center mb-6">
-              <div className="w-16 h-0.5 bg-yellow-600"></div>
-            </div>
-            <h2 className="text-5xl md:text-6xl font-serif font-light mb-6">Meet Our Masters</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              The visionary artists behind every timeless creation
-            </p>
+    {/* Watch Collections Section */}
+<section className="py-24 bg-white">
+  <div className="container mx-auto px-6">
+    {/* Section Title */}
+    <div className="text-center mb-20">
+      <div className="flex justify-center mb-6">
+        <div className="w-16 h-0.5 bg-yellow-600"></div>
+      </div>
+      <h2 className="text-5xl md:text-6xl font-serif font-light mb-6">Our Collections</h2>
+      <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+        Timeless pieces for every occasion and style
+      </p>
+    </div>
+
+    {/* Collection Grid */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8 max-w-7xl mx-auto">
+      {[
+        {
+          name: "Classic Heritage",
+          description: "Timeless designs inspired by vintage horology",
+          image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+          features: ["Automatic Movement", "Sapphire Crystal", "Alligator Strap"]
+        },
+        {
+          name: "Modern Sport",
+          description: "Robust timepieces for the active lifestyle",
+          image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+          features: ["Chronograph", "Water Resistant", "Ceramic Bezel"]
+        },
+        {
+          name: "Luxury Edition",
+          description: "Exclusive pieces with precious materials",
+          image: "https://i.pinimg.com/1200x/f6/94/2a/f6942a386de6d29080551993fa387942.jpg",
+          features: ["18K Gold", "Diamond Markers", "Limited Edition"]
+        },
+      ].map((collection, index) => (
+        <div
+          key={index}
+          className="bg-white rounded-lg shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 overflow-hidden flex flex-col"
+        >
+          {/* Image */}
+          <div className="relative w-full h-64 overflow-hidden">
+            <img
+              src={collection.image}
+              alt={collection.name}
+              className="w-full h-full object-cover transition-transform duration-700 transform group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-black/20 opacity-0 hover:opacity-50 transition-opacity duration-300"></div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl mx-auto">
-            {[
-              {
-                name: "Jean-Luc Moreau",
-                title: "Grand Master Watchmaker",
-                experience: "42 Years",
-                specialty: "Tourbillon & Complications",
-                image: "https://images.unsplash.com/photo-1582750433449-648d127f666d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                achievement: "200+ Complex Movements"
-              },
-              {
-                name: "Isabelle Roche",
-                title: "Artistic Director",
-                experience: "28 Years",
-                specialty: "Design & Aesthetics",
-                image: "https://images.unsplash.com/photo-1485893086445-ed75865251e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                achievement: "Red Dot Design Award Winner"
-              },
-              {
-                name: "Marcus Schmidt",
-                title: "Movement Specialist",
-                experience: "35 Years",
-                specialty: "Caliber Development",
-                image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                achievement: "15 Patents in Horology"
-              }
-            ].map((craftsman, index) => (
-              <div key={index} className="group text-center bg-white rounded-lg shadow-2xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
-                <div className="relative overflow-hidden rounded-t-lg">
-                  <img 
-                    src={craftsman.image}
-                    alt={craftsman.name}
-                    className="w-full h-96 object-cover transform group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-left">
-                    <div className="text-yellow-400 text-sm font-semibold">{craftsman.experience} Experience</div>
-                    <div className="text-sm text-gray-200">Achievement: {craftsman.achievement}</div>
-                  </div>
-                </div>
-                <div className="p-8">
-                  <h3 className="text-2xl font-serif mb-2 text-gray-900">{craftsman.name}</h3>
-                  <p className="text-yellow-600 text-sm uppercase tracking-widest mb-3 font-semibold">{craftsman.title}</p>
-                  <p className="text-gray-600 text-lg mb-4">Specialty: {craftsman.specialty}</p>
-                </div>
+          {/* Content */}
+          <div className="p-6 flex flex-col flex-1">
+            <h3 className="text-xl font-serif mb-2 text-gray-900">{collection.name}</h3>
+            <p className="text-gray-600 mb-4 text-sm flex-1">{collection.description}</p>
+            
+            <ul className="space-y-1 mt-auto">
+              {collection.features.map((feature, i) => (
+                <li key={i} className="flex items-center text-sm text-gray-500">
+                  <svg className="w-4 h-4 text-yellow-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+
+      {/* Innovation Section */}
+      <section className="py-24 bg-gray-100">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <div className="flex items-center mb-8">
+                <div className="w-16 h-0.5 bg-yellow-600 mr-4"></div>
+                <span className="text-yellow-600 uppercase tracking-widest text-sm font-semibold">Innovation</span>
               </div>
-            ))}
+              <h2 className="text-5xl md:text-6xl font-serif font-light text-gray-900 mb-8">
+                Pushing <span className="text-yellow-600">Boundaries</span>
+              </h2>
+              <p className="text-gray-700 text-lg leading-relaxed mb-8">
+                At Timepiece, we continuously innovate while respecting traditional watchmaking. 
+                Our research and development team works tirelessly to introduce new technologies 
+                that enhance precision, durability, and beauty.
+              </p>
+              <div className="space-y-4">
+                {[
+                  "Advanced anti-magnetic technology",
+                  "Proprietary lubrication systems",
+                  "Revolutionary power reserve mechanisms",
+                  "Sustainable manufacturing processes"
+                ].map((innovation, index) => (
+                  <div key={index} className="flex items-center">
+                    <div className="w-2 h-2 bg-yellow-600 rounded-full mr-4"></div>
+                    <span className="text-gray-700">{innovation}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <div className="relative">
+              <img 
+                src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                alt="Watch Innovation"
+                className="w-full h-[500px] object-cover rounded-lg shadow-2xl"
+              />
+              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-yellow-600 rounded-full opacity-20"></div>
+            </div>
           </div>
         </div>
       </section>
