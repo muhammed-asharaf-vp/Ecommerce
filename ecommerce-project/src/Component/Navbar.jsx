@@ -4,12 +4,18 @@ import { FaSearch, FaUser, FaHeart, FaShoppingBag, FaBars, FaTimes, FaSignOutAlt
 import logo from "../assets/new.png";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
+import Wishlist from "../Pages/Wishlist";
+import { WishlistContext } from "../Context/WishListContext";
+import { CartContext } from "../Context/CartContext";
 
 function Navbar() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const { user } = useContext(AuthContext);
+   const { wishlist } = useContext(WishlistContext);
+   const {cart} = useContext(CartContext);
+   const cartcount = cart.reduce((acc,item)=>acc+item.quantity,0);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -58,36 +64,54 @@ function Navbar() {
               className="hover:text-yellow-600 transition-colors"
               onClick={() => navigate("/Shop")}
             >
-              PRODUCTS ▾
+              SHOP
+            </button>
+            <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-yellow-600 transition-all group-hover:w-full"></span>
+          </li>
+          <li className="group relative">
+            <button className="hover:text-yellow-600 transition-colors"
+            onClick={() => navigate("/about")}>
+              ABOUT US 
             </button>
             <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-yellow-600 transition-all group-hover:w-full"></span>
           </li>
           <li className="group relative">
             <button className="hover:text-yellow-600 transition-colors">
-              ABOUT US ▾
+              CONTACT 
             </button>
             <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-yellow-600 transition-all group-hover:w-full"></span>
           </li>
+          
         </ul>
 
         {/* Icons + Profile (Desktop) */}
         <div className="hidden md:flex items-center space-x-6 text-xl text-gray-700">
           <FaSearch className="cursor-pointer hover:text-yellow-600 transition-colors" />
 
-          {/* Wishlist */}
-          <div className="relative cursor-pointer hover:text-yellow-600 transition-colors">
-            <FaHeart />
-            <span className="absolute -top-2 -right-2 bg-yellow-600 text-white text-xs px-[6px] rounded-full shadow">
-              0
+         {/* Wishlist Icon */}
+        <div
+          className="relative cursor-pointer hover:text-yellow-600 transition-colors"
+          onClick={() => navigate("/wishlist")}
+        >
+          <FaHeart className="text-xl" />
+          {Wishlist.length > 0 && (
+            <span className="absolute -top-2 -right-2 bg-yellow-600 text-white text-xs px-[6px] rounded-full shadow ">
+              {Wishlist.length}
             </span>
-          </div>
+          )}
+        </div>
+
 
           {/* Cart */}
-          <div className="relative cursor-pointer hover:text-yellow-600 transition-colors">
+          <div 
+          onClick={()=>navigate('/cart')}
+           className="relative cursor-pointer hover:text-yellow-600 transition-colors">
             <FaShoppingBag />
+            {cartcount > 0 && (
             <span className="absolute -top-2 -right-2 bg-yellow-600 text-white text-xs px-[6px] rounded-full shadow">
-              0
+              {cartcount}
             </span>
+            )}
           </div>
 
           {/* Profile or Login */}
