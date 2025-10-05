@@ -7,7 +7,7 @@ import { AuthContext } from "./AuthContext";
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const { user } = useContext(AuthContext);
+  const { user, login } = useContext(AuthContext);
   const userId = user?.id || null;
 
   const [cart, setCart] = useState([]);
@@ -125,6 +125,87 @@ export const CartProvider = ({ children }) => {
     exists ? removeFromCart(product.id) : addToCart(product);
   };
 
+  // 🟢 CREATE ORDER - NEW FUNCTION
+  const createOrder = async (orderData) => {
+    if (!userId) {
+      toast.error("Please login to create an order.");
+      return false;
+    }
+
+    try {
+      // Get current user data
+      const userResponse = await api.get(`/users/${userId}`);
+      const currentUser = userResponse.data;
+
+      // Create new order object
+      const newOrder = {
+        id: `VEL${Math.random().toString(36).substr(2, 9).toUpperCase()}`,
+        date: new Date().toISOString(),
+        items: orderData.cartItems,
+        shipping: orderData.shippingInfo,
+        payment: {
+          method: orderData.paymentMethod,
+          subtotal: orderData.subtotal,
+          tax: orderData.tax,
+          shipping: 0,
+          grandTotal: orderData.total
+        },
+        status: "confirmed",
+        estimatedDelivery: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString()
+      };
+
+      // Create shipping address object
+      const newShippingAddress = {
+        name: orderData.shippingInfo.name,
+        address: orderData.shippingInfo.address,
+        city: orderData.shippingInfo.city,
+        country: orderData.shippingInfo.country,
+        zipCode: orderData.shippingInfo.zipCode
+      };
+
+      // Update user data
+      const updatedUser = {
+        ...currentUser,
+        order: [...(currentUser.order || []), newOrder],
+        shippingAddress: [...(currentUser.shippingAddress || []), newShippingAddress],
+        cart: [] // Clear cart after successful order
+      };
+
+      // Save to database
+      await api.patch(`/users/${userId}`, updatedUser);
+      
+      // Update local state
+      setCart([]);
+      
+      // Update AuthContext user data
+      if (login) {
+        login(updatedUser);
+      }
+
+      toast.success("🎉 Order created successfully!");
+      console.log("✅ Order saved to database:", newOrder);
+      return true;
+
+    } catch (error) {
+      console.error("❌ Error creating order:", error);
+      toast.error("Failed to create order. Please try again.");
+      return false;
+    }
+  };
+
+  // 🟢 GET USER ORDERS
+  const getUserOrders = async () => {
+    if (!userId) return [];
+
+    try {
+      const response = await api.get(`/users/${userId}`);
+      return response.data.order || [];
+    } catch (error) {
+      console.error("❌ Error fetching user orders:", error);
+      return [];
+    }
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -133,8 +214,10 @@ export const CartProvider = ({ children }) => {
         removeFromCart,
         increaseQuantity,
         decreaseQuantity,
-        clearCart,     // ✅ added
-        toggleCart,    // ✅ added
+        clearCart,
+        toggleCart,
+        createOrder,    // ✅ NEW: Create order function
+        getUserOrders   // ✅ NEW: Get user orders function
       }}
     >
       {children}

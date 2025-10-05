@@ -16,7 +16,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 function Checkout() {
-  const { cart, clearCart } = useContext(CartContext);
+  const { cart, clearCart, createOrder } = useContext(CartContext);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -129,29 +129,47 @@ function Checkout() {
         toast.success("🎉 Payment Successful! Your order is confirmed.", {
           autoClose: 3000
         });
-        
-        // Clear cart
-        clearCart();
-        
-        // Navigate to confirmation page with order data
-        setTimeout(() => {
-          navigate("/confirm-order", { 
-            state: { 
-              cartItems: cart,
-              subtotal: subtotal,
-              tax: tax,
-              total: total,
-              shippingInfo: {
-                name: `${formData.firstName} ${formData.lastName}`,
-                address: formData.address,
-                city: formData.city,
-                country: formData.country,
-                zipCode: formData.zipCode
-              },
-              paymentMethod: "Credit Card"
-            } 
-          });
-        }, 2000);
+
+        // Create order in database
+        const orderSuccess = await createOrder({
+          cartItems: cart,
+          subtotal: subtotal,
+          tax: tax,
+          total: total,
+          shippingInfo: {
+            name: `${formData.firstName} ${formData.lastName}`,
+            address: formData.address,
+            city: formData.city,
+            country: formData.country,
+            zipCode: formData.zipCode
+          },
+          paymentMethod: "Credit Card"
+        });
+
+        if (orderSuccess) {
+          // Navigate to confirmation page with order data
+          setTimeout(() => {
+            navigate("/confirm-order", { 
+              state: { 
+                cartItems: cart,
+                subtotal: subtotal,
+                tax: tax,
+                total: total,
+                shippingInfo: {
+                  name: `${formData.firstName} ${formData.lastName}`,
+                  address: formData.address,
+                  city: formData.city,
+                  country: formData.country
+                },
+                paymentMethod: "Credit Card"
+              } 
+            });
+          }, 2000);
+        } else {
+          // If order creation failed
+          toast.error("❌ Failed to create order. Please try again.");
+          setIsProcessing(false);
+        }
         
       } else {
         // Payment failed - PayPal

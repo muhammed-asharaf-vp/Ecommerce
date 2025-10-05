@@ -12,10 +12,10 @@ function Home() {
     <HeroSlider/>
     <FeaturesBar/>
     <CategoryBoxes />
-    <TopRating />
-    <Footer/>
     </div>
   )
 }
 
 export default Home
+
+

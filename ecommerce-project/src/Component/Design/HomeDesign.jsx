@@ -140,6 +140,7 @@ export function FeaturesBar() {
 export  function CategoryBoxes() {
   const categories = [
     {
+      
       title: "MEN'S",
       image:
        "https:imgs.search.brave.com/lbMknnaNB7Vw7D7wQpPPyUroq2Q6y-aOnoRjgegSlVQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9t/YW4tbG9va2luZy1o/aXMtd2F0Y2hfNTM4/NzYtMTM1MDMuanBn/P3NlbXQ9YWlzX2h5/YnJpZCZ3PTc0MCZx/PTgw", // Men's watch image

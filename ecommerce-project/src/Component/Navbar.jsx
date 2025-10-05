@@ -139,13 +139,13 @@ function Navbar() {
                     <p className="text-xs text-gray-500">{user.email}</p>
                   </div>
                   <button
-                    onClick={() => handleNavigation("/profile")}
+                    onClick={() => handleNavigation("/my-profile")}
                     className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                   >
                     My Profile
                   </button>
                   <button
-                    onClick={() => handleNavigation("/orders")}
+                    onClick={() => handleNavigation("/my-orders")}
                     className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                   >
                     My Orders

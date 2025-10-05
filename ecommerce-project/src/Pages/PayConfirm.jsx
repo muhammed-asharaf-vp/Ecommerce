@@ -80,7 +80,7 @@ function OrderConfirmation() {
     toast.success("📄 Generating your luxury invoice...");
     setTimeout(() => {
       toast.success("✅ Invoice ready for download!");
-    }, 2000);
+    }, 3000);
   };
 
   const handleTrackOrder = () => {

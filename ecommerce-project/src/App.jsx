@@ -16,6 +16,9 @@ import Product from "./Pages/Products";
 import Contact from "./Pages/Contact";
 import Checkout from "./Pages/Checkout";
 import OrderConfirmation from "./Pages/PayConfirm";
+import ProfileModal from "./Pages/MyProfile";
+import MyProfile from "./Pages/MyProfile";
+import MyOrders from "./Pages/MyOrders";
 
 
 function App() {
@@ -33,6 +36,8 @@ function App() {
          <Route path="/contact" element={<Contact />}/>
          <Route path="/payment" element={<Checkout />} />
          <Route path="/confirm-order" element={<OrderConfirmation />}/>
+         <Route path="/my-profile" element={<MyProfile />} />
+         <Route path="/my-orders" element={<MyOrders />} />
       </Routes>
        {/* ✅ Toast Notification Container */}
       <ToastContainer
