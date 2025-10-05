@@ -8,10 +8,11 @@ import {
   FaStar,
   FaMinus,
   FaPlus,
+  FaBolt,
 } from "react-icons/fa";
 import { useAuth } from "../Context/AuthContext";
 import { CartContext } from "../Context/CartContext";
-import { WishlistContext} from "../Context/WishListContext"
+import { WishlistContext } from "../Context/WishListContext";
 import api from "../Api/Axios";
 
 function Product() {
@@ -66,6 +67,23 @@ function Product() {
     showAlert(`${quantity} ${product.name}(s) added to cart!`, "success");
   };
 
+  // ✅ NEW: Buy Now Function
+  const handleBuyNow = () => {
+    if (!user) return navigate("/login");
+    
+    // Add to cart first
+    for (let i = 0; i < quantity; i++) {
+      addToCart(product);
+    }
+    
+    showAlert(`Proceeding to checkout with ${quantity} ${product.name}(s)`, "success");
+    
+    // Navigate to checkout page after a short delay
+    setTimeout(() => {
+      navigate("/checkout");
+    }, 1000);
+  };
+
   // ✅ Loading UI
   if (loading)
     return (
@@ -80,7 +98,7 @@ function Product() {
       <div className="min-h-screen bg-black flex items-center justify-center text-white text-center">
         <h2 className="text-3xl font-semibold mb-2">Product Not Found</h2>
         <p className="text-gray-400 mb-6">
-          The product you’re looking for doesn’t exist.
+          The product you're looking for doesn't exist.
         </p>
         <button
           onClick={() => navigate("/shop")}
@@ -186,24 +204,55 @@ function Product() {
           </div>
 
           {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 pt-6">
+          <div className="flex flex-col gap-4 pt-6">
+            {/* Buy Now Button - Primary Action */}
             <button
-              onClick={handleAddToCart}
-              className="flex-1 bg-yellow-500 text-black py-4 rounded-xl font-semibold hover:bg-yellow-400 transition-colors flex items-center justify-center gap-3 text-lg"
+              onClick={handleBuyNow}
+              className="w-full bg-gradient-to-r from-yellow-600 to-yellow-500 text-black py-4 rounded-xl font-bold hover:from-yellow-500 hover:to-yellow-400 transition-all duration-300 flex items-center justify-center gap-3 text-lg shadow-lg hover:shadow-yellow-500/25 transform hover:scale-105"
             >
-              <FaCartPlus /> Add to Cart ({quantity})
+              <FaBolt className="text-black" />
+              Buy Now - ${(product.price * quantity).toFixed(2)}
             </button>
-            <button
-              onClick={() => toggleWishlist(product)}
-              className="px-8 py-4 border border-gray-700 rounded-xl font-semibold hover:bg-gray-800 flex items-center justify-center gap-3"
-            >
-              {isInWishlist() ? (
-                <FaHeart className="text-red-500 text-xl" />
-              ) : (
-                <FaRegHeart className="text-gray-500 text-xl" />
-              )}
-              Wishlist
-            </button>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button
+                onClick={handleAddToCart}
+                className="flex-1 bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 py-4 rounded-xl font-semibold hover:bg-yellow-500/30 transition-colors flex items-center justify-center gap-3 text-lg"
+              >
+                <FaCartPlus /> Add to Cart ({quantity})
+              </button>
+              <button
+                onClick={() => toggleWishlist(product)}
+                className="px-8 py-4 border border-gray-700 rounded-xl font-semibold hover:bg-gray-800 flex items-center justify-center gap-3"
+              >
+                {isInWishlist() ? (
+                  <FaHeart className="text-red-500 text-xl" />
+                ) : (
+                  <FaRegHeart className="text-gray-500 text-xl" />
+                )}
+                Wishlist
+              </button>
+            </div>
+          </div>
+
+          {/* Quick Features */}
+          <div className="grid grid-cols-2 gap-4 pt-6">
+            <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 text-center">
+              <div className="text-yellow-400 font-bold text-sm mb-2">🚚 Shipping</div>
+              <div className="text-gray-400 text-xs">Free Express Delivery</div>
+            </div>
+            <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 text-center">
+              <div className="text-yellow-400 font-bold text-sm mb-2">↩️ Returns</div>
+              <div className="text-gray-400 text-xs">30-Day Guarantee</div>
+            </div>
+            <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 text-center">
+              <div className="text-yellow-400 font-bold text-sm mb-2">🛡️ Warranty</div>
+              <div className="text-gray-400 text-xs">2-Year Coverage</div>
+            </div>
+            <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 text-center">
+              <div className="text-yellow-400 font-bold text-sm mb-2">💎 Quality</div>
+              <div className="text-gray-400 text-xs">Premium Materials</div>
+            </div>
           </div>
 
           {/* Features */}
@@ -216,6 +265,8 @@ function Product() {
               <li>✓ Fast Shipping</li>
               <li>✓ Secure Packaging</li>
               <li>✓ Luxury Guarantee</li>
+              <li>✓ Authentic Materials</li>
+              <li>✓ Expert Craftsmanship</li>
             </ul>
           </div>
         </div>

@@ -96,38 +96,7 @@
       "lastname": "nabhan",
       "email": "nabhan123@gmail.com",
       "password": "12345678",
-      "cart": [
-        {
-          "id": "thw002",
-          "name": "TAG Heuer Aquaracer Lady",
-          "description": "Water-resistant diving watch with feminine design.",
-          "price": 2500,
-          "count": 10,
-          "category": "women's",
-          "images": [
-            "https://i.pinimg.com/1200x/d8/76/d9/d876d9df0caa12f918521274d39758a3.jpg"
-          ],
-          "warranty": "3 year",
-          "isActive": true,
-          "created_at": "2025-09-30T12:30:00Z",
-          "quantity": 1
-        },
-        {
-          "id": "003",
-          "name": "Rado HyperChrome",
-          "description": "Dynamic sports watch with ceramic and stainless steel case, combining style and durability.",
-          "price": 2500,
-          "count": 10,
-          "category": "men's",
-          "images": [
-            "https://i.pinimg.com/736x/fb/66/69/fb6669571a89381cf37f5c360f0c16db.jpg"
-          ],
-          "warranty": "3 year",
-          "isActive": true,
-          "created_at": "2025-09-30T11:00:00Z",
-          "quantity": 4
-        }
-      ],
+      "cart": [],
       "wishlist": [],
       "shippingAddress": [],
       "order": [],
@@ -139,37 +108,63 @@
       "lastname": "jithu",
       "email": "jithu@gmail.com",
       "password": "zxcvbnm",
-      "cart": [
-        {
-          "id": "002",
-          "name": "Rado True Thinline",
-          "description": "Sleek, ultra-thin ceramic watch from Rado's True collection, perfect for minimalists.",
-          "price": 2200,
-          "count": 10,
-          "category": "men's",
-          "images": [
-            "https://i.pinimg.com/736x/06/58/51/06585185ff65485ed2139462fe653f6c.jpg"
-          ],
-          "warranty": "2 year",
-          "isActive": true,
-          "created_at": "2025-09-30T11:00:00Z",
-          "quantity": 3
-        }
-      ],
+      "cart": [],
       "wishlist": [
         {
-          "id": "cw003",
-          "name": "Cartier Tank Française",
-          "description": "Elegant rectangular watch with steel bracelet.",
-          "price": 5400,
+          "id": "cw002",
+          "name": "Cartier Panthère de Cartier",
+          "description": "Iconic square watch with flexible bracelet.",
+          "price": 6800,
           "count": 10,
           "category": "women's",
           "images": [
-            "https://i.pinimg.com/1200x/7d/1e/65/7d1e65a5b7190a1ab0e3f0d9449658e0.jpg"
+            "https://i.pinimg.com/1200x/8d/e1/d4/8de1d423a0643b1a390c74bb23be81f5.jpg"
           ],
           "warranty": "2 year",
           "isActive": true,
           "created_at": "2025-09-30T12:55:00Z"
+        },
+        {
+          "id": "cm003",
+          "name": "Cartier Calibre de Cartier",
+          "description": "Luxury men's chronograph with refined mechanical movement.",
+          "price": 8500,
+          "count": 10,
+          "category": "men's",
+          "images": [
+            "https://i.pinimg.com/1200x/de/9b/bc/de9bbc229a9cecb0ce83ce7c634f256a.jpg"
+          ],
+          "warranty": "2 year",
+          "isActive": true,
+          "created_at": "2025-09-30T12:45:00Z"
+        },
+        {
+          "id": "cm002",
+          "name": "Cartier Ballon Bleu",
+          "description": "Elegant round watch with blue sapphire crown.",
+          "price": 7200,
+          "count": 10,
+          "category": "men's",
+          "images": [
+            "https://i.pinimg.com/1200x/b5/b5/64/b5b56429d5cad33375cda1173af5f3b4.jpg"
+          ],
+          "warranty": "2 year",
+          "isActive": true,
+          "created_at": "2025-09-30T12:45:00Z"
+        },
+        {
+          "id": "cm001",
+          "name": "Cartier Santos de Cartier",
+          "description": "Iconic square watch with leather strap and automatic movement.",
+          "price": 6000,
+          "count": 10,
+          "category": "men's",
+          "images": [
+            "https://i.pinimg.com/1200x/ee/f0/2e/eef02e93a515a01dded10c2ec47006cf.jpg"
+          ],
+          "warranty": "2 year",
+          "isActive": true,
+          "created_at": "2025-09-30T12:45:00Z"
         }
       ],
       "shippingAddress": [],

@@ -14,6 +14,8 @@ import Cart from "./Pages/Cart";
 import About from "./Pages/About";
 import Product from "./Pages/Products";
 import Contact from "./Pages/Contact";
+import Checkout from "./Pages/Checkout";
+import OrderConfirmation from "./Pages/PayConfirm";
 
 
 function App() {
@@ -29,6 +31,8 @@ function App() {
          <Route path="/about" element={<About />} />
          <Route path="/product/:id" element={<Product />}/>
          <Route path="/contact" element={<Contact />}/>
+         <Route path="/payment" element={<Checkout />} />
+         <Route path="/confirm-order" element={<OrderConfirmation />}/>
       </Routes>
        {/* ✅ Toast Notification Container */}
       <ToastContainer
