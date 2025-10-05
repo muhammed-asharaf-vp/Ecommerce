@@ -1,112 +1,128 @@
 // src/Context/CartContext.jsx
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
 import api from "../Api/Axios";
 import { toast } from "react-toastify";
-import { Navigate, useNavigate } from "react-router-dom";
-
+import { AuthContext } from "./AuthContext";
 
 export const CartContext = createContext();
+
 export const CartProvider = ({ children }) => {
-
-
-  const user = JSON.parse(localStorage.getItem("user"));
-  const userId = user ? user.id : null;
+  const { user } = useContext(AuthContext);
+  const userId = user?.id || null;
 
   const [cart, setCart] = useState([]);
 
+  // 🟢 Load cart when user logs in
   useEffect(() => {
-    if (!userId) {
-        toast.warning("please login")
-      return;
+    if (userId) {
+      api
+        .get(`/users/${userId}`)
+        .then((res) => setCart(res.data.cart || []))
+        .catch((err) => console.error("Error loading cart:", err));
+    } else {
+      setCart([]); // clear cart when logged out
     }
-    api
-      .get(`/users/${userId}`)
-      .then((res) => setCart(res.data.cart || []))
-      .catch((err) => console.error("Error loading cart:", err));
   }, [userId]);
 
-
+  // 🟢 Add product to cart
   const addToCart = async (product) => {
     if (!userId) {
       toast.warning("Please login to add items to your cart.");
       return;
     }
-toast.success("item add to cart")
-    const exists = cart.find((i) => i.id === product.id);
-    const updatedCart = exists
-      ? cart.map((i) =>
-          i.id === product.id ? { ...i, quantity: i.quantity + 1 } : i
-        )
-      : [...cart, { ...product, quantity: 1 }];
+
+    const exists = cart.find((item) => item.id === product.id);
+    let updatedCart;
+
+    if (exists) {
+      updatedCart = cart.map((item) =>
+        item.id === product.id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      );
+      toast.info(`Increased quantity of "${product.name}".`);
+    } else {
+      updatedCart = [...cart, { ...product, quantity: 1 }];
+      toast.success(`"${product.name}" added to cart.`);
+    }
 
     setCart(updatedCart);
-
     try {
       await api.patch(`/users/${userId}`, { cart: updatedCart });
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ ...user, cart: updatedCart })
-      );
-
-      if (exists) {
-        toast.success(`Quantity of "${product.name}" increased.`);
-      } else {
-      }
-    } catch (err) {
-      console.error("Error updating cart:", err);
+      console.log("✅ Cart updated successfully!");
+    } catch (error) {
+      console.error("❌ Error updating cart:", error);
     }
   };
 
+  // 🟢 Remove product from cart
   const removeFromCart = async (id) => {
-    const removedProduct = cart.find((i) => i.id === id);
-    if (!removedProduct) {
-      toast.warning(`Product not found in cart.`);
-      return;
-    }
-toast.warning("item removed")
-    const updatedCart = cart.filter((i) => i.id !== id);
+    const updatedCart = cart.filter((item) => item.id !== id);
     setCart(updatedCart);
+    toast.warning("Item removed from cart.");
 
     try {
       await api.patch(`/users/${userId}`, { cart: updatedCart });
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ ...user, cart: updatedCart })
-      );
-    } catch (err) {
-      console.error("Error removing item from cart:", err);
+      console.log("✅ Removed from cart");
+    } catch (error) {
+      console.error("❌ Error removing from cart:", error);
     }
   };
 
+  // 🟢 Increase quantity
   const increaseQuantity = async (id) => {
-    const updatedCart = cart.map((i) =>
-      i.id === id ? { ...i, quantity: i.quantity + 1 } : i
+    const updatedCart = cart.map((item) =>
+      item.id === id ? { ...item, quantity: item.quantity + 1 } : item
     );
     setCart(updatedCart);
+
     try {
       await api.patch(`/users/${userId}`, { cart: updatedCart });
-      toast.success("Quantity updated.");
-    } catch (err) {
-      console.error("Error updating quantity:", err);
-      toast.error("Failed to update quantity.");
+      toast.success("Quantity increased.");
+    } catch (error) {
+      console.error("❌ Error increasing quantity:", error);
     }
   };
 
+  // 🟢 Decrease quantity
   const decreaseQuantity = async (id) => {
     const updatedCart = cart
-      .map((i) =>
-        i.id === id ? { ...i, quantity: Math.max(i.quantity - 1, 1) } : i
+      .map((item) =>
+        item.id === id ? { ...item, quantity: Math.max(item.quantity - 1, 1) } : item
       )
-      .filter((i) => i.quantity > 0);
+      .filter((item) => item.quantity > 0);
 
     setCart(updatedCart);
     try {
       await api.patch(`/users/${userId}`, { cart: updatedCart });
-      toast.success("Quantity updated.");
-    } catch (err) {
-      console.error("Error updating quantity:", err);
-      toast.error("Failed to update quantity.");
+      toast.info("Quantity decreased.");
+    } catch (error) {
+      console.error("❌ Error decreasing quantity:", error);
     }
+  };
+
+  // 🟢 Clear entire cart
+  const clearCart = async () => {
+    if (!userId) {
+      toast.warning("Please login to manage your cart.");
+      return;
+    }
+
+    setCart([]);
+    toast.info("Cart cleared.");
+
+    try {
+      await api.patch(`/users/${userId}`, { cart: [] });
+      console.log("✅ Cart cleared successfully!");
+    } catch (error) {
+      console.error("❌ Error clearing cart:", error);
+    }
+  };
+
+  // 🟢 Toggle cart (add if not exists, remove if exists)
+  const toggleCart = (product) => {
+    const exists = cart.find((item) => item.id === product.id);
+    exists ? removeFromCart(product.id) : addToCart(product);
   };
 
   return (
@@ -117,6 +133,8 @@ toast.warning("item removed")
         removeFromCart,
         increaseQuantity,
         decreaseQuantity,
+        clearCart,     // ✅ added
+        toggleCart,    // ✅ added
       }}
     >
       {children}

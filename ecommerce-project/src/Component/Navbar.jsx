@@ -75,7 +75,8 @@ function Navbar() {
             <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-yellow-600 transition-all group-hover:w-full"></span>
           </li>
           <li className="group relative">
-            <button className="hover:text-yellow-600 transition-colors">
+            <button className="hover:text-yellow-600 transition-colors"
+            onClick={()=> navigate ("/contact")}>
               CONTACT 
             </button>
             <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-yellow-600 transition-all group-hover:w-full"></span>

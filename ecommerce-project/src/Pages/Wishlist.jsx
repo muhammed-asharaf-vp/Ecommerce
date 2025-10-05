@@ -1,58 +1,122 @@
 // src/Pages/Wishlist.jsx
 import React, { useContext } from "react";
 import { WishlistContext } from "../Context/WishListContext";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaHeart, FaExclamationTriangle } from "react-icons/fa";
 import Navbar from "../Component/Navbar";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 
 function Wishlist() {
-  const { wishlist, removeFromWishlist, clearWishlist } =
-    useContext(WishlistContext);
+  const { wishlist, removeFromWishlist, clearWishlist } = useContext(WishlistContext);
+
+
+  const handleClearWishlist = () => {
+    if (wishlist.length === 0) {
+      toast.info("Your wishlist is already empty");
+      return;
+    }
+
+    // Confirmation dialog
+    if (window.confirm("Are you sure you want to clear your entire wishlist? This action cannot be undone.")) {
+      clearWishlist();
+      toast.success("Wishlist cleared successfully");
+    }
+  };
+
+  const handleRemoveItem = (item) => {
+    removeFromWishlist(item.id);
+    // toast.info(`"${item.name}" removed from wishlist`);
+  };
+  const navigate=useNavigate();
 
   return (
     <>
       <Navbar />
-      <div className="max-w-6xl mx-auto px-4 py-10">
-        <h2 className="text-3xl font-bold mb-6 text-center">My Wishlist ❤️</h2>
-
-        {wishlist.length === 0 ? (
-          <p className="text-center text-gray-600">No items in your wishlist.</p>
-        ) : (
-          <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {wishlist.map((item) => (
-                <div
-                  key={item.id}
-                  className="border rounded-lg shadow-md p-4 text-center"
-                >
-                  <img
-                    src={item.images[0]}
-                    alt={item.name}
-                    className="w-full h-52 object-cover rounded-md mb-3"
-                  />
-                  <h3 className="font-semibold">{item.name}</h3>
-                  <p className="text-gray-600 text-sm mb-2">
-                    ${item.price}
-                  </p>
-                  <button
-                    onClick={() => removeFromWishlist(item.id)}
-                    className="flex items-center justify-center gap-2 w-full bg-red-500 text-white py-2 rounded hover:bg-red-600 transition"
-                  >
-                    <FaTrash /> Remove
-                  </button>
-                </div>
-              ))}
+      <div className="min-h-screen bg-gray-50 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center mb-4">
+              <FaHeart className="text-red-500 text-4xl mr-3" />
+              <h1 className="text-4xl font-bold text-gray-900">My Wishlist</h1>
             </div>
+            <p className="text-gray-600">
+              {wishlist.length} {wishlist.length === 1 ? 'item' : 'items'} saved for later
+            </p>
+          </div>
 
-            <div className="text-center mt-6">
-              <button
-                onClick={clearWishlist}
-                className="bg-gray-700 text-white px-6 py-2 rounded hover:bg-gray-800 transition"
+          {wishlist.length === 0 ? (
+            <div className="text-center py-16 bg-white rounded-2xl shadow-sm">
+              <FaHeart className="text-gray-300 text-6xl mx-auto mb-4" />
+              <h3 className="text-2xl font-semibold text-gray-500 mb-4">Your wishlist is empty</h3>
+              <p className="text-gray-400 mb-8">Start adding your favorite products to your wishlist</p>
+              <button 
+               onClick={()=>navigate("/shop")}
+                className="bg-yellow-600 text-white px-8 py-3 rounded-lg hover:bg-yellow-500 transition-colors duration-300"
               >
-                Clear All
+                Browse Products
               </button>
             </div>
-          </>
-        )}
+          ) : (
+            <>
+              {/* Wishlist Items */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+                {wishlist.map((item) => (
+                  <div
+                    key={item.id}
+                    className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
+                  >
+                    <div className="relative">
+                      <img
+                        src={item.images?.[0] || "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"}
+                        alt={item.name}
+                        className="w-full h-48 object-cover"
+                      />
+                      <button
+                        onClick={() => handleRemoveItem(item)}
+                        className="absolute top-2 right-2 bg-white/90 hover:bg-red-500 hover:text-white w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200"
+                        title="Remove from wishlist"
+                      >
+                        <FaTrash className="text-xs" />
+                      </button>
+                    </div>
+
+                    <div className="p-4">
+                      <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">
+                        {item.name}
+                      </h3>
+                      <p className="text-lg font-bold text-gray-900 mb-3">
+                        ${item.price?.toLocaleString()}
+                      </p>
+                      <button
+                        onClick={() => handleRemoveItem(item)}
+                        className="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition-colors duration-300 flex items-center justify-center gap-2"
+                      >
+                        <FaTrash />
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Clear All Button */}
+              <div className="text-center">
+                <button
+                  onClick={handleClearWishlist}
+                  className="bg-red-600 text-white px-8 py-3 rounded-lg hover:bg-red-700 transition-colors duration-300 flex items-center justify-center gap-2 mx-auto"
+                >
+                  <FaExclamationTriangle />
+                  Clear All Items
+                </button>
+                <p className="text-sm text-gray-500 mt-2">
+                  This will remove all items from your wishlist
+                </p>
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </>
   );

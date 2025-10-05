@@ -1,10 +1,14 @@
 // src/Pages/About.jsx
 import React from 'react';
 import Navbar from '../Component/Navbar';
+import { useNavigate } from 'react-router-dom';
+
 
 const About = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-white">
+     
       <Navbar />
       
       {/* Premium Hero Section */}
@@ -299,7 +303,9 @@ const About = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <button className="bg-yellow-600 text-black px-16 py-5 text-lg font-semibold uppercase tracking-widest hover:bg-yellow-500 transition-colors duration-300 transform hover:scale-105 border-2 border-yellow-600">
+              <button onClick={()=> navigate ("/shop")}
+               className="bg-yellow-600 text-black px-16 py-5 text-lg font-semibold uppercase tracking-widest hover:bg-yellow-500 transition-colors duration-300 transform hover:scale-105 border-2 border-yellow-600"
+               >
                 Discover Collection
               </button>
             </div>
@@ -316,7 +322,7 @@ const About = () => {
               "We don't just tell time. We craft the moments that define lifetimes."
             </p>
             <div className="text-yellow-600 font-serif text-lg">
-              — Timepiece Atelier, Geneva
+              {/* — Timepiece Atelier, Geneva */}
             </div>
           </div>
         </div>
