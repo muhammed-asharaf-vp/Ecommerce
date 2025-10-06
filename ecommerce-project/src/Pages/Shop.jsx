@@ -92,7 +92,7 @@ const Shop = () => {
     }
   };
 
-  //  Simplified filtered products logic - only brand and search
+  // ✅ Simplified filtered products logic - only brand and search
   const filteredProducts = products.filter((product) => {
     //  Search filter
     const matchesSearch =
@@ -179,9 +179,9 @@ const Shop = () => {
               <SearchIcon />
             </div>
             <div className="absolute right-6 top-1/2 transform -translate-y-1/2 flex items-center gap-4">
-              <span className="text-sm text-gray-400 bg-gray-700 px-3 py-1 rounded-full">
+              {/* <span className="text-sm text-gray-400 bg-gray-700 px-3 py-1 rounded-full">
                 {filteredProducts.length} pieces
-              </span>
+              </span> */}
               <button
                 onClick={() => setShowFilters(!showFilters)}
                 className="p-2 rounded-lg bg-yellow-500 text-black hover:bg-yellow-400 transition-colors duration-300"
@@ -403,3 +403,4 @@ const Shop = () => {
 };
 
 export default Shop;
+
