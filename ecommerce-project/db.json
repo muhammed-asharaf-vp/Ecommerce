@@ -294,18 +294,18 @@
       "password": "zxcvbnm",
       "cart": [
         {
-          "id": "002",
-          "name": "Rado True Thinline",
-          "description": "Sleek, ultra-thin ceramic watch from Rado's True collection, perfect for minimalists.",
-          "price": 2200,
+          "id": "cm003",
+          "name": "Cartier Calibre de Cartier",
+          "description": "Luxury men's chronograph with refined mechanical movement.",
+          "price": 8500,
           "count": 10,
           "category": "men's",
           "images": [
-            "https://i.pinimg.com/736x/06/58/51/06585185ff65485ed2139462fe653f6c.jpg"
+            "https://i.pinimg.com/1200x/de/9b/bc/de9bbc229a9cecb0ce83ce7c634f256a.jpg"
           ],
           "warranty": "2 year",
           "isActive": true,
-          "created_at": "2025-09-30T11:00:00Z",
+          "created_at": "2025-09-30T12:45:00Z",
           "quantity": 1
         }
       ],
@@ -323,6 +323,34 @@
           "warranty": "2 year",
           "isActive": true,
           "created_at": "2025-09-30T11:00:00Z"
+        },
+        {
+          "id": "001",
+          "name": "Rado Captain Cook",
+          "description": "Rado Captain Cook revives a vintage diving icon with modern flair. Featuring a rotating bezel, domed sapphire crystal, and automatic movement, it's a bold blend of heritage design and contemporary craftsmanship—perfect for adventure seekers with style.",
+          "price": 1950,
+          "count": 10,
+          "category": "men's",
+          "images": [
+            "https://i.pinimg.com/736x/a2/94/13/a29413f772e2e96332b8ab51a073573f.jpg"
+          ],
+          "warranty": "2 year",
+          "isActive": true,
+          "created_at": "2025-09-30T11:00:00Z"
+        },
+        {
+          "id": "003",
+          "name": "Rado HyperChrome",
+          "description": "Dynamic sports watch with ceramic and stainless steel case, combining style and durability.",
+          "price": 2500,
+          "count": 10,
+          "category": "men's",
+          "images": [
+            "https://i.pinimg.com/736x/fb/66/69/fb6669571a89381cf37f5c360f0c16db.jpg"
+          ],
+          "warranty": "3 year",
+          "isActive": true,
+          "created_at": "2025-09-30T11:00:00Z"
         }
       ],
       "shippingAddress": [
@@ -332,6 +360,13 @@
           "city": "vly",
           "country": "AU",
           "zipCode": "676553"
+        },
+        {
+          "name": "hanna ASDF",
+          "address": "ZXCVBNM",
+          "city": "ggh",
+          "country": "CA",
+          "zipCode": "3456"
         }
       ],
       "order": [
@@ -386,6 +421,43 @@
           },
           "status": "confirmed",
           "estimatedDelivery": "2025-10-08T18:09:35.871Z"
+        },
+        {
+          "id": "VEL7SJVZKATW",
+          "date": "2025-10-06T06:23:24.761Z",
+          "items": [
+            {
+              "id": "001",
+              "name": "Rado Captain Cook",
+              "description": "Rado Captain Cook revives a vintage diving icon with modern flair. Featuring a rotating bezel, domed sapphire crystal, and automatic movement, it's a bold blend of heritage design and contemporary craftsmanship—perfect for adventure seekers with style.",
+              "price": 1950,
+              "count": 10,
+              "category": "men's",
+              "images": [
+                "https://i.pinimg.com/736x/a2/94/13/a29413f772e2e96332b8ab51a073573f.jpg"
+              ],
+              "warranty": "2 year",
+              "isActive": true,
+              "created_at": "2025-09-30T11:00:00Z",
+              "quantity": 1
+            }
+          ],
+          "shipping": {
+            "name": "hanna ASDF",
+            "address": "ZXCVBNM",
+            "city": "ggh",
+            "country": "CA",
+            "zipCode": "3456"
+          },
+          "payment": {
+            "method": "Credit Card",
+            "subtotal": 1950,
+            "tax": 156,
+            "shipping": 0,
+            "grandTotal": 2106
+          },
+          "status": "confirmed",
+          "estimatedDelivery": "2025-10-09T06:23:24.761Z"
         }
       ],
       "role": "user"

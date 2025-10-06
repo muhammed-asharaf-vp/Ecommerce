@@ -18,6 +18,8 @@ function HeroSlider() {
 
   // Auto slide every 4 seconds
   useEffect(() => {
+    
+window.scrollTo(0,0) 
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
     }, 4000);
@@ -145,14 +147,12 @@ export  function CategoryBoxes() {
      
       title: "Rado",
       image:
-       "https:imgs.search.brave.com/lbMknnaNB7Vw7D7wQpPPyUroq2Q6y-aOnoRjgegSlVQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9t/YW4tbG9va2luZy1o/aXMtd2F0Y2hfNTM4/NzYtMTM1MDMuanBn/P3NlbXQ9YWlzX2h5/YnJpZCZ3PTc0MCZx/PTgw", // Men's watch image
-    },
+            "https://i.pinimg.com/1200x/9b/f3/a8/9bf3a86d8818f88d127dc87657d888d8.jpg",    },
     {
       
-      title: "Rolex Lady-Datejust 28",
+      title: "omega",
       image:
-      "https://imgs.search.brave.com/TkazzKvLARmptWl4NqeKktXk0E36F_fLkkHtRTyC04Q/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA3LzQ1LzQzLzM0/LzM2MF9GXzc0NTQz/MzQ0Nl9vdzI2S2RI/QXI4UDFBUHhyYm1G/dDdXRFhjTDRmeTQ2/ei5qcGc", // Women's watch image
-    },
+           "https://i.pinimg.com/1200x/78/a8/cd/78a8cd25504b9f5c71d5779702680fb2.jpg"    },
   ];
 
   return (

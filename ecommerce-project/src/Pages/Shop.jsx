@@ -92,15 +92,15 @@ const Shop = () => {
     }
   };
 
-  // ✅ Simplified filtered products logic - only brand and search
+  //  Simplified filtered products logic - only brand and search
   const filteredProducts = products.filter((product) => {
-    // 🔍 Search filter
+    //  Search filter
     const matchesSearch =
       product.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       product.category?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       product.brand?.toLowerCase().includes(searchTerm.toLowerCase());
 
-    // 🏷️ Brand filter
+    //  Brand filter
     const matchesBrand =
       selectedBrands.length === 0 ||
       selectedBrands.some((brand) =>
@@ -108,7 +108,7 @@ const Shop = () => {
         product.name?.toLowerCase().includes(brand.toLowerCase())
       );
 
-    // ✅ Return only products that match both filters
+    // Return only products that match both filters
     return matchesSearch && matchesBrand;
   });
 

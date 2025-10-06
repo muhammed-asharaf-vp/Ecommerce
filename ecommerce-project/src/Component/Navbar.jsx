@@ -86,7 +86,8 @@ function Navbar() {
 
         {/* Icons + Profile (Desktop) */}
         <div className="hidden md:flex items-center space-x-6 text-xl text-gray-700">
-          <FaSearch className="cursor-pointer hover:text-yellow-600 transition-colors" />
+          <FaSearch className="cursor-pointer hover:text-yellow-600 transition-colors"
+          onClick={()=> navigate("/shop")} />
 
          {/* Wishlist Icon */}
         <div
