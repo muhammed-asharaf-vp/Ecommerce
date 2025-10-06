@@ -1,10 +1,8 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import Footer from "./Component/Footer";
-import Navbar from "./Component/Navbar";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Signup from "./Pages/SignUp";
@@ -16,30 +14,128 @@ import Product from "./Pages/Products";
 import Contact from "./Pages/Contact";
 import Checkout from "./Pages/Checkout";
 import OrderConfirmation from "./Pages/PayConfirm";
-import ProfileModal from "./Pages/MyProfile";
 import MyProfile from "./Pages/MyProfile";
 import MyOrders from "./Pages/MyOrders";
+import ProtectedRoute from "./Pages/ProtectedRoute";
 
 
 function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/cart" element={<Cart/>}/>
-         <Route path="/about" element={<About />} />
-         <Route path="/product/:id" element={<Product />}/>
-         <Route path="/contact" element={<Contact />}/>
-         <Route path="/payment" element={<Checkout />} />
-         <Route path="/confirm-order" element={<OrderConfirmation />}/>
-         <Route path="/my-profile" element={<MyProfile />} />
-         <Route path="/my-orders" element={<MyOrders />} />
+       
+        <Route 
+          path="/login" 
+          element={
+            <PublicRoute >
+              <Login />
+            </PublicRoute>
+          } 
+        />
+        <Route 
+          path="/signup" 
+          element={
+            <PublicRoute>
+              <Signup />
+            </PublicRoute>
+          } 
+        />
+        
+       
+        <Route 
+          path="/" 
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/shop" 
+          element={
+            <ProtectedRoute>
+              <Shop />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/wishlist" 
+          element={
+            <ProtectedRoute>
+              <Wishlist />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/cart" 
+          element={
+            <ProtectedRoute>
+              <Cart />
+            </ProtectedRoute>
+          }
+        />
+        <Route 
+          path="/about" 
+          element={
+            <ProtectedRoute>
+              <About />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/product/:id" 
+          element={
+            <ProtectedRoute>
+              <Product />
+            </ProtectedRoute>
+          }
+        />
+        <Route 
+          path="/contact" 
+          element={
+            <ProtectedRoute>
+              <Contact />
+            </ProtectedRoute>
+          }
+        />
+        <Route 
+          path="/payment" 
+          element={
+            <ProtectedRoute>
+              <Checkout />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/confirm-order" 
+          element={
+            <ProtectedRoute>
+              <OrderConfirmation />
+            </ProtectedRoute>
+          }
+        />
+        <Route 
+          path="/my-profile" 
+          element={
+            <ProtectedRoute>
+              <MyProfile />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/my-orders" 
+          element={
+            <ProtectedRoute>
+              <MyOrders />
+            </ProtectedRoute>
+          } 
+        />
+        
+        {/* Catch all route - redirect to home */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-       {/* ✅ Toast Notification Container */}
+      
+      {/* Toast Notification Container */}
       <ToastContainer
         position="top-center"
         autoClose={2000}
@@ -50,5 +146,16 @@ function App() {
     </div>
   );
 }
+
+// Public Route Component - redirect to home if user is already logged in
+const PublicRoute = ({ children }) => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  
+  if (user) {
+    return <Navigate to="/" replace />;
+  }
+  
+  return children;
+};
 
 export default App;

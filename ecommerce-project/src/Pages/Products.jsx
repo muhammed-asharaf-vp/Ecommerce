@@ -29,13 +29,13 @@ function Product() {
   const [quantity, setQuantity] = useState(1);
   const [alert, setAlert] = useState(null);
 
-  // ✅ Show Alert
+  //  Show Alert
   const showAlert = (message, type) => {
     setAlert({ message, type });
     setTimeout(() => setAlert(null), 3000);
   };
 
-  // ✅ Fetch Product
+  //  Fetch Product
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -56,18 +56,18 @@ function Product() {
     fetchProduct();
   }, [id, location.state]);
 
-  // ✅ Check if in wishlist
+  //  Check if in wishlist
   const isInWishlist = () =>
     wishlist?.some((item) => item.id === product?.id);
 
-  // ✅ Add to Cart
+  //  Add to Cart
   const handleAddToCart = () => {
     if (!user) return navigate("/login");
     for (let i = 0; i < quantity; i++) addToCart(product);
     showAlert(`${quantity} ${product.name}(s) added to cart!`, "success");
   };
 
-  // ✅ NEW: Buy Now Function
+  //  NEW: Buy Now Function
   const handleBuyNow = () => {
     if (!user) return navigate("/login");
     
@@ -84,7 +84,7 @@ function Product() {
     }, 1000);
   };
 
-  // ✅ Loading UI
+  //  Loading UI
   if (loading)
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
@@ -92,7 +92,7 @@ function Product() {
       </div>
     );
 
-  // ✅ Error UI
+  //  Error UI
   if (error || !product)
     return (
       <div className="min-h-screen bg-black flex items-center justify-center text-white text-center">
@@ -111,7 +111,7 @@ function Product() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white">
-      {/* ✅ Alert */}
+      {/*  Alert */}
       {alert && (
         <div
           className={`fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg text-white max-w-sm transition-transform duration-300 ${
@@ -126,7 +126,7 @@ function Product() {
         </div>
       )}
 
-      {/* ✅ Back Button */}
+      {/*  Back Button */}
       <div className="px-6 py-4 border-b border-gray-800">
         <button
           onClick={() => navigate(-1)}
@@ -136,7 +136,7 @@ function Product() {
         </button>
       </div>
 
-      {/* ✅ Product Details */}
+      {/*  Product Details */}
       <div className="container mx-auto px-6 py-10 grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* Image */}
         <div className="flex justify-center items-center">

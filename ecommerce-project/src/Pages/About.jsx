@@ -1,4 +1,4 @@
-// src/Pages/About.jsx
+
 import React from 'react';
 import Navbar from '../Component/Navbar';
 import { useNavigate } from 'react-router-dom';

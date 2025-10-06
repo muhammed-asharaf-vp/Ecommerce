@@ -1,4 +1,4 @@
-// src/Pages/Checkout.jsx
+
 import React, { useState, useContext } from "react";
 import { CartContext } from "../Context/CartContext";
 import { AuthContext } from "../Context/AuthContext";
@@ -120,7 +120,7 @@ function Checkout() {
       // Simulate API call delay
       await new Promise(resolve => setTimeout(resolve, 3000));
       
-      // ✅ UPDATED: Credit Card always succeeds, PayPal always fails
+      //  UPDATED: Credit Card always succeeds, PayPal always fails
       const isSuccess = paymentMethod === "credit";
       
       if (isSuccess) {

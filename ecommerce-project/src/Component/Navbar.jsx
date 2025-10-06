@@ -1,4 +1,4 @@
-// Navbar.jsx
+
 import React, { useContext, useState } from "react";
 import { FaSearch, FaUser, FaHeart, FaShoppingBag, FaBars, FaTimes, FaSignOutAlt } from "react-icons/fa";
 import logo from "../assets/new.png";

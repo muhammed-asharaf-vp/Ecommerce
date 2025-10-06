@@ -85,7 +85,7 @@ function Footer() {
                 <FaMapMarkerAlt className="w-4 h-4 text-amber-400 mt-1 flex-shrink-0" />
                 <div>
                   <p className="text-gray-400">123 Luxury Avenue</p>
-                  <p className="text-gray-400">Geneva, Switzerland 1201</p>
+                  <p className="text-gray-400">kerala, india </p>
                 </div>
               </div>
               <div className="flex items-center gap-3">

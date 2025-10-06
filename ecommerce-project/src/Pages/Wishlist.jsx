@@ -1,4 +1,4 @@
-// src/Pages/Wishlist.jsx
+
 import React, { useContext } from "react";
 import { WishlistContext } from "../Context/WishListContext";
 import { FaTrash, FaHeart, FaExclamationTriangle } from "react-icons/fa";

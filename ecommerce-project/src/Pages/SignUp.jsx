@@ -1,4 +1,4 @@
-// Signup.jsx
+
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../Api/Axios";
@@ -50,7 +50,7 @@ export default function Signup() {
     }
 
     try {
-      // ✅ FIX: json-server already filters with ?email
+      //  json-server already filters with ?email
       const { data: users } = await api.get(`/users?email=${email}`);
 
       if (users.length > 0) {

@@ -1,4 +1,4 @@
-// src/Context/WishListContext.jsx
+
 import React, { createContext, useState, useEffect, useContext } from "react";
 import api from "../Api/Axios";
 import { AuthContext } from "./AuthContext";
@@ -12,7 +12,7 @@ export const WishlistProvider = ({ children }) => {
 
   const [wishlist, setWishlist] = useState([]);
 
-  // 🟢 Load wishlist when user logs in
+  //  Load wishlist when user logs in
   useEffect(() => {
     if (userId) {
       api
@@ -24,7 +24,7 @@ export const WishlistProvider = ({ children }) => {
     }
   }, [userId]);
 
-  // 🟢 Add product to wishlist
+  //  Add product to wishlist
   const addToWishlist = async (product) => {
     if (!userId) {
       toast.warning("Please login to add items to your wishlist.");
@@ -50,7 +50,7 @@ export const WishlistProvider = ({ children }) => {
     }
   };
 
-  // 🟢 Remove product from wishlist
+  //  Remove product from wishlist
   const removeFromWishlist = async (id) => {
     const itemToRemove = wishlist.find(item => item.id === id);
     const updatedWishlist = wishlist.filter((item) => item.id !== id);
@@ -66,7 +66,7 @@ export const WishlistProvider = ({ children }) => {
     }
   };
 
-  // 🟢 Clear entire wishlist
+  //  Clear entire wishlist
   const clearWishlist = async () => {
     if (!userId) {
       toast.warning("Please login to manage your wishlist.");
@@ -85,7 +85,7 @@ export const WishlistProvider = ({ children }) => {
     }
   };
 
-  // 🟢 Toggle wishlist
+  //  Toggle wishlist
   const toggleWishlist = (product) => {
     const exists = wishlist.find((item) => item.id === product.id);
     if (exists) {

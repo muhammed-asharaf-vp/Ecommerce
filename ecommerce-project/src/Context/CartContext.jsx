@@ -1,4 +1,4 @@
-// src/Context/CartContext.jsx
+
 import React, { createContext, useState, useEffect, useContext } from "react";
 import api from "../Api/Axios";
 import { toast } from "react-toastify";
@@ -12,7 +12,7 @@ export const CartProvider = ({ children }) => {
 
   const [cart, setCart] = useState([]);
 
-  // 🟢 Load cart when user logs in
+  //  Load cart when user logs in
   useEffect(() => {
     if (userId) {
       api
@@ -24,7 +24,7 @@ export const CartProvider = ({ children }) => {
     }
   }, [userId]);
 
-  // 🟢 Add product to cart
+  //  Add product to cart
   const addToCart = async (product) => {
     if (!userId) {
       toast.warning("Please login to add items to your cart.");
@@ -55,7 +55,7 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  // 🟢 Remove product from cart
+  //  Remove product from cart
   const removeFromCart = async (id) => {
     const updatedCart = cart.filter((item) => item.id !== id);
     setCart(updatedCart);
@@ -69,7 +69,7 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  // 🟢 Increase quantity
+  //  Increase quantity
   const increaseQuantity = async (id) => {
     const updatedCart = cart.map((item) =>
       item.id === id ? { ...item, quantity: item.quantity + 1 } : item
@@ -84,7 +84,7 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  // 🟢 Decrease quantity
+  //  Decrease quantity
   const decreaseQuantity = async (id) => {
     const updatedCart = cart
       .map((item) =>
@@ -101,7 +101,7 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  // 🟢 Clear entire cart
+  //  Clear entire cart
   const clearCart = async () => {
     if (!userId) {
       toast.warning("Please login to manage your cart.");
@@ -119,13 +119,13 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  // 🟢 Toggle cart (add if not exists, remove if exists)
+  //  Toggle cart (add if not exists, remove if exists)
   const toggleCart = (product) => {
     const exists = cart.find((item) => item.id === product.id);
     exists ? removeFromCart(product.id) : addToCart(product);
   };
 
-  // 🟢 CREATE ORDER - NEW FUNCTION
+  //  CREATE ORDER - NEW FUNCTION
   const createOrder = async (orderData) => {
     if (!userId) {
       toast.error("Please login to create an order.");
@@ -193,7 +193,7 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  // 🟢 GET USER ORDERS
+  //  GET USER ORDERS
   const getUserOrders = async () => {
     if (!userId) return [];
 
@@ -216,8 +216,8 @@ export const CartProvider = ({ children }) => {
         decreaseQuantity,
         clearCart,
         toggleCart,
-        createOrder,    // ✅ NEW: Create order function
-        getUserOrders   // ✅ NEW: Get user orders function
+        createOrder,    
+        getUserOrders   
       }}
     >
       {children}

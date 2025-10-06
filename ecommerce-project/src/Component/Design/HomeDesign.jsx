@@ -1,8 +1,10 @@
-// HeroSlider.jsx
+
 import React, { useState, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight , FaShippingFast, FaHeadset, FaUndo, FaCreditCard  } from "react-icons/fa";
 import Navbar from "../Navbar";
 import { useNavigate } from "react-router-dom";
+
+
 
 const images = [
   "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=3840&q=80",
@@ -140,13 +142,14 @@ export function FeaturesBar() {
 export  function CategoryBoxes() {
   const categories = [
     {
-      
-      title: "MEN'S",
+     
+      title: "Rado",
       image:
        "https:imgs.search.brave.com/lbMknnaNB7Vw7D7wQpPPyUroq2Q6y-aOnoRjgegSlVQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9t/YW4tbG9va2luZy1o/aXMtd2F0Y2hfNTM4/NzYtMTM1MDMuanBn/P3NlbXQ9YWlzX2h5/YnJpZCZ3PTc0MCZx/PTgw", // Men's watch image
     },
     {
-      title: "WOMEN'S",
+      
+      title: "Rolex Lady-Datejust 28",
       image:
       "https://imgs.search.brave.com/TkazzKvLARmptWl4NqeKktXk0E36F_fLkkHtRTyC04Q/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA3LzQ1LzQzLzM0/LzM2MF9GXzc0NTQz/MzQ0Nl9vdzI2S2RI/QXI4UDFBUHhyYm1G/dDdXRFhjTDRmeTQ2/ei5qcGc", // Women's watch image
     },

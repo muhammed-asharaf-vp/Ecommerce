@@ -1,4 +1,4 @@
-// src/Pages/Cart.jsx
+
 import React, { useContext } from "react";
 import { CartContext } from "../Context/CartContext";
 import Navbar from "../Component/Navbar";

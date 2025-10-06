@@ -1,7 +1,7 @@
 import React from 'react'
-import Footer from '../Component/Footer'
 import Navbar from '../Component/Navbar'
 import HeroSlider, { CategoryBoxes, FeaturesBar, TopRating } from '../Component/Design/HomeDesign'
+import Footer from '../Component/Footer'
 
 
 

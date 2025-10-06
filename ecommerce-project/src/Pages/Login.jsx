@@ -1,16 +1,15 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import api from "../Api/Axios"; // axios instance
-import logo from "../assets/new.png";
-import { AuthContext } from "../Context/AuthContext"; // import context
-import { FaEye,FaEyeSlash } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import api from "../Api/Axios";
+import { AuthContext } from "../Context/AuthContext";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext); // get login from context
+  const { login } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,65 +47,63 @@ function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-600">
-      <div className="w-full max-w-4xl bg-white rounded-2xl shadow-2xl flex overflow-hidden">
-        {/* Left Side - Branding */}
-        <div className="hidden md:flex w-1/2 bg-yellow-600 items-center justify-center p-10">
-          <div className="text-center text-white">
-            <h2 className="text-4xl font-bold mb-4">Welcome Back!</h2>
-            <p className="text-lg">
-              Login to continue shopping with <br />
-              <span className="font-semibold">ChronoMart</span>
-            </p>
-            <img src={logo} alt="Login illustration" className="w-60 mx-auto mt-8" />
-          </div>
-        </div>
-
-        {/* Right Side - Login Form */}
-        <div className="w-full md:w-1/2 p-10">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Sign In</h2>
-
-          <form onSubmit={handleSubmit} className="space-y-5">
-            {/* Email */}
-            <div>
-              <label className="block text-gray-700 font-medium mb-1">Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                placeholder="Enter your email"
-              />
-            </div>
-
-            {/* Password */}
-            <div>
-              <label className="block text-gray-700 font-medium mb-1">Password</label>
-              <input    type="password"    value={password}    onChange={(e) => setPassword(e.target.value)}  className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"    placeholder="Enter your password"  />
-            </div>
-
-            {/* Error Message */}
-            {error && <p className="text-red-600 text-sm">{error}</p>}
-
-            {/* Submit Button */}
-            <button
-              type="submit"
-              className="w-full py-3 px-4 bg-yellow-600 text-white font-semibold rounded-lg shadow-md hover:bg-yellow-700 transition transform hover:scale-105"
-            >
-              Login
-            </button>
-          </form>
-
-          <p className="text-center text-gray-600 text-sm mt-5">
-            Don't have an account?{" "}
-            <span
-              onClick={() => navigate("/signup")}
-              className="text-yellow-600 font-medium hover:underline cursor-pointer"
-            >
-              SignUp
-            </span>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+      <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md border border-gray-200">
+        <div className="text-center mb-6">
+          <h1 className="text-4xl font-bold text-yellow-600 tracking-tight mb-2">Veloce</h1>
+          <h2 className="text-2xl font-bold text-gray-800">Welcome Back</h2>
+          <p className="text-sm text-gray-500 mt-2">
+            Sign in to your account to continue
           </p>
         </div>
+
+        <form onSubmit={handleSubmit} className="space-y-5">
+          {/* Email */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Email Address
+            </label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              placeholder="Enter your email"
+            />
+          </div>
+
+          {/* Password */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Password
+            </label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              placeholder="Enter your password"
+            />
+          </div>
+
+          {/* Error Message */}
+          {error && <p className="text-red-600 text-sm">{error}</p>}
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full py-3 bg-yellow-600 text-white font-semibold rounded-lg shadow-md hover:bg-yellow-700 transition"
+          >
+            Sign In
+          </button>
+        </form>
+
+        <p className="text-sm text-center text-gray-600 mt-6">
+          Don't have an account?{" "}
+          <Link to="/signup" className="text-yellow-600 font-medium hover:underline">
+            Sign Up
+          </Link>
+        </p>
       </div>
     </div>
   );

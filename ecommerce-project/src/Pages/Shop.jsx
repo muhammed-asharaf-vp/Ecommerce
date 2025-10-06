@@ -49,17 +49,15 @@ const Shop = () => {
   const [hoveredImage, setHoveredImage] = useState(null);
   const [showFilters, setShowFilters] = useState(false);
 
-  // Filter states
+  // Filter states - only brands now
   const [selectedBrands, setSelectedBrands] = useState([]);
-  const [selectedGenders, setSelectedGenders] = useState([]);
 
   // Contexts
   const { wishlist, addToWishlist, removeFromWishlist } = useContext(WishlistContext);
   const { cart, addToCart, removeFromCart } = useContext(CartContext);
 
-  // Brands and Genders
+  // Brands only
   const brands = ["ALL", "RADO", "ROLEX", "OMEGA", "TAG HEUER", "CARTIER"];
-  const genders = ["ALL", "MEN", "WOMEN"];
 
   // Fetch products
   useEffect(() => {
@@ -86,55 +84,37 @@ const Shop = () => {
     if (brand === "ALL") {
       setSelectedBrands([]);
     } else {
-      setSelectedBrands(prev => 
-        prev.includes(brand) 
-          ? prev.filter(b => b !== brand)
+      setSelectedBrands((prev) =>
+        prev.includes(brand)
+          ? prev.filter((b) => b !== brand)
           : [...prev, brand]
       );
     }
   };
 
-  // Gender filter handler
-  const handleGenderFilter = (gender) => {
-    if (gender === "ALL") {
-      setSelectedGenders([]);
-    } else {
-      setSelectedGenders(prev => 
-        prev.includes(gender) 
-          ? prev.filter(g => g !== gender)
-          : [...prev, gender]
-      );
-    }
-  };
-
-  // Filter products based on search, brands, and genders
+  // ✅ Simplified filtered products logic - only brand and search
   const filteredProducts = products.filter((product) => {
-    // Search filter
-    const matchesSearch = 
-      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.category.toLowerCase().includes(searchTerm.toLowerCase());
+    // 🔍 Search filter
+    const matchesSearch =
+      product.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.category?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.brand?.toLowerCase().includes(searchTerm.toLowerCase());
 
-    // Brand filter
-    const matchesBrand = selectedBrands.length === 0 || 
-      selectedBrands.some(brand => 
-        product.brand?.toUpperCase().includes(brand) ||
-        product.name?.toUpperCase().includes(brand)
+    // 🏷️ Brand filter
+    const matchesBrand =
+      selectedBrands.length === 0 ||
+      selectedBrands.some((brand) =>
+        product.brand?.toLowerCase().includes(brand.toLowerCase()) ||
+        product.name?.toLowerCase().includes(brand.toLowerCase())
       );
 
-    // Gender filter
-    const matchesGender = selectedGenders.length === 0 || 
-      selectedGenders.some(gender => 
-        product.gender?.toUpperCase().includes(gender) ||
-        product.category?.toUpperCase().includes(gender)
-      );
-
-    return matchesSearch && matchesBrand && matchesGender;
+    // ✅ Return only products that match both filters
+    return matchesSearch && matchesBrand;
   });
 
   // Clear all filters
   const clearAllFilters = () => {
     setSelectedBrands([]);
-    setSelectedGenders([]);
     setSearchTerm("");
   };
 
@@ -216,7 +196,7 @@ const Shop = () => {
         {showFilters && (
           <div className="bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-gray-700 shadow-2xl">
             {/* Active Filters */}
-            {(selectedBrands.length > 0 || selectedGenders.length > 0) && (
+            {selectedBrands.length > 0 && (
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-2 flex-wrap">
                   <span className="text-sm text-gray-400">Active filters:</span>
@@ -224,12 +204,6 @@ const Shop = () => {
                     <span key={brand} className="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm flex items-center gap-1">
                       {brand}
                       <button onClick={() => handleBrandFilter(brand)} className="hover:text-gray-700">×</button>
-                    </span>
-                  ))}
-                  {selectedGenders.map(gender => (
-                    <span key={gender} className="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm flex items-center gap-1">
-                      {gender}
-                      <button onClick={() => handleGenderFilter(gender)} className="hover:text-gray-700">×</button>
                     </span>
                   ))}
                 </div>
@@ -243,7 +217,7 @@ const Shop = () => {
             )}
 
             {/* Brand Filters */}
-            <div className="mb-6">
+            <div>
               <h3 className="text-lg font-semibold text-white mb-4">BRANDS</h3>
               <div className="flex flex-wrap gap-3">
                 {brands.map((brand) => (
@@ -258,27 +232,6 @@ const Shop = () => {
                     }`}
                   >
                     {brand}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Gender Filters - MOVED BELOW BRAND FILTERS */}
-            <div>
-              <h3 className="text-lg font-semibold text-white mb-4">GENDER</h3>
-              <div className="flex flex-wrap gap-3">
-                {genders.map((gender) => (
-                  <button
-                    key={gender}
-                    onClick={() => handleGenderFilter(gender)}
-                    className={`px-6 py-3 rounded-lg border-2 transition-all duration-300 font-medium ${
-                      (gender === "ALL" && selectedGenders.length === 0) || 
-                      selectedGenders.includes(gender)
-                        ? "bg-yellow-500 text-black border-yellow-500 shadow-lg transform scale-105"
-                        : "bg-gray-700 text-gray-300 border-gray-600 hover:bg-gray-600 hover:border-yellow-400"
-                    }`}
-                  >
-                    {gender}
                   </button>
                 ))}
               </div>
@@ -301,23 +254,6 @@ const Shop = () => {
                 }`}
               >
                 {brand}
-              </button>
-            ))}
-          </div>
-          
-          {/* Gender Quick Filters */}
-          <div className="flex flex-wrap gap-2">
-            {genders.filter(gender => gender !== "ALL").map((gender) => (
-              <button
-                key={gender}
-                onClick={() => handleGenderFilter(gender)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 border ${
-                  selectedGenders.includes(gender)
-                    ? "bg-yellow-500 text-black border-yellow-500 shadow-lg"
-                    : "bg-gray-700 text-gray-300 border-gray-600 hover:bg-gray-600 hover:border-yellow-400"
-                }`}
-              >
-                {gender}
               </button>
             ))}
           </div>
@@ -366,7 +302,7 @@ const Shop = () => {
                       hoveredImage === product.id ? "opacity-100 translate-x-0" : "opacity-0 translate-x-2"
                     }`}
                   >
-                    {/* ❤️ Wishlist */}
+                    {/* Wishlist */}
                     <button
                       onClick={() => toggleWishlist(product)}
                       className={`p-3 rounded-lg backdrop-blur-md border transition-all duration-300 ${
@@ -379,7 +315,7 @@ const Shop = () => {
                       <FaHeart className={`text-lg ${isWishlisted ? "text-white" : "text-gray-300"}`} />
                     </button>
 
-                    {/* 🔍 View */}
+                    {/* View */}
                     <button
                       onClick={() => navigate(`/product/${product.id}`)}
                       className="p-3 rounded-lg backdrop-blur-md border bg-black/80 text-gray-300 border-gray-600 hover:bg-yellow-500 hover:text-black hover:scale-110 hover:shadow-xl transition-all duration-300"
@@ -414,9 +350,9 @@ const Shop = () => {
                         {product.brand}
                       </span>
                     )}
-                    {product.gender && (
-                      <span className="text-xs font-medium text-white bg-gray-600 px-3 py-1 rounded-full border border-gray-500">
-                        {product.gender}
+                    {product.category && (
+                      <span className="text-xs font-medium text-gray-300 bg-gray-700 px-3 py-1 rounded-full border border-gray-600">
+                        {product.category}
                       </span>
                     )}
                   </div>
@@ -424,7 +360,7 @@ const Shop = () => {
                   <div className="flex justify-between items-center pt-6 border-t border-gray-700/50">
                     <span className="text-3xl font-light text-yellow-400">${product.price}</span>
 
-                    {/* 🛒 Cart */}
+                    {/* Cart */}
                     <button
                       onClick={() =>
                         isInCart ? removeFromCart(product.id) : addToCart(product)

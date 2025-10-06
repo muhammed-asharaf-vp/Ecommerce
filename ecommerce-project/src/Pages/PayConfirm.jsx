@@ -1,4 +1,4 @@
-// src/Pages/OrderConfirmation.jsx
+
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../Component/Navbar";
