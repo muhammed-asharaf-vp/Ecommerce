@@ -1,6 +1,4 @@
-
-import React, { createContext, useState, useEffect,useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { createContext, useState, useEffect, useContext } from "react";
 
 // 1. Create the context
 export const AuthContext = createContext();
@@ -9,16 +7,13 @@ export const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  const navigate = useNavigate()
-  // load user from localStorage when app starts
+  // Load user from localStorage when app starts
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
+    if (storedUser) setUser(JSON.parse(storedUser));
   }, []);
 
-  // login function
+  // login function (only save user, no navigation here)
   const login = (userData) => {
     setUser(userData);
     localStorage.setItem("user", JSON.stringify(userData));
@@ -37,11 +32,9 @@ export function AuthProvider({ children }) {
   );
 }
 
-
+// Custom hook to use auth context
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
+  if (!context) throw new Error("useAuth must be used within an AuthProvider");
   return context;
 };

@@ -17,131 +17,47 @@ import OrderConfirmation from "./Pages/PayConfirm";
 import MyProfile from "./Pages/MyProfile";
 import MyOrders from "./Pages/MyOrders";
 import ProtectedRoute from "./Pages/ProtectedRoute";
+import AdminDashboard from "./Component/Admin/Pages/Dashboard";
+
 
 
 function App() {
   return (
     <div>
       <Routes>
-       
-        <Route 
-          path="/login" 
-          element={
-            <PublicRoute >
-              <Login />
-            </PublicRoute>
-          } 
-        />
-        <Route 
-          path="/signup" 
-          element={
-            <PublicRoute>
-              <Signup />
-            </PublicRoute>
-          } 
-        />
-        
-       
-        <Route 
-          path="/" 
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          } 
-        />
-        <Route 
-          path="/shop" 
-          element={
-            <ProtectedRoute>
-              <Shop />
-            </ProtectedRoute>
-          } 
-        />
-        <Route 
-          path="/wishlist" 
-          element={
-            <ProtectedRoute>
-              <Wishlist />
-            </ProtectedRoute>
-          } 
-        />
-        <Route 
-          path="/cart" 
-          element={
-            <ProtectedRoute>
-              <Cart />
-            </ProtectedRoute>
-          }
-        />
-        <Route 
-          path="/about" 
-          element={
-            <ProtectedRoute>
-              <About />
-            </ProtectedRoute>
-          } 
-        />
-        <Route 
-          path="/product/:id" 
-          element={
-            <ProtectedRoute>
-              <Product />
-            </ProtectedRoute>
-          }
-        />
-        <Route 
-          path="/contact" 
-          element={
-            <ProtectedRoute>
-              <Contact />
-            </ProtectedRoute>
-          }
-        />
-        <Route 
-          path="/payment" 
-          element={
-            <ProtectedRoute>
-              <Checkout />
-            </ProtectedRoute>
-          } 
-        />
-        <Route 
-          path="/confirm-order" 
-          element={
-            <ProtectedRoute>
-              <OrderConfirmation />
-            </ProtectedRoute>
-          }
-        />
-        <Route 
-          path="/my-profile" 
-          element={
-            <ProtectedRoute>
-              <MyProfile />
-            </ProtectedRoute>
-          } 
-        />
-        <Route 
-          path="/my-orders" 
-          element={
-            <ProtectedRoute>
-              <MyOrders />
-            </ProtectedRoute>
-          } 
-        />
-        
+        <Route  path="/login" element={ <PublicRoute > <Login /> </PublicRoute> }  />
+        <Route path="/signup" element={ <PublicRoute>  <Signup />  </PublicRoute>} />
+        <Route path="/"  element={ <ProtectedRoute>   <Home /> </ProtectedRoute> } />
+        <Route path="/shop" element={ <ProtectedRoute>  <Shop /> </ProtectedRoute>  } />
+        <Route path="/wishlist" element={<ProtectedRoute> <Wishlist /> </ProtectedRoute> } />
+        <Route path="/cart" element={<ProtectedRoute> <Cart /> </ProtectedRoute> } />
+        <Route path="/about" element={ <ProtectedRoute> <About /> </ProtectedRoute> } />
+        <Route path="/product/:id" element={ <ProtectedRoute> <Product /> </ProtectedRoute>  }/>
+        <Route path="/contact" element={ <ProtectedRoute> <Contact /> </ProtectedRoute>  }/>
+        <Route path="/payment" element={ <ProtectedRoute> <Checkout /> </ProtectedRoute>  } />
+        <Route path="/confirm-order" element={ <ProtectedRoute>  <OrderConfirmation /> </ProtectedRoute>  }/>
+        <Route path="/my-profile"   element={    <ProtectedRoute>      <MyProfile />    </ProtectedRoute>  } />
+        <Route path="/my-orders" element={ <ProtectedRoute> <MyOrders /> </ProtectedRoute> } />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+
+
         {/* Catch all route - redirect to home */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       
       {/* Toast Notification Container */}
       <ToastContainer
-        position="top-center"
-        autoClose={2000}
-        hideProgressBar
-        theme="colored"
-      />
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <Footer />
     </div>
   );

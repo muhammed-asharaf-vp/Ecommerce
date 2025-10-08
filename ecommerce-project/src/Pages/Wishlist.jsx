@@ -1,7 +1,7 @@
 
 import React, { useContext } from "react";
 import { WishlistContext } from "../Context/WishListContext";
-import { FaTrash, FaHeart, FaExclamationTriangle } from "react-icons/fa";
+import { FaTrash, FaHeart, FaExclamationTriangle, FaArrowLeft } from "react-icons/fa";
 import Navbar from "../Component/Navbar";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -37,6 +37,17 @@ function Wishlist() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="text-center mb-8">
+            <div className="flex items-center justify-between mb-4 sm:hidden">
+                          <button 
+                            onClick={() => navigate(-1)}
+                            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+                          >
+                            <FaArrowLeft />
+                            <span>Back to shop</span>
+                          </button>
+                          <h1 className="text-xl font-semibold text-gray-900"></h1>
+                          <div className="w-10"></div> {/* Spacer for balance */}
+                        </div>
             <div className="flex items-center justify-center mb-4">
               <FaHeart className="text-red-500 text-4xl mr-3" />
               <h1 className="text-4xl font-bold text-gray-900">My Wishlist</h1>
@@ -113,6 +124,13 @@ function Wishlist() {
                 <p className="text-sm text-gray-500 mt-2">
                   This will remove all items from your wishlist
                 </p>
+                <br></br>
+                <button
+                      onClick={() => navigate("/shop")}
+                      className="w-full px-6 py-3  border-gray-300 text-gray-700 rounded-xl font-semibold hover:border-gray-400 hover:bg-gray-50 transition-colors duration-300 text-sm sm:text-base"
+                    >
+                      Continue Shopping
+                    </button>
               </div>
             </>
           )}

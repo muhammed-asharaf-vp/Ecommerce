@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../Api/Axios";
 import { AuthContext } from "../Context/AuthContext";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -25,7 +24,7 @@ function Login() {
     }
 
     try {
-      // Fetch users matching email & password
+      // Fetch user matching email & password
       const response = await api.get(`/users?email=${email}&password=${password}`);
       const data = response.data;
 
@@ -34,12 +33,19 @@ function Login() {
         return;
       }
 
-      // ✅ Save user in Context + localStorage
-      login(data[0]);
+      const userData = data[0];
 
-      // Clear error & redirect
-      setError("");
-      navigate("/");
+      // Save user in context & localStorage
+      login(userData);
+
+      // ✅ Navigate based on role
+      if (userData.role === "admin") {
+        navigate("/admin-dashboard");
+      } else {
+        navigate("/");
+      }
+
+      setError(""); // Clear any previous errors
     } catch (err) {
       console.error(err);
       setError("Something went wrong. Try again.");
@@ -58,11 +64,8 @@ function Login() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Email */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Email Address
-            </label>
+            <label className="block text-sm font-medium text-gray-700">Email Address</label>
             <input
               type="email"
               value={email}
@@ -72,11 +75,8 @@ function Login() {
             />
           </div>
 
-          {/* Password */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Password
-            </label>
+            <label className="block text-sm font-medium text-gray-700">Password</label>
             <input
               type="password"
               value={password}
@@ -86,10 +86,8 @@ function Login() {
             />
           </div>
 
-          {/* Error Message */}
           {error && <p className="text-red-600 text-sm">{error}</p>}
 
-          {/* Submit Button */}
           <button
             type="submit"
             className="w-full py-3 bg-yellow-600 text-white font-semibold rounded-lg shadow-md hover:bg-yellow-700 transition"

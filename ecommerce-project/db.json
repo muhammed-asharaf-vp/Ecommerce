@@ -1,70 +1,29 @@
 {
   "users": [
     {
-      "id": "fb38",
-      "firstname": "zxcvbnm",
-      "lastname": " asharaf vp",
-      "email": "davis@gmail.com",
-      "password": "12345678",
-      "cart": [],
-      "wishlist": [],
-      "shippingAddress": {}
-    },
-    {
-      "id": "2958",
-      "firstname": "briddd",
-      "lastname": "on",
-      "email": "bridgeon123@gmail.com",
-      "password": "12345678",
-      "cart": [],
-      "wishlist": [],
-      "shippingAddress": {}
-    },
-    {
-      "id": "2a8b",
+      "id": "001",
       "firstname": "mohamed",
-      "lastname": "nabhan",
-      "email": "raashid@gmail.com",
+      "lastname": "ashraf",
+      "email": "mohamedasharafvpp@gmail.com",
       "password": "12345678",
-      "cart": [],
-      "wishlist": [],
-      "shippingAddress": {}
-    },
-    {
-      "id": "55a3",
-      "firstname": "mohamed",
-      "lastname": "mnbvcxz",
-      "email": "bbbrid@gmail.com",
-      "password": "12345678",
-      "cart": [],
-      "wishlist": [],
-      "shippingAddress": [],
-      "order": [],
-      "role": "user"
-    },
-    {
-      "id": "8819",
-      "firstname": "mohamed",
-      "lastname": "Rinshad",
-      "email": "rinshad@gmail.com",
-      "password": "12345678",
-      "cart": [],
-      "wishlist": [],
-      "shippingAddress": [],
-      "order": [],
-      "role": "user"
-    },
-    {
-      "id": "7a37",
-      "firstname": "hii",
-      "lastname": "wow",
-      "email": "hy@gmail.com",
-      "password": "12345678",
-      "cart": [],
-      "wishlist": [],
-      "shippingAddress": [],
-      "order": [],
-      "role": "user"
+      "role": "admin",
+      "wishlist": [
+        {
+          "id": "002",
+          "name": "Rado True Thinline",
+          "description": "Sleek, ultra-thin ceramic watch from Rado's True collection, perfect for minimalists.",
+          "price": 2200,
+          "count": 10,
+          "category": "men's",
+          "images": [
+            "https://i.pinimg.com/736x/06/58/51/06585185ff65485ed2139462fe653f6c.jpg"
+          ],
+          "warranty": "2 year",
+          "isActive": true,
+          "created_at": "2025-09-30T11:00:00Z"
+        }
+      ],
+      "cart": []
     },
     {
       "id": "3426",
@@ -482,7 +441,7 @@
           "warranty": "3 year",
           "isActive": true,
           "created_at": "2025-09-30T11:00:00Z",
-          "quantity": 1
+          "quantity": 3
         },
         {
           "id": "w001",
@@ -500,21 +459,6 @@
           "quantity": 1
         },
         {
-          "id": "ow003",
-          "name": "Omega Seamaster Aqua Terra Ladies",
-          "description": "Sporty yet elegant, perfect for everyday wear.",
-          "price": 5000,
-          "count": 10,
-          "category": "women's",
-          "images": [
-            "https://i.pinimg.com/1200x/1a/9b/67/1a9b67f5f29001aeceb61ab8366663a1.jpg"
-          ],
-          "warranty": "5 year",
-          "isActive": true,
-          "created_at": "2025-09-30T12:00:00Z",
-          "quantity": 1
-        },
-        {
           "id": "thm001",
           "name": "TAG Heuer Carrera Calibre 16",
           "description": "Motorsport-inspired chronograph with automatic movement.",
@@ -528,9 +472,112 @@
           "isActive": true,
           "created_at": "2025-09-30T12:00:00Z",
           "quantity": 1
+        },
+        {
+          "id": "cw003",
+          "name": "Cartier Tank Française",
+          "description": "Elegant rectangular watch with steel bracelet.",
+          "price": 5400,
+          "count": 10,
+          "category": "women's",
+          "images": [
+            "https://i.pinimg.com/1200x/7d/1e/65/7d1e65a5b7190a1ab0e3f0d9449658e0.jpg"
+          ],
+          "warranty": "2 year",
+          "isActive": true,
+          "created_at": "2025-09-30T12:55:00Z",
+          "quantity": 1
+        },
+        {
+          "id": "002",
+          "name": "Rado True Thinline",
+          "description": "Sleek, ultra-thin ceramic watch from Rado's True collection, perfect for minimalists.",
+          "price": 2200,
+          "count": 10,
+          "category": "men's",
+          "images": [
+            "https://i.pinimg.com/736x/06/58/51/06585185ff65485ed2139462fe653f6c.jpg"
+          ],
+          "warranty": "2 year",
+          "isActive": true,
+          "created_at": "2025-09-30T11:00:00Z",
+          "quantity": 1
+        },
+        {
+          "id": "rw002",
+          "name": "Rolex Pearlmaster 34",
+          "description": "Pearlmaster series with diamond-set bezel and exquisite elegance.",
+          "price": 12000,
+          "count": 10,
+          "category": "women's",
+          "images": [
+            "https://i.pinimg.com/1200x/71/5e/f7/715ef7b6f66ecc63438a1f76358c7e87.jpg"
+          ],
+          "warranty": "5 year",
+          "isActive": true,
+          "created_at": "2025-09-30T12:00:00Z",
+          "quantity": 1
+        },
+        {
+          "id": "w003",
+          "name": "Rado Centrix Automatic Ladies",
+          "description": "Stylish and functional, features automatic movement with a sleek bracelet.",
+          "price": 2200,
+          "count": 10,
+          "category": "women's",
+          "images": [
+            "https://i.pinimg.com/1200x/54/df/4f/54df4fec1f4b0c7fd233c622522e662e.jpg"
+          ],
+          "warranty": "3 year",
+          "isActive": true,
+          "created_at": "2025-09-30T11:15:00Z",
+          "quantity": 1
         }
       ],
-      "wishlist": [],
+      "wishlist": [
+        {
+          "id": "cw001",
+          "name": "Cartier Ballon Bleu Lady",
+          "description": "Round watch for women with delicate design and blue sapphire crown.",
+          "price": 5200,
+          "count": 10,
+          "category": "women's",
+          "images": [
+            "https://i.pinimg.com/1200x/a8/e5/77/a8e57741aa83ac05b320fb90ead12432.jpg"
+          ],
+          "warranty": "2 year",
+          "isActive": true,
+          "created_at": "2025-09-30T12:55:00Z"
+        },
+        {
+          "id": "002",
+          "name": "Rado True Thinline",
+          "description": "Sleek, ultra-thin ceramic watch from Rado's True collection, perfect for minimalists.",
+          "price": 2200,
+          "count": 10,
+          "category": "men's",
+          "images": [
+            "https://i.pinimg.com/736x/06/58/51/06585185ff65485ed2139462fe653f6c.jpg"
+          ],
+          "warranty": "2 year",
+          "isActive": true,
+          "created_at": "2025-09-30T11:00:00Z"
+        },
+        {
+          "id": "cw003",
+          "name": "Cartier Tank Française",
+          "description": "Elegant rectangular watch with steel bracelet.",
+          "price": 5400,
+          "count": 10,
+          "category": "women's",
+          "images": [
+            "https://i.pinimg.com/1200x/7d/1e/65/7d1e65a5b7190a1ab0e3f0d9449658e0.jpg"
+          ],
+          "warranty": "2 year",
+          "isActive": true,
+          "created_at": "2025-09-30T12:55:00Z"
+        }
+      ],
       "shippingAddress": [
         {
           "name": "afi vp",
@@ -579,6 +626,54 @@
           "estimatedDelivery": "2025-10-09T06:45:06.592Z"
         }
       ],
+      "role": "user"
+    },
+    {
+      "id": "1b17",
+      "firstname": "sanha",
+      "lastname": "m",
+      "email": "sanham@gmail.com",
+      "password": "zxcvbnm",
+      "cart": [],
+      "wishlist": [],
+      "shippingAddress": [],
+      "order": [],
+      "role": "user"
+    },
+    {
+      "id": "9e32",
+      "firstname": "edwin",
+      "lastname": "jose",
+      "email": "edwin@gmail.com",
+      "password": "12345678",
+      "cart": [],
+      "wishlist": [],
+      "shippingAddress": [],
+      "order": [],
+      "role": "user"
+    },
+    {
+      "id": "452a",
+      "firstname": "shinaz",
+      "lastname": "kpz",
+      "email": "shinazvk@gmail.com",
+      "password": "12345678",
+      "cart": [],
+      "wishlist": [],
+      "shippingAddress": [],
+      "order": [],
+      "role": "user"
+    },
+    {
+      "id": "c2df",
+      "firstname": "jasil",
+      "lastname": "c",
+      "email": "jasil@gmail.com",
+      "password": "12345678",
+      "cart": [],
+      "wishlist": [],
+      "shippingAddress": [],
+      "order": [],
       "role": "user"
     }
   ],
