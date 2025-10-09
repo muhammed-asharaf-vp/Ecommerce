@@ -26,7 +26,6 @@ export default function AdminSidebar({ isOpen, onToggle }) {
       name: "Manage Products", 
       path: "/admin/products", 
       icon: <FaBox />,
-      badge: "12",
       submenu: [
         { name: "All Products", path: "/admin/products" },
         { name: "Add New", path: "/admin/products/new" },
@@ -37,7 +36,6 @@ export default function AdminSidebar({ isOpen, onToggle }) {
       name: "Order Details", 
       path: "/admin/orders", 
       icon: <FaShoppingCart />,
-      badge: "3",
       submenu: [
         { name: "All Orders", path: "/admin/orders" },
         { name: "Pending", path: "/admin/orders/pending" },
@@ -180,7 +178,7 @@ export default function AdminSidebar({ isOpen, onToggle }) {
             </div>
             {isOpen && (
               <div className="flex-1 min-w-0">
-                <p className="text-white font-medium text-sm truncate">Admin User</p>
+                <p className="text-white font-medium text-sm truncate">Admin </p>
                 <p className="text-gray-400 text-xs truncate">Administrator</p>
               </div>
             )}

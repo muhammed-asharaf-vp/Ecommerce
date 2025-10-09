@@ -10,28 +10,28 @@ const Dashboard = () => {
       value: '1,234',
       icon: <FaUsers className="text-2xl text-blue-500" />,
       color: 'bg-blue-50',
-      change: '+12%'
+      
     },
     {
       title: 'Total Products',
       value: '567',
       icon: <FaBox className="text-2xl text-green-500" />,
       color: 'bg-green-50',
-      change: '+5%'
+      
     },
     {
       title: 'Total Orders',
       value: '89',
       icon: <FaShoppingCart className="text-2xl text-purple-500" />,
       color: 'bg-purple-50',
-      change: '+23%'
+      
     },
     {
       title: 'Revenue',
       value: '$12,456',
       icon: <FaDollarSign className="text-2xl text-yellow-500" />,
       color: 'bg-yellow-50',
-      change: '+18%'
+      
     }
   ];
 
@@ -49,7 +49,7 @@ const Dashboard = () => {
               <div>
                 <p className="text-sm font-medium text-gray-600">{stat.title}</p>
                 <p className="text-2xl font-bold text-gray-900 mt-1">{stat.value}</p>
-                <p className="text-sm text-green-600 mt-1">{stat.change} from last month</p>
+                
               </div>
               <div className={`p-3 rounded-full ${stat.color}`}>
                 {stat.icon}
