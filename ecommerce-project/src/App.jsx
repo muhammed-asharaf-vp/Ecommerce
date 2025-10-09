@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "./Component/Footer";
@@ -17,16 +17,23 @@ import OrderConfirmation from "./Pages/PayConfirm";
 import MyProfile from "./Pages/MyProfile";
 import MyOrders from "./Pages/MyOrders";
 import ProtectedRoute from "./Pages/ProtectedRoute";
-import AdminDashboard from "./Component/Admin/Pages/Dashboard";
+import AdminLayout from "./Component/Admin/AdminLayout";
+import Dashboard from "./Component/Admin/Pages/Dashboard";
+
+
 
 
 
 function App() {
+  const location =useLocation();
+  const isAdminRoute=location.pathname.startsWith("/admin")
   return (
     <div>
       <Routes>
+        {/* //public Routes */}
         <Route  path="/login" element={ <PublicRoute > <Login /> </PublicRoute> }  />
         <Route path="/signup" element={ <PublicRoute>  <Signup />  </PublicRoute>} />
+         {/* protected router */}
         <Route path="/"  element={ <ProtectedRoute>   <Home /> </ProtectedRoute> } />
         <Route path="/shop" element={ <ProtectedRoute>  <Shop /> </ProtectedRoute>  } />
         <Route path="/wishlist" element={<ProtectedRoute> <Wishlist /> </ProtectedRoute> } />
@@ -38,11 +45,13 @@ function App() {
         <Route path="/confirm-order" element={ <ProtectedRoute>  <OrderConfirmation /> </ProtectedRoute>  }/>
         <Route path="/my-profile"   element={    <ProtectedRoute>      <MyProfile />    </ProtectedRoute>  } />
         <Route path="/my-orders" element={ <ProtectedRoute> <MyOrders /> </ProtectedRoute> } />
-        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+         
+        {/* admin router */}
+        <Route path="/admin-layout" element={<AdminLayout />}   />
+        <Route path="/admin-dashboard" element= {<Dashboard />}   />
 
 
-        {/* Catch all route - redirect to home */}
-        <Route path="*" element={<Navigate to="/" replace />} />
+
       </Routes>
       
       {/* Toast Notification Container */}
@@ -58,7 +67,7 @@ function App() {
         pauseOnHover
         theme="light"
       />
-      <Footer />
+     {!isAdminRoute && <Footer />}
     </div>
   );
 }

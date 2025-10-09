@@ -15,7 +15,8 @@ export default function Signup() {
     cart: [],
     wishlist: [],
     order: [],
-    shippingAddress: []
+    shippingAddress: [],
+    status:"active"
   });
 
   const navigate = useNavigate();
@@ -37,7 +38,8 @@ export default function Signup() {
       wishlist,
       shippingAddress,
       order,
-      role
+      role,
+      status
     } = formData;
 
     if (!firstname || !lastname || !email || !password || !confirmPassword) {
@@ -68,7 +70,8 @@ export default function Signup() {
         wishlist,
         shippingAddress,
         order,
-        role
+        role,
+        status
       };
 
       const res = await api.post("/users", newUser);

@@ -5,7 +5,7 @@ import api from "../Api/Axios";
 import { WishlistContext } from "../Context/WishListContext";
 import { CartContext } from "../Context/CartContext";
 import { FaHeart } from "react-icons/fa";
-import { toast } from "react-toastify";
+// import { toast } from "sonner";
 
 // Icons
 const SearchIcon = () => (

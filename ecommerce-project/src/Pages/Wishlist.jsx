@@ -26,7 +26,7 @@ function Wishlist() {
 
   const handleRemoveItem = (item) => {
     removeFromWishlist(item.id);
-    // toast.info(`"${item.name}" removed from wishlist`);
+    toast.info(`"${item.name}" removed from wishlist`);
   };
   const navigate=useNavigate();
 

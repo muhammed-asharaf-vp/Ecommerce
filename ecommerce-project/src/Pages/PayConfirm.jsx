@@ -20,7 +20,7 @@ import {
   FaBox,
   FaHeadset
 } from "react-icons/fa";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 function OrderConfirmation() {
   const navigate = useNavigate();

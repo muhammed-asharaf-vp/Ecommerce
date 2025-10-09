@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { CartContext } from "../Context/CartContext";
 import Navbar from "../Component/Navbar";
+// import { toast } from "react-toastify";
 import { toast } from "react-toastify";
 import { FaTrash, FaPlus, FaMinus, FaShoppingBag, FaBolt, FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+
 
 function Cart() {
   const {
