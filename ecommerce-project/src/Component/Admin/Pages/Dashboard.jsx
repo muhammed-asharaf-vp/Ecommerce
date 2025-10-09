@@ -1,27 +1,74 @@
-// src/components/Admin/Dashboard.jsx
-import React from 'react';
+
+import React, { useEffect, useState } from 'react';
 import { FaUsers, FaBox, FaShoppingCart, FaDollarSign } from 'react-icons/fa';
 import AdminLayout from '../AdminLayout';
+import api from '../../../Api/Axios';
+
 
 const Dashboard = () => {
+  const[usercount,setusercount]=useState(0);
+  const[productcount,setproductcount] =useState(0)
+  const[ordercount,setordercount]=useState(0)
+  const[loading,setloading]=useState(true);
+
+  useEffect(()=>{
+    const fetchUsers = async ()=>{
+      try{
+        const res = await api.get("/users");
+        const normalusers=res.data.filter(user =>user.role==="user")
+        setusercount(normalusers.length);
+      }catch(error){
+        console.log("error fetching users:" , error);
+      }finally{
+        setloading(false)
+      }
+    };
+    fetchUsers();
+  },[]);
+  useEffect(()=>{
+    const fetchProducts = async ()=>{
+      try{
+        const res = await api.get("/products");
+        setproductcount(res.data.length);
+      }catch(error){
+        console.log("error fetching products:" , error);
+      }finally{
+        setloading(false)
+      }
+    };
+    fetchProducts();
+  },[]);
+  useEffect(()=>{
+    const totalOrders = async ()=>{
+      try{
+        const res = await api.get("/users/order");
+        setordercount(res.data.length);
+      }catch(error){
+        console.log("error fetching orders:" , error);
+      }finally{
+        setloading(false)
+      }
+    };
+    totalOrders();
+  },[]);
   const stats = [
     {
       title: 'Total Users',
-      value: '1,234',
+      value: loading? "loading..." : usercount,
       icon: <FaUsers className="text-2xl text-blue-500" />,
       color: 'bg-blue-50',
       
     },
     {
       title: 'Total Products',
-      value: '567',
+      value: loading? "loading...":productcount,
       icon: <FaBox className="text-2xl text-green-500" />,
       color: 'bg-green-50',
       
     },
     {
       title: 'Total Orders',
-      value: '89',
+      value: loading? "loading...":ordercount,
       icon: <FaShoppingCart className="text-2xl text-purple-500" />,
       color: 'bg-purple-50',
       
