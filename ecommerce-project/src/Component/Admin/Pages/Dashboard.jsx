@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { FaUsers, FaBox, FaShoppingCart, FaDollarSign } from 'react-icons/fa';
 import AdminLayout from '../AdminLayout';
 import api from '../../../Api/Axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const Dashboard = () => {
@@ -13,6 +14,8 @@ const Dashboard = () => {
   const [topSales, setTopSales] = useState([]);
 
   const[loading,setloading]=useState(true);
+
+  const navigate=useNavigate()
 
   useEffect(()=>{
     const fetchUsers = async ()=>{
@@ -90,7 +93,7 @@ const Dashboard = () => {
       } catch (error) {
         console.log("Error fetching total revenue:", error);
       } finally {
-        setLoading(false);
+        setloading(false);
       }
     };
 
@@ -122,7 +125,7 @@ const Dashboard = () => {
         });
 
         const salesArray = Object.values(salesMap).sort((a, b) => b.quantity - a.quantity);
-        setTopSales(salesArray.slice(0, 5)); // Top 5 products
+        setTopSales(salesArray.slice(0, 5)); 
       } catch (error) {
         console.log("Error fetching top sales:", error);
       }
@@ -264,54 +267,14 @@ const Dashboard = () => {
 
   <div className="mt-4 flex items-center justify-between text-sm text-gray-500">
     <span>Updated just now</span>
-    {/* <button className="text-blue-600 hover:text-blue-700 font-medium flex items-center space-x-1 transition-colors">
-      <span>View All</span>
-      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-      </svg>
-    </button> */}
   </div>
 </div>
-
-{/* Last Month Sales Table
-<div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mt-6">
-  <h3 className="text-lg font-semibold text-gray-800 mb-4">
-    Last Month Sales
-  </h3>
-  <table className="w-full text-left border-collapse">
-    <thead>
-      <tr>
-        <th className="border-b p-2">Product</th>
-        <th className="border-b p-2">Price</th>
-        <th className="border-b p-2">Quantity Sold</th>
-      </tr>
-    </thead>
-    <tbody>
-      {lastMonthSales.length > 0 ? (
-        lastMonthSales.map((item) => (
-          <tr key={item.id}>
-            <td className="border-b p-2">{item.name}</td>
-            <td className="border-b p-2">${item.price}</td>
-            <td className="border-b p-2">{item.quantity}</td>
-          </tr>
-        ))
-      ) : (
-        <tr>
-          <td colSpan="3" className="text-center text-gray-500 p-4">
-            No sales recorded last month.
-          </td>
-        </tr>
-      )}
-    </tbody>
-  </table>
-</div> */}
-
-
         {/* Quick Actions */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-30">
           <h3 className="text-lg font-semibold text-gray-800 mb-4">Quick Actions</h3>
           <div className="grid grid-cols-2 gap-4">
-            <button className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors text-center">
+            <button onClick={()=>navigate("/admin-newproducts")}
+            className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors text-center">
               <FaBox className="text-xl text-blue-600 mx-auto mb-2" />
               <p className="text-sm font-medium text-blue-800">Add Product</p>
             </button>
@@ -325,7 +288,7 @@ const Dashboard = () => {
             </button>
             <button className="p-4 bg-yellow-50 rounded-lg hover:bg-yellow-100 transition-colors text-center">
               <FaDollarSign className="text-xl text-yellow-600 mx-auto mb-2" />
-              <p className="text-sm font-medium text-yellow-800">View Reports</p>
+              <p className="text-sm font-medium text-yellow-800">View products</p>
             </button>
           </div>
         </div>

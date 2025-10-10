@@ -676,14 +676,14 @@
       "id": "001",
       "name": "Rado Captain Cook",
       "description": "Rado Captain Cook revives a vintage diving icon with modern flair. Featuring a rotating bezel, domed sapphire crystal, and automatic movement, it's a bold blend of heritage design and contemporary craftsmanship—perfect for adventure seekers with style.",
-      "price": 1950,
-      "count": 10,
+      "price": "2000",
+      "count": "3",
       "category": "men's",
       "images": [
         "https://i.pinimg.com/736x/a2/94/13/a29413f772e2e96332b8ab51a073573f.jpg"
       ],
       "warranty": "2 year",
-      "isActive": true,
+      "isActive": false,
       "created_at": "2025-09-30T11:00:00Z"
     },
     {
@@ -697,7 +697,7 @@
         "https://i.pinimg.com/736x/06/58/51/06585185ff65485ed2139462fe653f6c.jpg"
       ],
       "warranty": "2 year",
-      "isActive": true,
+      "isActive": false,
       "created_at": "2025-09-30T11:00:00Z"
     },
     {
@@ -1091,6 +1091,34 @@
       "warranty": "2 year",
       "isActive": true,
       "created_at": "2025-09-30T12:55:00Z"
+    },
+    {
+      "id": "ml9s3vx",
+      "name": "Rolex Batgirl ",
+      "description": "Rolex GMT-Master II “Batgirl” — A luxurious and versatile timepiece featuring a striking blue and black Cerachrom bezel, stainless steel case, and Jubilee bracelet. Known for its dual time zone functionality and elegant design, it’s a perfect blend of sporty style and timeless sophistication.",
+      "price": 9100,
+      "count": 5,
+      "category": "men's",
+      "warranty": "3 years",
+      "isActive": true,
+      "images": [
+        "https://i.pinimg.com/736x/8c/54/4b/8c544b1baa11f66241874d13266d9f8b.jpg"
+      ],
+      "created_at": "2025-10-10T19:59:05.133Z"
+    },
+    {
+      "id": "mla8pj5",
+      "name": "rado binbond",
+      "description": "Gosasa Luxury Diamond Quartz Watch — Elegant gold & silver two-tone design, Roman numeral dial, waterproof stainless steel case, with day-date calendar.",
+      "price": 9800,
+      "count": 10,
+      "category": "men's",
+      "warranty": "5 years",
+      "isActive": true,
+      "images": [
+        "https://i.pinimg.com/1200x/85/52/4a/85524a6c641b9dd14d483c1e362c9979.jpg"
+      ],
+      "created_at": "2025-10-10T20:11:59.681Z"
     }
   ]
 }
