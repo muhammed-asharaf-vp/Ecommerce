@@ -80,7 +80,7 @@ function Product() {
     
     // Navigate to checkout page after a short delay
     setTimeout(() => {
-      navigate("/checkout");
+      navigate("/payment");
     }, 1000);
   };
 

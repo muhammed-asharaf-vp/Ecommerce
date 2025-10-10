@@ -6,9 +6,7 @@
       "lastname": "administrator",
       "email": "admin@gmail.com",
       "password": "adminn",
-      "role": "admin",
-      "wishlist": [],
-      "cart": []
+      "role": "admin"
     },
     {
       "id": "a025",
@@ -16,38 +14,7 @@
       "lastname": "vp",
       "email": "hannavp@gmail.com",
       "password": "12345678",
-      "cart": [
-        {
-          "id": "w001",
-          "name": "Rado True Thinline Ladies",
-          "description": "Ultra-thin ceramic watch for women, elegant and minimalist design.",
-          "price": 2100,
-          "count": 10,
-          "category": "women's",
-          "images": [
-            "https://i.pinimg.com/736x/2e/a7/51/2ea751c0ac37a64a28f4883351e29ac8.jpg"
-          ],
-          "warranty": "2 year",
-          "isActive": true,
-          "created_at": "2025-09-30T11:15:00Z",
-          "quantity": 1
-        },
-        {
-          "id": "002",
-          "name": "Rado True Thinline",
-          "description": "Sleek, ultra-thin ceramic watch from Rado's True collection, perfect for minimalists.",
-          "price": 2200,
-          "count": 10,
-          "category": "men's",
-          "images": [
-            "https://i.pinimg.com/736x/06/58/51/06585185ff65485ed2139462fe653f6c.jpg"
-          ],
-          "warranty": "2 year",
-          "isActive": true,
-          "created_at": "2025-09-30T11:00:00Z",
-          "quantity": 1
-        }
-      ],
+      "cart": [],
       "wishlist": [
         {
           "id": "cw001",
@@ -113,6 +80,20 @@
           "city": "vly",
           "country": "US",
           "zipCode": "676553"
+        },
+        {
+          "name": "hanna vp",
+          "address": "vadakkepeediakkal ",
+          "city": "ggh",
+          "country": "UK",
+          "zipCode": "3456"
+        },
+        {
+          "name": "hisham vp",
+          "address": "vadakkepeediakkal ",
+          "city": "vly",
+          "country": "US",
+          "zipCode": "676553"
         }
       ],
       "order": [
@@ -152,6 +133,80 @@
           },
           "status": "confirmed",
           "estimatedDelivery": "2025-10-08T18:04:57.610Z"
+        },
+        {
+          "id": "VELDUH9OKBEF",
+          "date": "2025-10-10T08:32:35.177Z",
+          "items": [
+            {
+              "id": "003",
+              "name": "Rado HyperChrome",
+              "description": "Dynamic sports watch with ceramic and stainless steel case, combining style and durability.",
+              "price": 2500,
+              "count": 10,
+              "category": "men's",
+              "images": [
+                "https://i.pinimg.com/736x/fb/66/69/fb6669571a89381cf37f5c360f0c16db.jpg"
+              ],
+              "warranty": "3 year",
+              "isActive": true,
+              "created_at": "2025-09-30T11:00:00Z",
+              "quantity": 1
+            }
+          ],
+          "shipping": {
+            "name": "hanna vp",
+            "address": "vadakkepeediakkal ",
+            "city": "ggh",
+            "country": "UK",
+            "zipCode": "3456"
+          },
+          "payment": {
+            "method": "Credit Card",
+            "subtotal": 2500,
+            "tax": 200,
+            "shipping": 0,
+            "grandTotal": 2700
+          },
+          "status": "confirmed",
+          "estimatedDelivery": "2025-10-13T08:32:35.177Z"
+        },
+        {
+          "id": "VEL6484GYJ7P",
+          "date": "2025-10-10T10:26:36.432Z",
+          "items": [
+            {
+              "id": "002",
+              "name": "Rado True Thinline",
+              "description": "Sleek, ultra-thin ceramic watch from Rado's True collection, perfect for minimalists.",
+              "price": 2200,
+              "count": 10,
+              "category": "men's",
+              "images": [
+                "https://i.pinimg.com/736x/06/58/51/06585185ff65485ed2139462fe653f6c.jpg"
+              ],
+              "warranty": "2 year",
+              "isActive": true,
+              "created_at": "2025-09-30T11:00:00Z",
+              "quantity": 3
+            }
+          ],
+          "shipping": {
+            "name": "hisham vp",
+            "address": "vadakkepeediakkal ",
+            "city": "vly",
+            "country": "US",
+            "zipCode": "676553"
+          },
+          "payment": {
+            "method": "Credit Card",
+            "subtotal": 6600,
+            "tax": 528,
+            "shipping": 0,
+            "grandTotal": 7128
+          },
+          "status": "confirmed",
+          "estimatedDelivery": "2025-10-13T10:26:36.432Z"
         }
       ],
       "role": "user",

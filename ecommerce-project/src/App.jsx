@@ -31,8 +31,8 @@ function App() {
     <div>
       <Routes>
         {/* //public Routes */}
-        <Route  path="/login" element={ <PublicRoute > <Login /> </PublicRoute> }  />
-        <Route path="/signup" element={ <PublicRoute>  <Signup />  </PublicRoute>} />
+        <Route  path="/login" element={  <Login /> } />
+        <Route path="/signup" element={  <Signup />} />
          {/* protected router */}
         <Route path="/"  element={ <ProtectedRoute>   <Home /> </ProtectedRoute> } />
         <Route path="/shop" element={ <ProtectedRoute>  <Shop /> </ProtectedRoute>  } />
@@ -47,8 +47,8 @@ function App() {
         <Route path="/my-orders" element={ <ProtectedRoute> <MyOrders /> </ProtectedRoute> } />
          
         {/* admin router */}
-        <Route path="/admin-layout" element={<AdminLayout />}   />
-        <Route path="/admin-dashboard" element= {<Dashboard />}   />
+        <Route path="/admin-layout" element= {<ProtectedRoute> <AdminLayout /> </ProtectedRoute>}   />
+        <Route path="/admin-dashboard" element= {<ProtectedRoute> <Dashboard /> </ProtectedRoute>}   />
 
 
 
@@ -65,8 +65,7 @@ function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
-      />
+        theme="light"/>
      {!isAdminRoute && <Footer />}
     </div>
   );

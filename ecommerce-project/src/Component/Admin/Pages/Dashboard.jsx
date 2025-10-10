@@ -9,6 +9,9 @@ const Dashboard = () => {
   const[usercount,setusercount]=useState(0);
   const[productcount,setproductcount] =useState(0)
   const[ordercount,setordercount]=useState(0)
+  const[totalRevenue,setTotalRevenue]=useState(0)
+  const [topSales, setTopSales] = useState([]);
+
   const[loading,setloading]=useState(true);
 
   useEffect(()=>{
@@ -38,19 +41,96 @@ const Dashboard = () => {
     };
     fetchProducts();
   },[]);
-  useEffect(()=>{
-    const totalOrders = async ()=>{
-      try{
-        const res = await api.get("/users/order");
-        setordercount(res.data.length);
-      }catch(error){
-        console.log("error fetching orders:" , error);
-      }finally{
-        setloading(false)
+  
+  useEffect(() => {
+    const fetchOrder = async () => {
+      try {
+        const res = await api.get("/users");
+        const allUsers = res.data;
+        const totalItems = allUsers.reduce((sum, user) => {
+            const userItems = user.order?.reduce(
+              (acc, order) => acc + (order.items?.length || 0),
+              0
+            ) || 0;
+            return sum + userItems;
+          }, 0);
+
+        setordercount(totalItems);
+      } catch (error) {
+        console.log("Error fetching order items:", error);
+      } finally {
+        setloading(false);
       }
     };
-    totalOrders();
-  },[]);
+
+    fetchOrder();
+  }, []);
+  
+  useEffect(() => {
+    const fetchRevenue = async () => {
+      try {
+        const res = await api.get("/users");
+        const allUsers = res.data;
+        const total = allUsers
+          .reduce((sum, user) => {
+            const userRevenue =
+              user.order?.reduce((orderSum, order) => {
+                const orderTotal =
+                  order.items?.reduce(
+                    (itemSum, item) =>
+                      itemSum + (item.price || 0) * (item.quantity || 1),
+                    0
+                  ) || 0;
+                return orderSum + orderTotal;
+              }, 0) || 0;
+            return sum + userRevenue;
+          }, 0);
+
+        setTotalRevenue(total);
+      } catch (error) {
+        console.log("Error fetching total revenue:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRevenue();
+  }, []);
+    // Fetch Top Sales
+  useEffect(() => {
+    const fetchTopSales = async () => {
+      try {
+        const res = await api.get("/users");
+        const allUsers = res.data;
+
+        const salesMap = {};
+        allUsers.forEach(user => {
+          user.order?.forEach(order => {
+            order.items?.forEach(item => {
+              if (salesMap[item.id]) {
+                salesMap[item.id].quantity += item.quantity || 0;
+              } else {
+                salesMap[item.id] = {
+                  id: item.id,
+                  name: item.name,
+                  price: item.price,
+                  quantity: item.quantity || 0,
+                };
+              }
+            });
+          });
+        });
+
+        const salesArray = Object.values(salesMap).sort((a, b) => b.quantity - a.quantity);
+        setTopSales(salesArray.slice(0, 5)); // Top 5 products
+      } catch (error) {
+        console.log("Error fetching top sales:", error);
+      }
+    };
+    fetchTopSales();
+  }, []);
+
+
   const stats = [
     {
       title: 'Total Users',
@@ -75,7 +155,7 @@ const Dashboard = () => {
     },
     {
       title: 'Revenue',
-      value: '$12,456',
+      value: loading? "loading...":totalRevenue ,
       icon: <FaDollarSign className="text-2xl text-yellow-500" />,
       color: 'bg-yellow-50',
       
@@ -107,8 +187,125 @@ const Dashboard = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Recent Activities */}
-        
+        {/* Top Sales Table - Premium Design */}
+<div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-all duration-300">
+  <div className="flex items-center justify-between mb-6">
+    <div>
+      <h3 className="text-xl font-bold text-gray-900">Top Sales</h3>
+      <p className="text-sm text-gray-500 mt-1">Best performing products</p>
+    </div>
+    <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+      </svg>
+    </div>
+  </div>
+
+  <div className="overflow-hidden rounded-lg border border-gray-200">
+    <table className="w-full">
+      <thead>
+        <tr className="bg-gradient-to-r from-gray-50 to-gray-100">
+          <th className="p-4 text-left font-semibold text-gray-700">
+            <div className="flex items-center space-x-2">
+              <span>Product</span>
+              <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+              </svg>
+            </div>
+          </th>
+          <th className="p-4 text-left font-semibold text-gray-700">Price</th>
+          <th className="p-4 text-left font-semibold text-gray-700">
+            <div className="flex items-center space-x-2">
+              <span>Quantity Sold</span>
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-gray-200">
+        {topSales.map((item, index) => (
+          <tr 
+            key={item.id} 
+            className="hover:bg-blue-50 transition-colors duration-200 group"
+          >
+            <td className="p-4">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg flex items-center justify-center">
+                  <span className="text-sm font-medium text-blue-600">{index + 1}</span>
+                </div>
+                <div>
+                  <p className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">
+                    {item.name}
+                  </p>
+                </div>
+              </div>
+            </td>
+            <td className="p-4">
+              <span className="font-semibold text-gray-900">${item.price}</span>
+            </td>
+            <td className="p-4">
+              <div className="flex items-center space-x-3">
+                <span className="font-semibold text-gray-900">{item.quantity}</span>
+                <div className="w-16 bg-gray-200 rounded-full h-2">
+                  <div 
+                    className="bg-gradient-to-r from-green-400 to-green-500 h-2 rounded-full transition-all duration-500"
+                    style={{ 
+                      width: `${Math.min((item.quantity / Math.max(...topSales.map(i => i.quantity))) * 100, 100)}%` 
+                    }}
+                  ></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <div className="mt-4 flex items-center justify-between text-sm text-gray-500">
+    <span>Updated just now</span>
+    {/* <button className="text-blue-600 hover:text-blue-700 font-medium flex items-center space-x-1 transition-colors">
+      <span>View All</span>
+      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+      </svg>
+    </button> */}
+  </div>
+</div>
+
+{/* Last Month Sales Table
+<div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mt-6">
+  <h3 className="text-lg font-semibold text-gray-800 mb-4">
+    Last Month Sales
+  </h3>
+  <table className="w-full text-left border-collapse">
+    <thead>
+      <tr>
+        <th className="border-b p-2">Product</th>
+        <th className="border-b p-2">Price</th>
+        <th className="border-b p-2">Quantity Sold</th>
+      </tr>
+    </thead>
+    <tbody>
+      {lastMonthSales.length > 0 ? (
+        lastMonthSales.map((item) => (
+          <tr key={item.id}>
+            <td className="border-b p-2">{item.name}</td>
+            <td className="border-b p-2">${item.price}</td>
+            <td className="border-b p-2">{item.quantity}</td>
+          </tr>
+        ))
+      ) : (
+        <tr>
+          <td colSpan="3" className="text-center text-gray-500 p-4">
+            No sales recorded last month.
+          </td>
+        </tr>
+      )}
+    </tbody>
+  </table>
+</div> */}
+
 
         {/* Quick Actions */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
