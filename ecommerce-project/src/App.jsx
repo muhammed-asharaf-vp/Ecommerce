@@ -21,8 +21,7 @@ import AdminLayout from "./Component/Admin/AdminLayout";
 import Dashboard from "./Component/Admin/Pages/Dashboard";
 import AllProductsPage from "./Component/Admin/Pages/AllProducts";
 import AddNewProductPage from "./Component/Admin/Pages/AddNew";
-
-import ManageUsers from "./Component/Admin/Pages/ManageUsers";
+import ManageUsersPage from "./Component/Admin/Pages/ManageUsers";
 
 
 
@@ -56,7 +55,7 @@ function App() {
         <Route path="/admin-dashboard" element= {<ProtectedRoute> <Dashboard /> </ProtectedRoute>}   />
         <Route path="/admin-allproducts" element= {<ProtectedRoute> <AllProductsPage /> </ProtectedRoute>}   />
         <Route path="/admin-newproducts" element= {<ProtectedRoute> <AddNewProductPage /> </ProtectedRoute>}   />
-        <Route path="/admin-manageusers" element= {<ProtectedRoute> <ManageUsers /> </ProtectedRoute>}   />
+        <Route path="/admin-manageusers" element= {<ProtectedRoute> <ManageUsersPage /> </ProtectedRoute>}   />
 
 
 

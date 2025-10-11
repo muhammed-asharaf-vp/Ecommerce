@@ -6,7 +6,8 @@
       "lastname": "administrator",
       "email": "admin@gmail.com",
       "password": "adminn",
-      "role": "admin"
+      "role": "admin",
+      "status": "active"
     },
     {
       "id": "a025",
