@@ -22,6 +22,8 @@ import Dashboard from "./Component/Admin/Pages/Dashboard";
 import AllProductsPage from "./Component/Admin/Pages/AllProducts";
 import AddNewProductPage from "./Component/Admin/Pages/AddNew";
 
+import ManageUsers from "./Component/Admin/Pages/ManageUsers";
+
 
 
 
@@ -32,7 +34,8 @@ function App() {
   return (
     <div>
       <Routes>
-        {/* //public Routes */}
+      
+        
         <Route  path="/login" element={  <Login /> } />
         <Route path="/signup" element={  <Signup />} />
          {/* protected router */}
@@ -53,6 +56,8 @@ function App() {
         <Route path="/admin-dashboard" element= {<ProtectedRoute> <Dashboard /> </ProtectedRoute>}   />
         <Route path="/admin-allproducts" element= {<ProtectedRoute> <AllProductsPage /> </ProtectedRoute>}   />
         <Route path="/admin-newproducts" element= {<ProtectedRoute> <AddNewProductPage /> </ProtectedRoute>}   />
+        <Route path="/admin-manageusers" element= {<ProtectedRoute> <ManageUsers /> </ProtectedRoute>}   />
+
 
 
 

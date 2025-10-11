@@ -43,7 +43,7 @@ export default function AdminSidebar({ isOpen, onToggle }) {
     },
     { 
       name: "Manage Users", 
-      path: "/admin/users", 
+      path: "/admin-manageusers", 
       icon: <FaUsers />,
       badge: null
     },
@@ -60,26 +60,23 @@ export default function AdminSidebar({ isOpen, onToggle }) {
 
   return (
     <>
-      {/* === Hamburger Button (Visible on all screens) === */}
+      {/* === Hamburger Button === */}
       <button
         onClick={onToggle}
-        className="fixed top-6 left-6 z-50 text-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white p-3 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl backdrop-blur-sm md:hidden"
+        className="fixed top-6 left-6 z-50 text-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white p-3 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl backdrop-blur-sm"
       >
         {isOpen ? <FaTimes /> : <FaBars />}
       </button>
 
       {/* === Sidebar === */}
       <div
-        className={`fixed top-0 left-0 h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white flex flex-col justify-between shadow-2xl transition-all duration-500 ease-in-out border-r border-slate-700/50
-          ${isOpen ? "translate-x-0" : "-translate-x-full"} 
-          md:translate-x-0 
-          ${isOpen ? "w-80 px-6" : "md:w-24 md:px-3"}
-          z-40 md:relative
-        `}
+        className={`fixed top-0 left-0 h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white flex flex-col justify-between shadow-2xl transition-all duration-500 ease-in-out border-r border-slate-700/50 ${
+          isOpen ? "w-80 px-6" : "w-24 px-3"
+        }`}
       >
         {/* === Header === */}
-        <div className="pt-20 md:pt-10">
-          <div className={`flex items-center gap-4 mb-12 transition-all duration-500 ${isOpen ? "opacity-100" : "opacity-0 md:opacity-100"}`}>
+        <div className="pt-20">
+          <div className={`flex items-center gap-4 mb-12 transition-all duration-500 ${isOpen ? "opacity-100" : "opacity-0"}`}>
             <div>
               <h2 className="text-2xl font-bold bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
                 Admin Panel
@@ -97,9 +94,6 @@ export default function AdminSidebar({ isOpen, onToggle }) {
                     if (item.submenu) {
                       e.preventDefault();
                       toggleSubmenu(index);
-                    } else if (window.innerWidth < 768) {
-                      // Close sidebar on mobile navigation
-                      onToggle();
                     }
                   }}
                   className={({ isActive }) =>
@@ -117,14 +111,13 @@ export default function AdminSidebar({ isOpen, onToggle }) {
                       {item.icon}
                     </div>
                     {isOpen && (
-                      <span className="font-medium text-gray-200 hidden md:inline">
-                        {item.name}
-                      </span>
+                      <span className="font-medium text-gray-200">{item.name}</span>
                     )}
                   </div>
                   
+                  {/* Badge and Submenu Indicator */}
                   {isOpen && (
-                    <div className="flex items-center gap-2 hidden md:flex">
+                    <div className="flex items-center gap-2">
                       {item.badge && (
                         <span className={`px-2 py-1 text-xs rounded-full font-medium ${
                           item.badge === "New" 
@@ -141,6 +134,11 @@ export default function AdminSidebar({ isOpen, onToggle }) {
                       )}
                     </div>
                   )}
+                  
+                  {/* Active Indicator */}
+                  <div className={`absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-10 bg-gradient-to-b from-blue-400 to-purple-500 rounded-r-full transition-all duration-300 ${
+                    activeSubmenu === index ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                  }`} />
                 </NavLink>
 
                 {/* Submenu */}
@@ -150,7 +148,6 @@ export default function AdminSidebar({ isOpen, onToggle }) {
                       <NavLink
                         key={subItem.name}
                         to={subItem.path}
-                        onClick={() => window.innerWidth < 768 && onToggle()}
                         className={({ isActive }) =>
                           `block px-4 py-3 rounded-lg text-sm transition-all duration-200 border-l-2 ${
                             isActive
@@ -169,20 +166,24 @@ export default function AdminSidebar({ isOpen, onToggle }) {
           </nav>
         </div>
 
-        {/* === Footer === */}
+        {/* === Footer Section === */}
         <div className="pb-8">
-          <div className={`flex items-center gap-3 p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 mb-4 transition-all duration-300 ${isOpen ? "opacity-100" : "opacity-0 md:opacity-100"}`}>
+          {/* User Profile */}
+          <div className={`flex items-center gap-3 p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 mb-4 transition-all duration-300 ${
+            isOpen ? "opacity-100" : "opacity-0"
+          }`}>
             <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-cyan-500 rounded-full flex items-center justify-center shadow-lg ring-2 ring-emerald-500/30">
               <span className="text-white font-bold text-sm">AD</span>
             </div>
             {isOpen && (
-              <div className="flex-1 min-w-0 hidden md:block">
-                <p className="text-white font-medium text-sm truncate">Admin</p>
+              <div className="flex-1 min-w-0">
+                <p className="text-white font-medium text-sm truncate">Admin </p>
                 <p className="text-gray-400 text-xs truncate">Administrator</p>
               </div>
             )}
           </div>
 
+          {/* Logout Button */}
           <button
             onClick={handleLogout}
             className={`group flex items-center gap-4 w-full px-4 py-4 rounded-xl font-semibold text-white transition-all duration-300 bg-gradient-to-r from-red-500/90 to-red-600/90 hover:from-red-600 hover:to-red-700 shadow-lg hover:shadow-xl backdrop-blur-sm border border-red-500/20 ${
@@ -190,20 +191,12 @@ export default function AdminSidebar({ isOpen, onToggle }) {
             }`}
           >
             <FaSignOutAlt className="text-lg transition-all duration-300 group-hover:scale-110 group-hover:rotate-12" />
-            {isOpen && <span className="hidden md:inline">Logout</span>}
+            {isOpen && <span>Logout</span>}
           </button>
         </div>
       </div>
 
-      {/* === Mobile Backdrop === */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-30 md:hidden"
-          onClick={onToggle}
-        />
-      )}
-
-      {/* === Animations === */}
+      {/* Add custom animations */}
       <style jsx>{`
         @keyframes slideDown {
           from {
@@ -222,3 +215,4 @@ export default function AdminSidebar({ isOpen, onToggle }) {
     </>
   );
 }
+
