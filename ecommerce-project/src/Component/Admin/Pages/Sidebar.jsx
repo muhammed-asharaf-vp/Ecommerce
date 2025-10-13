@@ -36,9 +36,9 @@ export default function AdminSidebar({ isOpen, onToggle }) {
       path: "/admin/orders", 
       icon: <FaShoppingCart />,
       submenu: [
-        { name: "All Orders", path: "/admin/orders" },
-        { name: "Pending", path: "/admin/orders/pending" },
-        { name: "Completed", path: "/admin/orders/completed" },
+        { name: "All Orders", path: "/admin-allorders" },
+        { name: "Pending", path: "/admin-pendingorders" },
+        { name: "Completed", path: "/admin-completedorders" },
       ]
     },
     { 
@@ -197,7 +197,7 @@ export default function AdminSidebar({ isOpen, onToggle }) {
       </div>
 
       {/* Add custom animations */}
-      <style jsx>{`
+      {/* <style jsx>{`
         @keyframes slideDown {
           from {
             opacity: 0;
@@ -211,7 +211,7 @@ export default function AdminSidebar({ isOpen, onToggle }) {
         .animate-slideDown {
           animation: slideDown 0.3s ease-out;
         }
-      `}</style>
+      `}</style> */}
     </>
   );
 }

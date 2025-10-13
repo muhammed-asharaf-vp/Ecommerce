@@ -21,14 +21,13 @@ const ManageUsersPage = () => {
     status: 'active'
   });
 
-  // Fetch users using Axios - CHANGED TO YOUR PREFERRED PATTERN
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const res = await api.get("/users");
         const normalusers = res.data.filter(user => user.role === "user");
-        setUsers(res.data); // Keep all users for display
-        setFilteredUsers(res.data); // Keep all users for filtering
+        setUsers(res.data); //  all users for display
+        setFilteredUsers(res.data); //  all users for filtering
       } catch (error) {
         console.log("Error fetching users:", error);
       } finally {
@@ -37,8 +36,6 @@ const ManageUsersPage = () => {
     };
     fetchUsers();
   }, []);
-
-  // Rest of your code remains EXACTLY the same...
   // Filter users
   useEffect(() => {
     let filtered = users;
@@ -71,8 +68,6 @@ const ManageUsersPage = () => {
     admins: users.filter(u => u.role === 'admin').length,
     customers: users.filter(u => u.role === 'user').length
   };
-
-  // ALL OTHER FUNCTIONS AND COMPONENT REMAIN EXACTLY THE SAME...
   const handleViewDetails = (user) => {
     setSelectedUser(user);
     setIsModalOpen(true);
@@ -235,9 +230,9 @@ const ManageUsersPage = () => {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Manage Users</h1>
-          <p className="text-gray-600 mt-2">
+          {/* <p className="text-gray-600 mt-2">
             Total {userStats.total} users • {userStats.admins} administrator{userStats.admins !== 1 ? 's' : ''} • {userStats.customers} customer{userStats.customers !== 1 ? 's' : ''}
-          </p>
+          </p> */}
         </div>
 
         {/* Stats Grid */}
@@ -247,7 +242,6 @@ const ManageUsersPage = () => {
               <div>
                 <p className="text-sm font-medium text-gray-600">Total Users</p>
                 <p className="text-2xl font-bold text-gray-900 mt-1">{userStats.total}</p>
-                <p className="text-xs text-gray-500 mt-1">All registered users</p>
               </div>
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
                 <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -262,8 +256,7 @@ const ManageUsersPage = () => {
               <div>
                 <p className="text-sm font-medium text-gray-600">Active Users</p>
                 <p className="text-2xl font-bold text-green-600 mt-1">{userStats.active}</p>
-                <p className="text-xs text-gray-500 mt-1">{Math.round((userStats.active / userStats.total) * 100)}% of total</p>
-              </div>
+                 </div>
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
                 <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -277,7 +270,6 @@ const ManageUsersPage = () => {
               <div>
                 <p className="text-sm font-medium text-gray-600">Administrators</p>
                 <p className="text-2xl font-bold text-purple-600 mt-1">{userStats.admins}</p>
-                <p className="text-xs text-gray-500 mt-1">Admin accounts</p>
               </div>
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
                 <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -292,7 +284,7 @@ const ManageUsersPage = () => {
               <div>
                 <p className="text-sm font-medium text-gray-600">Customers</p>
                 <p className="text-2xl font-bold text-blue-600 mt-1">{userStats.customers}</p>
-                <p className="text-xs text-gray-500 mt-1">Regular users</p>
+        
               </div>
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
                 <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -422,15 +414,17 @@ const ManageUsersPage = () => {
                         <span className="text-gray-400">orders</span>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <div className="flex space-x-3">
-                        <button
-                          onClick={() => handleViewDetails(user)}
-                          className="text-blue-600 hover:text-blue-900 font-medium transition-colors"
-                          title="View Details"
-                        >
-                          View
-                        </button>
+                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <div className="flex space-x-3">
+                       {/* Show View only if user is NOT admin */}
+                        {user.role !== "admin" && (
+                          <button
+                           onClick={() => handleViewDetails(user)}
+                            className="text-blue-600 hover:text-blue-900"
+                           >
+                           View
+                              </button>
+                       )}
                         <button
                           onClick={() => handleEditUser(user)}
                           className="text-green-600 hover:text-green-900 font-medium transition-colors"

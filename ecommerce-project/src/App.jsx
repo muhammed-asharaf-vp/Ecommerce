@@ -22,6 +22,9 @@ import Dashboard from "./Component/Admin/Pages/Dashboard";
 import AllProductsPage from "./Component/Admin/Pages/AllProducts";
 import AddNewProductPage from "./Component/Admin/Pages/AddNew";
 import ManageUsersPage from "./Component/Admin/Pages/ManageUsers";
+import AllOrders from "./Component/Admin/Pages/AllOrders";
+import PendingOrders from "./Component/Admin/Pages/PendingOrders";
+import CompletedOrders from "./Component/Admin/Pages/CompletedOrders";
 
 
 
@@ -57,6 +60,12 @@ function App() {
         <Route path="/admin-allproducts" element= {<ProtectedRoute> <AllProductsPage /> </ProtectedRoute>}   />
         <Route path="/admin-newproducts" element= {<ProtectedRoute> <AddNewProductPage /> </ProtectedRoute>}   />
         <Route path="/admin-manageusers" element= {<ProtectedRoute> <ManageUsersPage /> </ProtectedRoute>}   />
+        <Route path="/admin-allorders" element= {<ProtectedRoute> <AllOrders /> </ProtectedRoute>}   />
+        <Route path="/admin-pendingorders" element= {<ProtectedRoute> <PendingOrders /> </ProtectedRoute>}   />
+        <Route path="/admin-completedorders" element= {<ProtectedRoute> <CompletedOrders /> </ProtectedRoute>}   />
+
+
+
 
 
 
