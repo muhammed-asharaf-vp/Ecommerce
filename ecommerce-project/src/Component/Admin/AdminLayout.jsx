@@ -18,9 +18,7 @@ export default function AdminLayout({ children }) {
       <div className={`w-full p-6 bg-gray-100 min-h-screen transition-all duration-300 ${
         isSidebarOpen ? 'ml-80' : 'ml-24'
       }`}>
-        <div className="text-gray-500 mb-4 text-sm">
-          Path: {location.pathname}
-        </div>
+
         {children}
       </div>
     </div>

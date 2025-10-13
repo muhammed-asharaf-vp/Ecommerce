@@ -6,7 +6,6 @@ import {
   FaClock,
   FaTruck,
   FaCheckCircle,
-  FaBox,
   FaStar,
   FaDownload,
   FaEye,
@@ -43,8 +42,8 @@ function MyOrders() {
   const getStatusColor = (status) => {
     switch (status) {
       case "confirmed": return "bg-blue-100 text-blue-800";
-      case "shipped": return "bg-purple-100 text-purple-800";
-      case "delivered": return "bg-green-100 text-green-800";
+      // case "shipped": return "bg-purple-100 text-purple-800";
+      // case "delivered": return "bg-green-100 text-green-800";
       case "cancelled": return "bg-red-100 text-red-800";
       default: return "bg-gray-100 text-gray-800";
     }
@@ -53,8 +52,8 @@ function MyOrders() {
   const getStatusIcon = (status) => {
     switch (status) {
       case "confirmed": return FaCheckCircle;
-      case "shipped": return FaTruck;
-      case "delivered": return FaBox;
+      // case "shipped": return FaTruck;
+      // case "delivered": return FaBox;
       case "cancelled": return FaUndo;
       default: return FaClock;
     }
@@ -237,18 +236,7 @@ function MyOrders() {
               <div className="text-2xl font-bold text-gray-900 mb-2">{orders.length}</div>
               <div className="text-gray-600 text-sm">Total Orders</div>
             </div>
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200/50 p-6 text-center">
-              <div className="text-2xl font-bold text-gray-900 mb-2">
-                {orders.filter(o => o.status === 'delivered').length}
-              </div>
-              <div className="text-gray-600 text-sm">Delivered</div>
-            </div>
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200/50 p-6 text-center">
-              <div className="text-2xl font-bold text-gray-900 mb-2">
-                {orders.filter(o => o.status === 'shipped').length}
-              </div>
-              <div className="text-gray-600 text-sm">In Transit</div>
-            </div>
+            
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200/50 p-6 text-center">
               <div className="text-2xl font-bold text-gray-900 mb-2">
                 ${orders.reduce((total, order) => total + (order.payment?.grandTotal || 0), 0).toFixed(2)}
@@ -263,8 +251,8 @@ function MyOrders() {
               {[
                 { id: "all", label: "All Orders", count: orders.length },
                 { id: "confirmed", label: "Confirmed", count: orders.filter(o => o.status === 'confirmed').length },
-                { id: "shipped", label: "Shipped", count: orders.filter(o => o.status === 'shipped').length },
-                { id: "delivered", label: "Delivered", count: orders.filter(o => o.status === 'delivered').length },
+                // { id: "shipped", label: "Shipped", count: orders.filter(o => o.status === 'shipped').length },
+                // { id: "delivered", label: "Delivered", count: orders.filter(o => o.status === 'delivered').length },
                 { id: "cancelled", label: "Cancelled", count: orders.filter(o => o.status === 'cancelled').length }
               ].map(tab => (
                 <button

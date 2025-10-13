@@ -7,6 +7,7 @@ import api from '../../../Api/Axios';
 
 const AllOrders = () => {
   const [orders, setOrders] = useState([]);
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedOrder, setSelectedOrder] = useState(null);
@@ -20,12 +21,14 @@ const AllOrders = () => {
       try {
         const res = await api.get("/users");
         const allOrders = [];
+        const usersData = res.data;
         
-        res.data.forEach(user => {
+        usersData.forEach(user => {
           if (user.order && user.order.length > 0) {
             user.order.forEach(order => {
               allOrders.push({
                 ...order,
+                userId: user.id, // Store user ID for updates
                 user: {
                   id: user.id,
                   name: `${user.firstname} ${user.lastname}`,
@@ -37,6 +40,7 @@ const AllOrders = () => {
         });
 
         setOrders(allOrders);
+        setUsers(usersData);
       } catch (error) {
         console.log("Error fetching orders:", error);
       } finally {
@@ -65,10 +69,26 @@ const AllOrders = () => {
     if (!selectedOrder || !editStatus) return;
 
     try {
-      // Update order status in the backend
-      // This is a placeholder - you'll need to implement your actual API call
-      await api.put(`/orders/${selectedOrder.id}`, { status: editStatus });
-      
+      // Find the user that owns this order
+      const user = users.find(u => u.id === selectedOrder.userId);
+      if (!user) {
+        alert('User not found');
+        return;
+      }
+
+      // Update the order status in the user's orders
+      const updatedOrders = user.order.map(order => 
+        order.id === selectedOrder.id 
+          ? { ...order, status: editStatus }
+          : order
+      );
+
+      // Update the user with the modified orders
+      await api.put(`/users/${selectedOrder.userId}`, {
+        ...user,
+        order: updatedOrders
+      });
+
       // Update local state
       setOrders(prevOrders => 
         prevOrders.map(order => 
@@ -77,7 +97,16 @@ const AllOrders = () => {
             : order
         )
       );
-      
+
+      // Also update users state
+      setUsers(prevUsers =>
+        prevUsers.map(u =>
+          u.id === selectedOrder.userId
+            ? { ...u, order: updatedOrders }
+            : u
+        )
+      );
+
       setShowEditModal(false);
       setSelectedOrder(null);
       setEditStatus('');
@@ -97,13 +126,41 @@ const AllOrders = () => {
     }
 
     try {
-      // Delete order from backend
-      // This is a placeholder - you'll need to implement your actual API call
-      await api.delete(`/orders/${orderId}`);
-      
+      // Find the order to get user ID
+      const orderToDelete = orders.find(order => order.id === orderId);
+      if (!orderToDelete) {
+        alert('Order not found');
+        return;
+      }
+
+      // Find the user that owns this order
+      const user = users.find(u => u.id === orderToDelete.userId);
+      if (!user) {
+        alert('User not found');
+        return;
+      }
+
+      // Remove the order from user's orders
+      const updatedOrders = user.order.filter(order => order.id !== orderId);
+
+      // Update the user with the filtered orders
+      await api.put(`/users/${orderToDelete.userId}`, {
+        ...user,
+        order: updatedOrders
+      });
+
       // Update local state
       setOrders(prevOrders => prevOrders.filter(order => order.id !== orderId));
       
+      // Also update users state
+      setUsers(prevUsers =>
+        prevUsers.map(u =>
+          u.id === orderToDelete.userId
+            ? { ...u, order: updatedOrders }
+            : u
+        )
+      );
+
       // Show success message
       alert('Order deleted successfully!');
     } catch (error) {

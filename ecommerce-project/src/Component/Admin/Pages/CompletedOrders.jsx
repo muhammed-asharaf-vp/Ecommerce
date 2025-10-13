@@ -1,6 +1,6 @@
 // src/components/Admin/Orders/CompletedOrders.jsx
 import React, { useEffect, useState } from 'react';
-import { FaCheckCircle, FaEye, FaPrint, FaSearch } from 'react-icons/fa';
+import { FaCheckCircle, FaEye, FaSearch } from 'react-icons/fa';
 import api from '../../../Api/Axios';
 import AdminLayout from '../AdminLayout';
 
@@ -8,6 +8,8 @@ const CompletedOrders = () => {
   const [completedOrders, setCompletedOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchCompletedOrders = async () => {
@@ -24,7 +26,8 @@ const CompletedOrders = () => {
                   user: {
                     id: user.id,
                     name: `${user.firstname} ${user.lastname}`,
-                    email: user.email
+                    email: user.email,
+                    phone: user.phone || 'N/A'
                   }
                 });
               }
@@ -51,6 +54,42 @@ const CompletedOrders = () => {
 
   const getTotalRevenue = () => {
     return completedOrders.reduce((total, order) => total + (order.payment?.grandTotal || 0), 0);
+  };
+
+  const handleViewOrder = (order) => {
+    setSelectedOrder(order);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedOrder(null);
+  };
+
+  const getStatusBadgeColor = (status) => {
+    switch (status) {
+      case 'confirmed':
+        return 'bg-green-100 text-green-800 border border-green-200';
+      case 'pending':
+        return 'bg-yellow-100 text-yellow-800 border border-yellow-200';
+      case 'cancelled':
+        return 'bg-red-100 text-red-800 border border-red-200';
+      default:
+        return 'bg-gray-100 text-gray-800 border border-gray-200';
+    }
+  };
+
+  const getStatusDisplayName = (status) => {
+    switch (status) {
+      case 'confirmed':
+        return 'Completed';
+      case 'pending':
+        return 'Pending';
+      case 'cancelled':
+        return 'Cancelled';
+      default:
+        return status;
+    }
   };
 
   if (loading) {
@@ -122,7 +161,7 @@ const CompletedOrders = () => {
             <FaSearch className="absolute left-3 top-3 text-gray-400" />
             <input
               type="text"
-              placeholder="Search completed orders..."
+              placeholder="Search completed orders by ID, customer name, or email..."
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -180,16 +219,13 @@ const CompletedOrders = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="flex space-x-2">
-                        <button className="text-blue-600 hover:text-blue-900 text-sm font-medium flex items-center">
-                          <FaEye className="mr-1" />
-                          View
-                        </button>
-                        <button className="text-gray-600 hover:text-gray-900 text-sm font-medium flex items-center">
-                          <FaPrint className="mr-1" />
-                          Print
-                        </button>
-                      </div>
+                      <button 
+                        onClick={() => handleViewOrder(order)}
+                        className="text-blue-600 hover:text-blue-900 text-sm font-medium flex items-center transition-colors"
+                      >
+                        <FaEye className="mr-2" />
+                        View Details
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -198,12 +234,145 @@ const CompletedOrders = () => {
           </div>
 
           {filteredOrders.length === 0 && (
-            <div className="text-center py-8 text-gray-500">
-              <FaCheckCircle className="text-4xl text-gray-300 mx-auto mb-2" />
-              <p>No completed orders found</p>
+            <div className="text-center py-12 text-gray-500">
+              <FaCheckCircle className="text-4xl text-gray-300 mx-auto mb-3" />
+              <p className="text-lg font-medium text-gray-900">No completed orders found</p>
+              <p className="text-sm text-gray-600 mt-1">
+                {searchTerm ? 'Try adjusting your search criteria' : 'All completed orders will appear here'}
+              </p>
             </div>
           )}
         </div>
+
+        {/* Order Details Modal */}
+        {isModalOpen && selectedOrder && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-2xl font-bold text-gray-900">Order Details</h2>
+                  <button
+                    onClick={closeModal}
+                    className="text-gray-400 hover:text-gray-600 transition-colors"
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  {/* Order Information */}
+                  <div className="space-y-6">
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-4">Order Information</h3>
+                      <div className="space-y-3">
+                        <div className="flex justify-between">
+                          <span className="text-sm font-medium text-gray-500">Order ID:</span>
+                          <span className="text-sm text-gray-900">{selectedOrder.id}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-sm font-medium text-gray-500">Status:</span>
+                          <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusBadgeColor(selectedOrder.status)}`}>
+                            {getStatusDisplayName(selectedOrder.status)}
+                          </span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-sm font-medium text-gray-500">Order Date:</span>
+                          <span className="text-sm text-gray-900">
+                            {new Date(selectedOrder.date).toLocaleDateString()} at {new Date(selectedOrder.date).toLocaleTimeString()}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Customer Information */}
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-4">Customer Information</h3>
+                      <div className="space-y-3">
+                        <div className="flex justify-between">
+                          <span className="text-sm font-medium text-gray-500">Name:</span>
+                          <span className="text-sm text-gray-900">{selectedOrder.user.name}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-sm font-medium text-gray-500">Email:</span>
+                          <span className="text-sm text-gray-900">{selectedOrder.user.email}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-sm font-medium text-gray-500">Phone:</span>
+                          <span className="text-sm text-gray-900">{selectedOrder.user.phone}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Payment & Items */}
+                  <div className="space-y-6">
+                    {/* Order Items */}
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-4">Order Items</h3>
+                      <div className="space-y-3">
+                        {selectedOrder.items?.map((item, index) => (
+                          <div key={index} className="flex justify-between items-center border-b border-gray-200 pb-2">
+                            <div>
+                              <p className="text-sm font-medium text-gray-900">{item.name}</p>
+                              <p className="text-xs text-gray-500">Qty: {item.quantity}</p>
+                            </div>
+                            <p className="text-sm font-medium text-gray-900">
+                              ${(item.price * item.quantity).toFixed(2)}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Payment Summary */}
+                    {selectedOrder.payment && (
+                      <div>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-4">Payment Summary</h3>
+                        <div className="space-y-2 bg-gray-50 rounded-lg p-4">
+                          <div className="flex justify-between">
+                            <span className="text-sm text-gray-600">Subtotal:</span>
+                            <span className="text-sm font-medium text-gray-900">
+                              ${selectedOrder.payment.subTotal?.toFixed(2) || '0.00'}
+                            </span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-sm text-gray-600">Tax:</span>
+                            <span className="text-sm font-medium text-gray-900">
+                              ${selectedOrder.payment.tax?.toFixed(2) || '0.00'}
+                            </span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-sm text-gray-600">Shipping:</span>
+                            <span className="text-sm font-medium text-gray-900">
+                              ${selectedOrder.payment.shipping?.toFixed(2) || '0.00'}
+                            </span>
+                          </div>
+                          <div className="flex justify-between border-t border-gray-200 pt-2">
+                            <span className="text-base font-semibold text-gray-900">Total:</span>
+                            <span className="text-base font-bold text-green-600">
+                              ${selectedOrder.payment.grandTotal?.toFixed(2) || '0.00'}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="mt-8 flex justify-end">
+                  <button
+                    onClick={closeModal}
+                    className="px-6 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </AdminLayout>
   );

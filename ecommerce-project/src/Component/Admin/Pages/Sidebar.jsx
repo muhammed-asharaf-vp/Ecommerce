@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { 
   FaBars, 
@@ -10,10 +10,12 @@ import {
   FaSignOutAlt,
   FaChevronRight
 } from "react-icons/fa";
-
+import { AuthContext } from "../../../Context/AuthContext";
 export default function AdminSidebar({ isOpen, onToggle }) {
   const navigate = useNavigate();
   const [activeSubmenu, setActiveSubmenu] = useState(null);
+
+  const { logout } = useContext(AuthContext)
 
   const menu = [
     { 
@@ -49,10 +51,10 @@ export default function AdminSidebar({ isOpen, onToggle }) {
     },
   ];
 
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    navigate("/login");
-  };
+ const handleLogout = () => {
+  logout(); // updates user state to null
+  navigate("/login"); // now safe to navigate
+};
 
   const toggleSubmenu = (index) => {
     setActiveSubmenu(activeSubmenu === index ? null : index);

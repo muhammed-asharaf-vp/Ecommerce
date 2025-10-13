@@ -62,9 +62,10 @@ const ManageUsersPage = () => {
   }, [searchTerm, roleFilter, statusFilter, users]);
 
   // Calculate user statistics
+  const totalNonAdminUsers = users.filter(user => user.role !== "admin").length;
+
   const userStats = {
-    total: users.length,
-    active: users.filter(u => u.status === 'active').length,
+    active: users.filter(u => u.status === 'active' && u.role==="user").length,
     admins: users.filter(u => u.role === 'admin').length,
     customers: users.filter(u => u.role === 'user').length
   };
@@ -241,7 +242,7 @@ const ManageUsersPage = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Total Users</p>
-                <p className="text-2xl font-bold text-gray-900 mt-1">{userStats.total}</p>
+                <p className="text-2xl font-bold text-gray-900 mt-1">{totalNonAdminUsers}</p>
               </div>
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
                 <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
