@@ -1,10 +1,24 @@
-import React from 'react';
+
 import Navbar from '../Component/Navbar';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const About = () => {
   const navigate = useNavigate();
+   const [touchDevice, setTouchDevice] = useState(false);
+
+  useEffect(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, []);
   
+     // Detect touch device
+      useEffect(() => {
+        const isTouchDevice = () => {
+          return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        };
+        setTouchDevice(isTouchDevice());
+      }, []);
+
   return (
     <div className="min-h-screen bg-white">
       <Navbar />

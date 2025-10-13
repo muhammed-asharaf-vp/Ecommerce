@@ -220,7 +220,50 @@
       "email": "hishamvp@gmail.com",
       "password": "zxcvbnm",
       "cart": [],
-      "wishlist": [],
+      "wishlist": [
+        {
+          "id": "w003",
+          "name": "Rado Centrix Automatic Ladies",
+          "description": "Stylish and functional, features automatic movement with a sleek bracelet.",
+          "price": 2200,
+          "count": 10,
+          "category": "women's",
+          "images": [
+            "https://i.pinimg.com/1200x/54/df/4f/54df4fec1f4b0c7fd233c622522e662e.jpg"
+          ],
+          "warranty": "3 year",
+          "isActive": true,
+          "created_at": "2025-09-30T11:15:00Z"
+        },
+        {
+          "id": "r001",
+          "name": "Rolex Submariner",
+          "description": "Legendary dive watch, waterproof Oyster case, timeless design.",
+          "price": 8500,
+          "count": 10,
+          "category": "men's",
+          "images": [
+            "https://i.pinimg.com/736x/b9/fa/6a/b9fa6a9e6807e061355073effc94f688.jpg"
+          ],
+          "warranty": "5 year",
+          "isActive": true,
+          "created_at": "2025-09-30T11:45:00Z"
+        },
+        {
+          "id": "rw001",
+          "name": "Rolex Lady-Datejust 28",
+          "description": "Elegant 28mm Lady-Datejust with stainless steel and gold finish, perfect for everyday luxury.",
+          "price": 7500,
+          "count": 10,
+          "category": "women's",
+          "images": [
+            "https://i.pinimg.com/1200x/04/f1/60/04f160a7c81914ed378fd1fd281d9aba.jpg"
+          ],
+          "warranty": "5 year",
+          "isActive": true,
+          "created_at": "2025-09-30T12:00:00Z"
+        }
+      ],
       "shippingAddress": [
         {
           "name": "hisham vp",
@@ -235,6 +278,13 @@
           "city": "ggh",
           "country": "CA",
           "zipCode": "3456"
+        },
+        {
+          "name": "hisham vp",
+          "address": "vadakkepeediakkal ",
+          "city": "valanchery",
+          "country": "CA",
+          "zipCode": "676553"
         }
       ],
       "order": [
@@ -326,6 +376,73 @@
           },
           "status": "confirmed",
           "estimatedDelivery": "2025-10-09T06:23:24.761Z"
+        },
+        {
+          "id": "VEL40PJGXRSH",
+          "date": "2025-10-13T12:43:39.686Z",
+          "items": [
+            {
+              "id": "003",
+              "name": "Rado HyperChrome",
+              "description": "Dynamic sports watch with ceramic and stainless steel case, combining style and durability.",
+              "price": 2500,
+              "count": 10,
+              "category": "men's",
+              "images": [
+                "https://i.pinimg.com/736x/fb/66/69/fb6669571a89381cf37f5c360f0c16db.jpg"
+              ],
+              "warranty": "3 year",
+              "isActive": true,
+              "created_at": "2025-09-30T11:00:00Z",
+              "quantity": 1
+            },
+            {
+              "id": "r002",
+              "name": "Rolex Daytona",
+              "description": "Iconic chronograph with high-performance automatic movement.",
+              "price": 12000,
+              "count": 10,
+              "category": "men's",
+              "images": [
+                "https://i.pinimg.com/736x/e7/9b/07/e79b07190fe42c8f9691a8212d96385a.jpg"
+              ],
+              "warranty": "5 year",
+              "isActive": true,
+              "created_at": "2025-09-30T11:45:00Z",
+              "quantity": 1
+            },
+            {
+              "id": "rw002",
+              "name": "Rolex Pearlmaster 34",
+              "description": "Pearlmaster series with diamond-set bezel and exquisite elegance.",
+              "price": 12000,
+              "count": 10,
+              "category": "women's",
+              "images": [
+                "https://i.pinimg.com/1200x/71/5e/f7/715ef7b6f66ecc63438a1f76358c7e87.jpg"
+              ],
+              "warranty": "5 year",
+              "isActive": true,
+              "created_at": "2025-09-30T12:00:00Z",
+              "quantity": 1
+            }
+          ],
+          "shipping": {
+            "name": "hisham vp",
+            "address": "vadakkepeediakkal ",
+            "city": "valanchery",
+            "country": "CA",
+            "zipCode": "676553"
+          },
+          "payment": {
+            "method": "Credit Card",
+            "subtotal": 26500,
+            "tax": 2120,
+            "shipping": 0,
+            "grandTotal": 28620
+          },
+          "status": "confirmed",
+          "estimatedDelivery": "2025-10-16T12:43:39.686Z"
         }
       ],
       "role": "user",

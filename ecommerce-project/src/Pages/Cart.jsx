@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useState,useEffect } from "react";
 import { CartContext } from "../Context/CartContext";
 import Navbar from "../Component/Navbar";
 // import { toast } from "react-toastify";
@@ -17,10 +17,22 @@ function Cart() {
   } = useContext(CartContext);
   
   const navigate = useNavigate();
+ const [touchDevice, setTouchDevice] = useState(false);
 
   const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
   const tax = subtotal * 0.08; // 8% tax
   const total = subtotal + tax;
+
+   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  // Detect touch device
+  useEffect(() => {
+    const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    setTouchDevice(isTouchDevice());
+  }, []);
+
 
   const handleBuyNow = () => {
     if (cart.length === 0) {

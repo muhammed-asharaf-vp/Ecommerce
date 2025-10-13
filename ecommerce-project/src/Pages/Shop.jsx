@@ -5,7 +5,6 @@ import api from "../Api/Axios";
 import { WishlistContext } from "../Context/WishListContext";
 import { CartContext } from "../Context/CartContext";
 import { FaHeart } from "react-icons/fa";
-// import { toast } from "sonner";
 
 // Icons
 const SearchIcon = () => (
@@ -59,6 +58,11 @@ const Shop = () => {
 
   // Brands only
   const brands = ["ALL", "RADO", "ROLEX", "OMEGA", "TAG HEUER", "CARTIER"];
+
+    useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
 
   // Detect touch device
   useEffect(() => {

@@ -25,7 +25,7 @@ import {
 function OrderConfirmation() {
   const navigate = useNavigate();
   const location = useLocation();
-  
+   const [touchDevice, setTouchDevice] = useState(false); 
   const orderData = location.state || {};
   
   const [orderDetails, setOrderDetails] = useState({
@@ -75,6 +75,16 @@ function OrderConfirmation() {
       }));
     }
   }, [orderData.cartItems]);
+
+   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  // Detect touch device
+  useEffect(() => {
+    const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    setTouchDevice(isTouchDevice());
+  }, []);
 
   const handleDownloadInvoice = () => {
     toast.success("📄 Generating your luxury invoice...");

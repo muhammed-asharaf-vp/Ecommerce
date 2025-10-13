@@ -1,5 +1,5 @@
 
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import { CartContext } from "../Context/CartContext";
 import { AuthContext } from "../Context/AuthContext";
 import Navbar from "../Component/Navbar";
@@ -19,6 +19,8 @@ function Checkout() {
   const { cart, clearCart, createOrder } = useContext(CartContext);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+    const [touchDevice, setTouchDevice] = useState(false);
+
 
   const [paymentMethod, setPaymentMethod] = useState("credit");
   const [isProcessing, setIsProcessing] = useState(false);
@@ -40,6 +42,16 @@ function Checkout() {
   const shipping = 0; // Free shipping
   const tax = subtotal * 0.08; // 8% tax
   const total = subtotal + shipping + tax;
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  // Detect touch device
+  useEffect(() => {
+    const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    setTouchDevice(isTouchDevice());
+  }, []);
 
   const handleInputChange = (e) => {
     setFormData({

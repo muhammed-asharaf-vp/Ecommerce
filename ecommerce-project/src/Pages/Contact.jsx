@@ -1,11 +1,13 @@
 
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Navbar from '../Component/Navbar';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+ 
 
 const Contact = () => {
     const navigate = useNavigate();
+     const [touchDevice, setTouchDevice] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -13,6 +15,18 @@ const Contact = () => {
     subject: '',
     message: ''
   });
+
+   useEffect(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, []);
+  
+     // Detect touch device
+      useEffect(() => {
+        const isTouchDevice = () => {
+          return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        };
+        setTouchDevice(isTouchDevice());
+      }, []);
 
   const handleChange = (e) => {
     setFormData({

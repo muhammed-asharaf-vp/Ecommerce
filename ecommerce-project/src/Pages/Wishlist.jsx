@@ -1,5 +1,5 @@
 
-import React, { useContext } from "react";
+import React, { useContext,useEffect,useState } from "react";
 import { WishlistContext } from "../Context/WishListContext";
 import { FaTrash, FaHeart, FaExclamationTriangle, FaArrowLeft } from "react-icons/fa";
 import Navbar from "../Component/Navbar";
@@ -7,8 +7,22 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 
+
 function Wishlist() {
   const { wishlist, removeFromWishlist, clearWishlist } = useContext(WishlistContext);
+    const [touchDevice, setTouchDevice] = useState(false);
+
+      useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, []);
+    
+       // Detect touch device
+        useEffect(() => {
+          const isTouchDevice = () => {
+            return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+          };
+          setTouchDevice(isTouchDevice());
+        }, []);
 
 
   const handleClearWishlist = () => {
@@ -23,6 +37,8 @@ function Wishlist() {
       toast.success("Wishlist cleared successfully");
     }
   };
+
+
 
   const handleRemoveItem = (item) => {
     removeFromWishlist(item.id);
