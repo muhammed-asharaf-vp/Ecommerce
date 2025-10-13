@@ -52,8 +52,8 @@ export default function AdminSidebar({ isOpen, onToggle }) {
   ];
 
  const handleLogout = () => {
-  logout(); // updates user state to null
-  navigate("/login"); // now safe to navigate
+  logout(); 
+  navigate("/login"); 
 };
 
   const toggleSubmenu = (index) => {
@@ -62,7 +62,7 @@ export default function AdminSidebar({ isOpen, onToggle }) {
 
   return (
     <>
-      {/* === Hamburger Button === */}
+      {/*  Hamburger Button  */}
       <button
         onClick={onToggle}
         className="fixed top-6 left-6 z-50 text-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white p-3 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl backdrop-blur-sm"
@@ -70,13 +70,13 @@ export default function AdminSidebar({ isOpen, onToggle }) {
         {isOpen ? <FaTimes /> : <FaBars />}
       </button>
 
-      {/* === Sidebar === */}
+      {/*  Sidebar */}
       <div
         className={`fixed top-0 left-0 h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white flex flex-col justify-between shadow-2xl transition-all duration-500 ease-in-out border-r border-slate-700/50 ${
           isOpen ? "w-80 px-6" : "w-24 px-3"
         }`}
       >
-        {/* === Header === */}
+        {/*  Header  */}
         <div className="pt-20">
           <div className={`flex items-center gap-4 mb-12 transition-all duration-500 ${isOpen ? "opacity-100" : "opacity-0"}`}>
             <div>
@@ -86,7 +86,7 @@ export default function AdminSidebar({ isOpen, onToggle }) {
             </div>
           </div>
 
-          {/* === Navigation Menu === */}
+          {/*  Navigation Menu  */}
           <nav className="space-y-3">
             {menu.map((item, index) => (
               <div key={item.name}>
@@ -168,9 +168,9 @@ export default function AdminSidebar({ isOpen, onToggle }) {
           </nav>
         </div>
 
-        {/* === Footer Section === */}
+        {/*  Footer Section  */}
         <div className="pb-8">
-          {/* User Profile */}
+          {/* admin Profile */}
           <div className={`flex items-center gap-3 p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 mb-4 transition-all duration-300 ${
             isOpen ? "opacity-100" : "opacity-0"
           }`}>
@@ -197,24 +197,10 @@ export default function AdminSidebar({ isOpen, onToggle }) {
           </button>
         </div>
       </div>
-
-      {/* Add custom animations */}
-      {/* <style jsx>{`
-        @keyframes slideDown {
-          from {
-            opacity: 0;
-            transform: translateY(-10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-slideDown {
-          animation: slideDown 0.3s ease-out;
-        }
-      `}</style> */}
     </>
   );
 }
+
+
+
 

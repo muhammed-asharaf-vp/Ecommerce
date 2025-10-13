@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 import AdminSidebar from "./Pages/Sidebar";
 
 export default function AdminLayout({ children }) {
-  const location = useLocation();
+  // const location = useLocation();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   return (

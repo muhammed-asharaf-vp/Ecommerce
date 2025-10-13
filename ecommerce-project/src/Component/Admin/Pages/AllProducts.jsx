@@ -22,8 +22,6 @@ const AllProductsPage = () => {
     warranty: '',
     isActive: true
   });
-
-  // Fetch products using Axios
   useEffect(() => {
     const fetchProducts = async () => {
       try {

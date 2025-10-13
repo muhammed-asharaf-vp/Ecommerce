@@ -211,7 +211,7 @@
         }
       ],
       "role": "user",
-      "status": "blocked"
+      "status": "active"
     },
     {
       "id": "aa7a",
@@ -607,6 +607,19 @@
           "created_at": "2025-09-30T12:55:00Z"
         }
       ],
+      "shippingAddress": [],
+      "order": [],
+      "role": "user",
+      "status": "active"
+    },
+    {
+      "id": "8726",
+      "firstname": "nabhan",
+      "lastname": "nabhan",
+      "email": "nabu@gmail.com",
+      "password": "zxcvbnm",
+      "cart": [],
+      "wishlist": [],
       "shippingAddress": [],
       "order": [],
       "role": "user",

@@ -142,7 +142,7 @@ const AddNewProductPage = () => {
       
       if (response.status === 201) {
         alert('Product added successfully!');
-        navigate('/admin-allproducts'); // Redirect to products list
+        navigate('/admin-allproducts');
       }
     } catch (error) {
       console.error('Error adding product:', error);

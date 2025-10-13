@@ -26,8 +26,8 @@ const ManageUsersPage = () => {
       try {
         const res = await api.get("/users");
         const normalusers = res.data.filter(user => user.role === "user");
-        setUsers(res.data); //  all users for display
-        setFilteredUsers(res.data); //  all users for filtering
+        setUsers(res.data); 
+        setFilteredUsers(res.data); 
       } catch (error) {
         console.log("Error fetching users:", error);
       } finally {
@@ -231,9 +231,6 @@ const ManageUsersPage = () => {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Manage Users</h1>
-          {/* <p className="text-gray-600 mt-2">
-            Total {userStats.total} users • {userStats.admins} administrator{userStats.admins !== 1 ? 's' : ''} • {userStats.customers} customer{userStats.customers !== 1 ? 's' : ''}
-          </p> */}
         </div>
 
         {/* Stats Grid */}

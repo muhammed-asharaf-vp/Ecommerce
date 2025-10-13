@@ -28,7 +28,7 @@ const AllOrders = () => {
             user.order.forEach(order => {
               allOrders.push({
                 ...order,
-                userId: user.id, // Store user ID for updates
+                userId: user.id, 
                 user: {
                   id: user.id,
                   name: `${user.firstname} ${user.lastname}`,
