@@ -16,7 +16,7 @@ export default function AdminLayout({ children }) {
 
       {/* Content area with dynamic margin */}
       <div className={`w-full p-6 bg-gray-100 min-h-screen transition-all duration-300 ${
-        isSidebarOpen ? 'ml-80' : 'ml-24'
+        isSidebarOpen ? 'md:ml-80' : 'md:ml-24'
       }`}>
 
         {children}

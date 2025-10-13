@@ -10,11 +10,11 @@ const Dashboard = () => {
   const [ordercount, setordercount] = useState(0);
   const [totalRevenue, setTotalRevenue] = useState(0);
   const [topSales, setTopSales] = useState([]);
-
   const [loading, setloading] = useState(true);
 
   const navigate = useNavigate();
 
+  // Fetch Users
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -29,6 +29,8 @@ const Dashboard = () => {
     };
     fetchUsers();
   }, []);
+
+  // Fetch Products
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -43,6 +45,7 @@ const Dashboard = () => {
     fetchProducts();
   }, []);
 
+  // Fetch Orders
   useEffect(() => {
     const fetchOrder = async () => {
       try {
@@ -56,7 +59,6 @@ const Dashboard = () => {
             ) || 0;
           return sum + userItems;
         }, 0);
-
         setordercount(totalItems);
       } catch (error) {
         console.log("Error fetching order items:", error);
@@ -64,10 +66,10 @@ const Dashboard = () => {
         setloading(false);
       }
     };
-
     fetchOrder();
   }, []);
 
+  // Fetch Revenue
   useEffect(() => {
     const fetchRevenue = async () => {
       try {
@@ -86,7 +88,6 @@ const Dashboard = () => {
             }, 0) || 0;
           return sum + userRevenue;
         }, 0);
-
         setTotalRevenue(total);
       } catch (error) {
         console.log("Error fetching total revenue:", error);
@@ -94,10 +95,10 @@ const Dashboard = () => {
         setloading(false);
       }
     };
-
     fetchRevenue();
   }, []);
 
+  // Fetch Top Sales
   useEffect(() => {
     const fetchTopSales = async () => {
       try {
@@ -154,7 +155,7 @@ const Dashboard = () => {
     },
     {
       title: "Revenue",
-      value: loading ? "loading..." : totalRevenue,
+      value: loading ? "loading..." : `$${totalRevenue}`,
       icon: <FaDollarSign className="text-2xl text-yellow-500" />,
       color: "bg-yellow-50",
     },
@@ -188,7 +189,7 @@ const Dashboard = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Top Sales Table Design */}
+          {/* Top Sales */}
           <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-all duration-300">
             <div className="flex items-center justify-between mb-6">
               <div>
@@ -219,31 +220,13 @@ const Dashboard = () => {
                 <thead>
                   <tr className="bg-gradient-to-r from-gray-50 to-gray-100">
                     <th className="p-4 text-left font-semibold text-gray-700">
-                      <div className="flex items-center space-x-2">
-                        <span>Product</span>
-                        <svg
-                          className="w-4 h-4 text-gray-400"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"
-                          />
-                        </svg>
-                      </div>
+                      Product
                     </th>
                     <th className="p-4 text-left font-semibold text-gray-700">
                       Price
                     </th>
                     <th className="p-4 text-left font-semibold text-gray-700">
-                      <div className="flex items-center space-x-2">
-                        <span>Quantity Sold</span>
-                        <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      </div>
+                      Quantity Sold
                     </th>
                   </tr>
                 </thead>
@@ -260,17 +243,13 @@ const Dashboard = () => {
                               {index + 1}
                             </span>
                           </div>
-                          <div>
-                            <p className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">
-                              {item.name}
-                            </p>
-                          </div>
+                          <p className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">
+                            {item.name}
+                          </p>
                         </div>
                       </td>
-                      <td className="p-4">
-                        <span className="font-semibold text-gray-900">
-                          ${item.price}
-                        </span>
+                      <td className="p-4 font-semibold text-gray-900">
+                        ${item.price}
                       </td>
                       <td className="p-4">
                         <div className="flex items-center space-x-3">
@@ -299,53 +278,50 @@ const Dashboard = () => {
                 </tbody>
               </table>
             </div>
-
-            <div className="mt-4 flex items-center justify-between text-sm text-gray-500">
-              <span>Updated just now</span>
+            <div className="mt-4 text-sm text-gray-500 text-center">
+              Updated just now
             </div>
           </div>
-          {/* Quick Actions */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 md:p-6 lg:p-8">
-            <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-4 md:mb-6">
+
+          {/* ✅ Centered Quick Actions */}
+          <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-8 flex flex-col items-center justify-center text-center hover:shadow-xl transition-all duration-300">
+            <h3 className="text-xl font-bold text-gray-900 mb-8">
               Quick Actions
             </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
+
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-6 place-items-center">
               <button
                 onClick={() => navigate("/admin-newproducts")}
-                className="p-3 md:p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-all duration-300 text-center group hover:shadow-md hover:-translate-y-1"
+                className="p-5 w-40 bg-blue-50 rounded-lg hover:bg-blue-100 transition-all duration-300 text-center group hover:shadow-md hover:-translate-y-1"
               >
-                <FaBox className="text-lg md:text-xl text-blue-600 mx-auto mb-2 group-hover:scale-110 transition-transform duration-300" />
-                <p className="text-xs md:text-sm font-medium text-blue-800">
-                  Add Product
-                </p>
+                <FaBox className="text-2xl text-blue-600 mx-auto mb-2 group-hover:scale-110 transition-transform duration-300" />
+                <p className="text-sm font-medium text-blue-800">Add Product</p>
               </button>
 
               <button
                 onClick={() => navigate("/admin-manageusers")}
-                className="p-3 md:p-4 bg-green-50 rounded-lg hover:bg-green-100 transition-all duration-300 text-center group hover:shadow-md hover:-translate-y-1"
+                className="p-5 w-40 bg-green-50 rounded-lg hover:bg-green-100 transition-all duration-300 text-center group hover:shadow-md hover:-translate-y-1"
               >
-                <FaUsers className="text-lg md:text-xl text-green-600 mx-auto mb-2 group-hover:scale-110 transition-transform duration-300" />
-                <p className="text-xs md:text-sm font-medium text-green-800">
-                  View Users
-                </p>
+                <FaUsers className="text-2xl text-green-600 mx-auto mb-2 group-hover:scale-110 transition-transform duration-300" />
+                <p className="text-sm font-medium text-green-800">View Users</p>
               </button>
 
               <button
                 onClick={() => navigate("/admin-allorders")}
-                className="p-3 md:p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition-all duration-300 text-center group hover:shadow-md hover:-translate-y-1"
+                className="p-5 w-40 bg-purple-50 rounded-lg hover:bg-purple-100 transition-all duration-300 text-center group hover:shadow-md hover:-translate-y-1"
               >
-                <FaShoppingCart className="text-lg md:text-xl text-purple-600 mx-auto mb-2 group-hover:scale-110 transition-transform duration-300" />
-                <p className="text-xs md:text-sm font-medium text-purple-800">
+                <FaShoppingCart className="text-2xl text-purple-600 mx-auto mb-2 group-hover:scale-110 transition-transform duration-300" />
+                <p className="text-sm font-medium text-purple-800">
                   Process Orders
                 </p>
               </button>
 
               <button
                 onClick={() => navigate("/admin-allproducts")}
-                className="p-3 md:p-4 bg-yellow-50 rounded-lg hover:bg-yellow-100 transition-all duration-300 text-center group hover:shadow-md hover:-translate-y-1"
+                className="p-5 w-40 bg-yellow-50 rounded-lg hover:bg-yellow-100 transition-all duration-300 text-center group hover:shadow-md hover:-translate-y-1"
               >
-                <FaDollarSign className="text-lg md:text-xl text-yellow-600 mx-auto mb-2 group-hover:scale-110 transition-transform duration-300" />
-                <p className="text-xs md:text-sm font-medium text-yellow-800">
+                <FaDollarSign className="text-2xl text-yellow-600 mx-auto mb-2 group-hover:scale-110 transition-transform duration-300" />
+                <p className="text-sm font-medium text-yellow-800">
                   View Products
                 </p>
               </button>

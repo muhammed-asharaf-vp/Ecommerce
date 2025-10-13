@@ -26,7 +26,7 @@ const AllProductsPage = () => {
     const fetchProducts = async () => {
       try {
         const response = await api.get('/products');
-        setProducts(response.data);
+        setProducts(response.data.reverse());
         setFilteredProducts(response.data);
         setLoading(false);
       } catch (error) {
@@ -180,6 +180,7 @@ const AllProductsPage = () => {
     new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric', month: 'short', day: 'numeric',
     });
+    
 
   if (loading) {
     return (

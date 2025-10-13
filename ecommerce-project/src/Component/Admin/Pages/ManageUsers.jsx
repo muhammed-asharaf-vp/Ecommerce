@@ -340,7 +340,7 @@ const ManageUsersPage = () => {
               >
                 <option value="all">All Status</option>
                 <option value="active">Active ({userStats.active})</option>
-                <option value="inactive">Inactive ({userStats.total - userStats.active})</option>
+                <option value="inactive">Inactive ({totalNonAdminUsers-userStats.active})</option>
               </select>
             </div>
           </div>
