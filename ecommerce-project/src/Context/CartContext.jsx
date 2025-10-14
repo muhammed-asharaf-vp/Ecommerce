@@ -1,4 +1,3 @@
-
 import React, { createContext, useState, useEffect, useContext } from "react";
 import api from "../Api/Axios";
 import { toast } from "react-toastify";
@@ -36,9 +35,7 @@ export const CartProvider = ({ children }) => {
 
     if (exists) {
       updatedCart = cart.map((item) =>
-        item.id === product.id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
       );
       toast.info(`Increased quantity of "${product.name}".`);
     } else {
@@ -88,7 +85,9 @@ export const CartProvider = ({ children }) => {
   const decreaseQuantity = async (id) => {
     const updatedCart = cart
       .map((item) =>
-        item.id === id ? { ...item, quantity: Math.max(item.quantity - 1, 1) } : item
+        item.id === id
+          ? { ...item, quantity: Math.max(item.quantity - 1, 1) }
+          : item
       )
       .filter((item) => item.quantity > 0);
 
@@ -148,10 +147,12 @@ export const CartProvider = ({ children }) => {
           subtotal: orderData.subtotal,
           tax: orderData.tax,
           shipping: 0,
-          grandTotal: orderData.total
+          grandTotal: orderData.total,
         },
         status: "confirmed",
-        estimatedDelivery: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString()
+        estimatedDelivery: new Date(
+          Date.now() + 3 * 24 * 60 * 60 * 1000
+        ).toISOString(),
       };
 
       // Create shipping address object
@@ -160,23 +161,26 @@ export const CartProvider = ({ children }) => {
         address: orderData.shippingInfo.address,
         city: orderData.shippingInfo.city,
         country: orderData.shippingInfo.country,
-        zipCode: orderData.shippingInfo.zipCode
+        zipCode: orderData.shippingInfo.zipCode,
       };
 
       // Update user data
       const updatedUser = {
         ...currentUser,
         order: [...(currentUser.order || []), newOrder],
-        shippingAddress: [...(currentUser.shippingAddress || []), newShippingAddress],
-        cart: [] // Clear cart after successful order
+        shippingAddress: [
+          ...(currentUser.shippingAddress || []),
+          newShippingAddress,
+        ],
+        cart: [], // Clear cart after successful order
       };
 
       // Save to database
       await api.patch(`/users/${userId}`, updatedUser);
-      
+
       // Update local state
       setCart([]);
-      
+
       // Update AuthContext user data
       if (login) {
         login(updatedUser);
@@ -185,7 +189,6 @@ export const CartProvider = ({ children }) => {
       toast.success("🎉 Order created successfully!");
       console.log("✅ Order saved to database:", newOrder);
       return true;
-
     } catch (error) {
       console.error("❌ Error creating order:", error);
       toast.error("Failed to create order. Please try again.");
@@ -216,8 +219,8 @@ export const CartProvider = ({ children }) => {
         decreaseQuantity,
         clearCart,
         toggleCart,
-        createOrder,    
-        getUserOrders   
+        createOrder,
+        getUserOrders,
       }}
     >
       {children}

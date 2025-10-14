@@ -25,30 +25,32 @@ export const WishlistProvider = ({ children }) => {
   }, [userId]);
 
   //  Add product to wishlist
-  const addToWishlist = async (product) => {
-    if (!userId) {
-      toast.warning("Please login to add items to your wishlist.");
-      return;
-    }
+const addToWishlist = async (product) => {
+  if (!userId) {
+    toast.warning("Please login to add items to your wishlist.");
+    return;
+  }
 
-    const exists = wishlist.find((item) => item.id === product.id);
-    if (exists) {
-      toast.info("This item is already in your wishlist!");
-      return;
-    }
+  const exists = wishlist.find((item) => item.id === product.id);
+  if (exists) {
+    toast.info("This item is already in your wishlist!");
+    return;
+  }
 
-    const updatedWishlist = [...wishlist, product];
-    setWishlist(updatedWishlist);
+  const updatedWishlist = [...wishlist, product];
+  setWishlist(updatedWishlist);
+  
+  try {
+    console.log(" Sending PATCH to:", `/users/${userId}`);
+    await api.patch(`/users/${userId}`, { wishlist: updatedWishlist });
+    toast.success(`❤️ "${product.name}" added to wishlist!`);
+    console.log("✅ Wishlist updated successfully!");
+  } catch (error) {
+    console.error("❌ Error updating wishlist:", error.response?.data || error.message);
+    toast.error("Failed to add item to wishlist. Please try again.");
+  }
+};
 
-    try {
-      await api.patch(`/users/${userId}`, { wishlist: updatedWishlist });
-      toast.success(`❤️ "${product.name}" added to wishlist!`);
-      console.log("✅ Wishlist updated successfully!");
-    } catch (error) {
-      console.error("❌ Error updating wishlist:", error);
-      toast.error("Failed to add item to wishlist. Please try again.");
-    }
-  };
 
   //  Remove product from wishlist
   const removeFromWishlist = async (id) => {

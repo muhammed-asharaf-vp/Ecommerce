@@ -10,7 +10,7 @@ import ProtectedRoute from "./Pages/ProtectedRoute";
 
 // Components & Pages
 import Footer from "./Component/Footer";
-import Home from "./Pages/Home";
+
 import Login from "./Pages/Login";
 import Signup from "./Pages/SignUp";
 import Shop from "./Pages/Shop";
@@ -33,6 +33,7 @@ import ManageUsersPage from "./Component/Admin/Pages/ManageUsers";
 import AllOrders from "./Component/Admin/Pages/AllOrders";
 import PendingOrders from "./Component/Admin/Pages/PendingOrders";
 import CompletedOrders from "./Component/Admin/Pages/CompletedOrders";
+import { Home } from "./Pages/Home";
 
 function App() {
   const location = useLocation();

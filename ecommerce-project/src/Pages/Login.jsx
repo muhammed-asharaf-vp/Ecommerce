@@ -35,7 +35,7 @@ function Login() {
 
       const userData = usersWithEmail[0];
 
-      // ✅ Check user status before password verification
+      //  Check user status before password verification
       if (userData.status === "blocked") {
         setError("🚫 Your account has been blocked. Please contact the administrator for assistance.");
         return;
@@ -52,7 +52,7 @@ function Login() {
         return;
       }
 
-      // ✅ Check if user is active before login
+      //  Check if user is active before login
       if (userData.status !== "active") {
         setError("Account not active. Please contact administrator.");
         return;
@@ -61,7 +61,7 @@ function Login() {
       // Save user in context & localStorage
       login(userData);
 
-      // ✅ Navigate based on role
+      //  Navigate based on role
       if (userData.role === "admin") {
         navigate("/admin-dashboard");
       } else {

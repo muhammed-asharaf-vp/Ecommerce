@@ -219,7 +219,23 @@
       "lastname": "vp",
       "email": "hishamvp@gmail.com",
       "password": "zxcvbnm",
-      "cart": [],
+      "cart": [
+        {
+          "id": "003",
+          "name": "Rado HyperChrome",
+          "description": "Dynamic sports watch with ceramic and stainless steel case, combining style and durability.",
+          "price": 2500,
+          "count": 10,
+          "category": "men's",
+          "images": [
+            "https://i.pinimg.com/736x/fb/66/69/fb6669571a89381cf37f5c360f0c16db.jpg"
+          ],
+          "warranty": "3 year",
+          "isActive": true,
+          "created_at": "2025-09-30T11:00:00Z",
+          "quantity": 1
+        }
+      ],
       "wishlist": [
         {
           "id": "w003",
@@ -262,6 +278,34 @@
           "warranty": "5 year",
           "isActive": true,
           "created_at": "2025-09-30T12:00:00Z"
+        },
+        {
+          "id": "001",
+          "name": "Rado Captain Cook",
+          "description": "Rado Captain Cook revives a vintage diving icon with modern flair. Featuring a rotating bezel, domed sapphire crystal, and automatic movement, it's a bold blend of heritage design and contemporary craftsmanship—perfect for adventure seekers with style.",
+          "price": "2000",
+          "count": "3",
+          "category": "men's",
+          "images": [
+            "https://i.pinimg.com/736x/a2/94/13/a29413f772e2e96332b8ab51a073573f.jpg"
+          ],
+          "warranty": "2 year",
+          "isActive": false,
+          "created_at": "2025-09-30T11:00:00Z"
+        },
+        {
+          "id": "002",
+          "name": "Rado True Thinline",
+          "description": "Sleek, ultra-thin ceramic watch from Rado's True collection, perfect for minimalists.",
+          "price": 2200,
+          "count": 10,
+          "category": "men's",
+          "images": [
+            "https://i.pinimg.com/736x/06/58/51/06585185ff65485ed2139462fe653f6c.jpg"
+          ],
+          "warranty": "2 year",
+          "isActive": false,
+          "created_at": "2025-09-30T11:00:00Z"
         }
       ],
       "shippingAddress": [
@@ -730,13 +774,44 @@
       "status": "active"
     },
     {
-      "id": "8726",
-      "firstname": "nabhan",
-      "lastname": "nabhan",
-      "email": "nabu@gmail.com",
+      "id": "c9f8",
+      "firstname": "ziyad",
+      "lastname": "kundan",
+      "email": "kundan@gmail.com",
       "password": "zxcvbnm",
-      "cart": [],
-      "wishlist": [],
+      "cart": [
+        {
+          "id": "002",
+          "name": "Rado True Thinline",
+          "description": "Sleek, ultra-thin ceramic watch from Rado's True collection, perfect for minimalists.",
+          "price": 2200,
+          "count": 10,
+          "category": "men's",
+          "images": [
+            "https://i.pinimg.com/736x/06/58/51/06585185ff65485ed2139462fe653f6c.jpg"
+          ],
+          "warranty": "2 year",
+          "isActive": false,
+          "created_at": "2025-09-30T11:00:00Z",
+          "quantity": 1
+        }
+      ],
+      "wishlist": [
+        {
+          "id": "ml9s3vx",
+          "name": "Rolex Batgirl ",
+          "description": "Rolex GMT-Master II “Batgirl” — A luxurious and versatile timepiece featuring a striking blue and black Cerachrom bezel, stainless steel case, and Jubilee bracelet. Known for its dual time zone functionality and elegant design, it’s a perfect blend of sporty style and timeless sophistication.",
+          "price": 9100,
+          "count": 5,
+          "category": "men's",
+          "warranty": "3 years",
+          "isActive": true,
+          "images": [
+            "https://i.pinimg.com/736x/8c/54/4b/8c544b1baa11f66241874d13266d9f8b.jpg"
+          ],
+          "created_at": "2025-10-10T19:59:05.133Z"
+        }
+      ],
       "shippingAddress": [],
       "order": [],
       "role": "user",
@@ -1193,18 +1268,18 @@
       "created_at": "2025-10-10T20:11:59.681Z"
     },
     {
-      "id": "movqb2u",
-      "name": "rado",
-      "description": "leather",
-      "price": 3000,
-      "count": 0,
+      "id": "mqa8szx",
+      "name": "Tag Heuer",
+      "description": "Crafted with a stainless steel case, scratch-resistant sapphire crystal, and luminescent hands and markers, it ensures durability and readability in all conditions. Many models feature a unidirectional rotating bezel, chronograph functionality, and water resistance up to 200 meters, making them as tough as they are elegant.",
+      "price": 7750,
+      "count": 10,
       "category": "men's",
-      "warranty": "2 years",
+      "warranty": "3 years",
       "isActive": true,
       "images": [
-        "https://i.pinimg.com/736x/74/34/b6/7434b6002482c66bfefe27155508657b.jpg"
+        "https://i.pinimg.com/736x/3c/ca/e5/3ccae5bba04c03c1b50e12a5ffb679af.jpg"
       ],
-      "created_at": "2025-10-13T08:36:51.222Z"
+      "created_at": "2025-10-14T08:10:55.053Z"
     }
   ]
 }

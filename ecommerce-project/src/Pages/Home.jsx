@@ -1,21 +1,18 @@
-import React from 'react'
+import HeroSlider, { CategoryBoxes, FeaturesBar, InstagramFeed, NewArrivals, Newsletter } from '../Component/Design/HomeDesign'
 import Navbar from '../Component/Navbar'
-import HeroSlider, { CategoryBoxes, FeaturesBar,  } from '../Component/Design/HomeDesign'
 
-
-
-
-function Home() {
+export function Home() {
   return (
-    <div>
-    <Navbar/>
-    <HeroSlider/>
-    <FeaturesBar/>
-    <CategoryBoxes />
+    <div className="min-h-screen bg-white">
+      <main>
+        <Navbar />
+        <HeroSlider />
+        <FeaturesBar />
+        <CategoryBoxes />
+        <NewArrivals />
+        <Newsletter />
+        <InstagramFeed />
+      </main>
     </div>
   )
 }
-
-export default Home
-
-

@@ -59,10 +59,9 @@ const Shop = () => {
   // Brands only
   const brands = ["ALL", "RADO", "ROLEX", "OMEGA", "TAG HEUER", "CARTIER"];
 
-    useEffect(() => {
+  useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
-
 
   // Detect touch device
   useEffect(() => {
@@ -153,13 +152,13 @@ const Shop = () => {
   // Loading screen
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gradient-to-br from-black to-gray-900">
+      <div className="flex justify-center items-center h-screen bg-gradient-to-br from-[#003631] to-[#002822]">
         <div className="flex flex-col items-center">
-          <div className="w-16 h-16 sm:w-20 sm:h-20 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin mb-4 sm:mb-6 shadow-lg"></div>
+          <div className="w-16 h-16 sm:w-20 sm:h-20 border-4 border-[#FFEDA8] border-t-transparent rounded-full animate-spin mb-4 sm:mb-6 shadow-lg"></div>
           <p className="text-lg sm:text-xl font-light text-white tracking-wide text-center px-4">
             Curating Luxury Collection...
           </p>
-          <p className="text-xs sm:text-sm text-gray-400 mt-2 text-center px-4">
+          <p className="text-xs sm:text-sm text-[#FFEDA8]/80 mt-2 text-center px-4">
             Experience timeless elegance
           </p>
         </div>
@@ -168,25 +167,25 @@ const Shop = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black to-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-[#003631] to-[#002822]">
       <Navbar />
 
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-black to-gray-900 text-white py-16 sm:py-20 lg:py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80"></div>
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1547996160-81dfd9c4b1cd?auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-20"></div>
+      <div className="relative bg-gradient-to-r from-[#003631] to-[#002822] text-white py-16 sm:py-20 lg:py-24 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#003631]/80"></div>
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1547996160-81dfd9c4b1cd?auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-10"></div>
 
         <div className="relative max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 sm:gap-3 bg-white/5 backdrop-blur-lg px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-full mb-6 sm:mb-8 border border-white/10">
-            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-yellow-500 rounded-full animate-pulse"></div>
-            <span className="text-xs sm:text-sm font-light tracking-widest text-yellow-400">
+          <div className="inline-flex items-center gap-2 sm:gap-3 bg-white/5 backdrop-blur-lg px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-full mb-6 sm:mb-8 border border-[#FFEDA8]/20">
+            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[#FFEDA8] rounded-full animate-pulse"></div>
+            <span className="text-xs sm:text-sm font-light tracking-widest text-[#FFEDA8]">
               LUXURY TIMEPIECES
             </span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-thin mb-4 sm:mb-6 tracking-tight text-white">
             veloce
-            <span className="block text-lg sm:text-xl lg:text-2xl text-yellow-400 mt-2 sm:mt-3 lg:mt-4 font-light tracking-widest">
+            <span className="block text-lg sm:text-xl lg:text-2xl text-[#FFEDA8] mt-2 sm:mt-3 lg:mt-4 font-light tracking-widest">
               MASTERPIECE COLLECTION
             </span>
           </h1>
@@ -207,15 +206,15 @@ const Shop = () => {
               placeholder="Discover luxury timepieces..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-4 sm:px-6 lg:px-8 py-3 sm:py-4 lg:py-5 pl-12 sm:pl-14 lg:pl-16 rounded-lg sm:rounded-xl border border-gray-700 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all duration-500 bg-gray-800/80 backdrop-blur-sm shadow-xl sm:shadow-2xl outline-none text-sm sm:text-base lg:text-lg font-light placeholder-gray-400 text-white"
+              className="w-full px-4 sm:px-6 lg:px-8 py-3 sm:py-4 lg:py-5 pl-12 sm:pl-14 lg:pl-16 rounded-lg sm:rounded-xl border border-[#003631] focus:border-[#FFEDA8] focus:ring-2 focus:ring-[#FFEDA8]/20 transition-all duration-500 bg-[#003631]/80 backdrop-blur-sm shadow-xl sm:shadow-2xl outline-none text-sm sm:text-base lg:text-lg font-light placeholder-gray-400 text-white"
             />
-            <div className="absolute left-4 sm:left-5 lg:left-6 top-1/2 transform -translate-y-1/2 text-gray-400 group-focus-within:text-yellow-500 transition-colors duration-300">
+            <div className="absolute left-4 sm:left-5 lg:left-6 top-1/2 transform -translate-y-1/2 text-gray-400 group-focus-within:text-[#FFEDA8] transition-colors duration-300">
               <SearchIcon />
             </div>
             <div className="absolute right-3 sm:right-4 lg:right-6 top-1/2 transform -translate-y-1/2 flex items-center gap-2 sm:gap-4">
               <button
                 onClick={() => setShowFilters(!showFilters)}
-                className="p-2 sm:p-2.5 rounded-lg bg-yellow-500 text-black hover:bg-yellow-400 transition-colors duration-300"
+                className="p-2 sm:p-2.5 rounded-lg bg-[#FFEDA8] text-[#003631] hover:bg-[#FFEDA8]/90 transition-colors duration-300"
                 aria-label="Toggle filters"
               >
                 <FilterIcon />
@@ -226,14 +225,14 @@ const Shop = () => {
 
         {/* Filters */}
         {showFilters && (
-          <div className="bg-gray-800/80 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 border border-gray-700 shadow-xl sm:shadow-2xl">
+          <div className="bg-[#003631]/80 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 border border-[#FFEDA8]/20 shadow-xl sm:shadow-2xl">
             {/* Active Filters */}
             {selectedBrands.length > 0 && (
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0 mb-4 sm:mb-6">
                 <div className="flex items-center gap-2 flex-wrap">
                   <span className="text-xs sm:text-sm text-gray-400">Active filters:</span>
                   {selectedBrands.map(brand => (
-                    <span key={brand} className="bg-yellow-500 text-black px-2 sm:px-3 py-1 rounded-full text-xs flex items-center gap-1">
+                    <span key={brand} className="bg-[#FFEDA8] text-[#003631] px-2 sm:px-3 py-1 rounded-full text-xs flex items-center gap-1">
                       {brand}
                       <button 
                         onClick={() => handleBrandFilter(brand)} 
@@ -247,7 +246,7 @@ const Shop = () => {
                 </div>
                 <button
                   onClick={clearAllFilters}
-                  className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors self-start sm:self-auto"
+                  className="text-xs sm:text-sm text-gray-400 hover:text-[#FFEDA8] transition-colors self-start sm:self-auto"
                 >
                   Clear all
                 </button>
@@ -265,8 +264,8 @@ const Shop = () => {
                     className={`px-3 sm:px-4 lg:px-6 py-2 sm:py-2.5 lg:py-3 rounded-lg border-2 transition-all duration-300 font-medium text-xs sm:text-sm ${
                       (brand === "ALL" && selectedBrands.length === 0) || 
                       selectedBrands.includes(brand)
-                        ? "bg-yellow-500 text-black border-yellow-500 shadow-lg transform scale-105"
-                        : "bg-gray-700 text-gray-300 border-gray-600 hover:bg-gray-600 hover:border-yellow-400"
+                        ? "bg-[#FFEDA8] text-[#003631] border-[#FFEDA8] shadow-lg transform scale-105"
+                        : "bg-[#002822] text-gray-300 border-[#003631] hover:bg-[#003631] hover:border-[#FFEDA8]"
                     }`}
                   >
                     {brand}
@@ -287,8 +286,8 @@ const Shop = () => {
                 onClick={() => handleBrandFilter(brand)}
                 className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 border ${
                   selectedBrands.includes(brand)
-                    ? "bg-yellow-500 text-black border-yellow-500 shadow-lg"
-                    : "bg-gray-700 text-gray-300 border-gray-600 hover:bg-gray-600 hover:border-yellow-400"
+                    ? "bg-[#FFEDA8] text-[#003631] border-[#FFEDA8] shadow-lg"
+                    : "bg-[#002822] text-gray-300 border-[#003631] hover:bg-[#003631] hover:border-[#FFEDA8]"
                 }`}
               >
                 {brand}
@@ -309,16 +308,16 @@ const Shop = () => {
             return (
               <div
                 key={product.id}
-                className="group relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-2xl hover:shadow-xl sm:hover:shadow-3xl transition-all duration-500 overflow-hidden border border-gray-700/50 hover:border-yellow-500/50"
+                className="group relative bg-gradient-to-br from-[#003631] to-[#002822] rounded-xl sm:rounded-2xl shadow-lg sm:shadow-2xl hover:shadow-xl sm:hover:shadow-3xl transition-all duration-500 overflow-hidden border border-[#003631] hover:border-[#FFEDA8]/50"
                 onMouseEnter={() => handleProductHover(product.id)}
                 onMouseLeave={handleProductLeave}
                 onTouchStart={() => handleProductTouch(product.id)}
               >
                 {/* Product Image */}
-                <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-black">
+                <div className="relative overflow-hidden bg-gradient-to-br from-[#002822] to-[#003631]">
                   <div className="h-48 xs:h-56 sm:h-64 lg:h-72 xl:h-80 flex items-center justify-center p-4 sm:p-6 lg:p-8 relative">
                     <div
-                      className={`absolute inset-0 bg-gradient-to-br from-yellow-500/10 to-transparent transition-opacity duration-500 ${
+                      className={`absolute inset-0 bg-gradient-to-br from-[#FFEDA8]/10 to-transparent transition-opacity duration-500 ${
                         isHovered ? "opacity-100" : "opacity-0"
                       }`}
                     ></div>
@@ -349,7 +348,7 @@ const Shop = () => {
                       className={`p-2 sm:p-2.5 lg:p-3 rounded-lg backdrop-blur-md border transition-all duration-300 ${
                         isWishlisted
                           ? "bg-red-500 text-white border-red-500 scale-110 shadow-xl sm:shadow-2xl"
-                          : "bg-black/80 text-gray-300 border-gray-600 hover:bg-red-500 hover:text-white hover:scale-110 hover:shadow-xl"
+                          : "bg-[#003631]/80 text-gray-300 border-[#003631] hover:bg-red-500 hover:text-white hover:scale-110 hover:shadow-xl"
                       }`}
                       title="Add to wishlist"
                       aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
@@ -360,7 +359,7 @@ const Shop = () => {
                     {/* View */}
                     <button
                       onClick={() => navigate(`/product/${product.id}`)}
-                      className="p-2 sm:p-2.5 lg:p-3 rounded-lg backdrop-blur-md border bg-black/80 text-gray-300 border-gray-600 hover:bg-yellow-500 hover:text-black hover:scale-110 hover:shadow-xl transition-all duration-300"
+                      className="p-2 sm:p-2.5 lg:p-3 rounded-lg backdrop-blur-md border bg-[#003631]/80 text-gray-300 border-[#003631] hover:bg-[#FFEDA8] hover:text-[#003631] hover:scale-110 hover:shadow-xl transition-all duration-300"
                       title="View Product"
                       aria-label="View product details"
                     >
@@ -384,7 +383,7 @@ const Shop = () => {
                   {/* Touch Device Indicator */}
                   {touchDevice && !isHovered && (
                     <div className="absolute bottom-2 left-2 z-20">
-                      <div className="bg-black/60 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full border border-white/20">
+                      <div className="bg-[#003631]/60 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full border border-[#FFEDA8]/20">
                         Tap for details
                       </div>
                     </div>
@@ -396,30 +395,30 @@ const Shop = () => {
                   <h2 className="text-lg sm:text-xl lg:text-2xl font-normal text-white mb-1 sm:mb-2 leading-tight line-clamp-2">
                     {product.name}
                   </h2>
-                  <div className="w-8 sm:w-10 lg:w-12 h-0.5 bg-yellow-500 mb-2 sm:mb-3"></div>
+                  <div className="w-8 sm:w-10 lg:w-12 h-0.5 bg-[#FFEDA8] mb-2 sm:mb-3"></div>
 
                   <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
                     {product.brand && (
-                      <span className="text-xs font-medium text-yellow-400 bg-yellow-500/10 px-2 sm:px-3 py-1 rounded-full border border-yellow-500/20">
+                      <span className="text-xs font-medium text-[#FFEDA8] bg-[#FFEDA8]/10 px-2 sm:px-3 py-1 rounded-full border border-[#FFEDA8]/20">
                         {product.brand}
                       </span>
                     )}
                     {product.category && (
-                      <span className="text-xs font-medium text-gray-300 bg-gray-700 px-2 sm:px-3 py-1 rounded-full border border-gray-600">
+                      <span className="text-xs font-medium text-gray-300 bg-[#003631] px-2 sm:px-3 py-1 rounded-full border border-[#003631]">
                         {product.category}
                       </span>
                     )}
                   </div>
 
-                  <div className="flex justify-between items-center pt-3 sm:pt-4 lg:pt-6 border-t border-gray-700/50">
-                    <span className="text-xl sm:text-2xl lg:text-3xl font-light text-yellow-400">${product.price}</span>
+                  <div className="flex justify-between items-center pt-3 sm:pt-4 lg:pt-6 border-t border-[#003631]">
+                    <span className="text-xl sm:text-2xl lg:text-3xl font-light text-[#FFEDA8]">${product.price}</span>
 
                     {/* Cart */}
                     <button
                       onClick={() =>
                         isInCart ? removeFromCart(product.id) : addToCart(product)
                       }
-                      className={`p-2 sm:p-3 lg:p-4 rounded-lg bg-gradient-to-r from-yellow-500 to-yellow-600 text-black hover:from-yellow-400 hover:to-yellow-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border border-yellow-300 ${
+                      className={`p-2 sm:p-3 lg:p-4 rounded-lg bg-gradient-to-r from-[#FFEDA8] to-[#FFEDA8]/90 text-[#003631] hover:from-[#FFEDA8]/90 hover:to-[#FFEDA8]/80 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border border-[#FFEDA8] ${
                         isHovered ? 'scale-105' : 'scale-100'
                       }`}
                       title={isInCart ? "Remove from cart" : "Add to cart"}
@@ -437,8 +436,8 @@ const Shop = () => {
         {/* Empty State */}
         {filteredProducts.length === 0 && (
           <div className="text-center py-12 sm:py-16 lg:py-20">
-            <div className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto mb-4 sm:mb-6 bg-gradient-to-br from-gray-800 to-gray-900 rounded-full flex items-center justify-center shadow-xl sm:shadow-2xl border border-gray-700">
-              <div className="text-2xl sm:text-3xl lg:text-4xl text-yellow-400">⌚</div>
+            <div className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto mb-4 sm:mb-6 bg-gradient-to-br from-[#003631] to-[#002822] rounded-full flex items-center justify-center shadow-xl sm:shadow-2xl border border-[#FFEDA8]/20">
+              <div className="text-2xl sm:text-3xl lg:text-4xl text-[#FFEDA8]">⌚</div>
             </div>
             <h3 className="text-xl sm:text-2xl font-light text-white mb-2 sm:mb-3">
               No Timepieces Found
@@ -448,7 +447,7 @@ const Shop = () => {
             </p>
             <button
               onClick={clearAllFilters}
-              className="bg-yellow-500 text-black px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-bold hover:bg-yellow-400 transition-colors duration-300 border border-yellow-300 text-sm sm:text-base"
+              className="bg-[#FFEDA8] text-[#003631] px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-bold hover:bg-[#FFEDA8]/90 transition-colors duration-300 border border-[#FFEDA8] text-sm sm:text-base"
             >
               VIEW ALL COLLECTIONS
             </button>
