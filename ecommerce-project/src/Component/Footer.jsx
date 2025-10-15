@@ -83,7 +83,7 @@ function Footer() {
               </div>
               <div className="flex items-center gap-3">
                 <FaEnvelope className="w-4 h-4 text-[#FFEDA8] flex-shrink-0" />
-                <a href="mailto:info@veloce.com" className="text-gray-300 hover:text-[#FFEDA8] transition-colors duration-200 text-sm">
+                <a href="concierge@veloce.com" className="text-gray-300 hover:text-[#FFEDA8] transition-colors duration-200 text-sm">
                   info@veloce.com
                 </a>
               </div>

@@ -186,7 +186,6 @@ export const CartProvider = ({ children }) => {
         login(updatedUser);
       }
 
-      toast.success("🎉 Order created successfully!");
       console.log("✅ Order saved to database:", newOrder);
       return true;
     } catch (error) {

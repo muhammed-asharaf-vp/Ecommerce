@@ -5,6 +5,7 @@ import api from "../Api/Axios";
 import { WishlistContext } from "../Context/WishListContext";
 import { CartContext } from "../Context/CartContext";
 import { FaHeart } from "react-icons/fa";
+// import Loader from "../effects/loading";
 
 // Icons
 const SearchIcon = () => (
@@ -40,6 +41,18 @@ const FilterIcon = () => (
   </svg>
 );
 
+const ChevronLeft = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+  </svg>
+);
+
+const ChevronRight = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+  </svg>
+);
+
 const Shop = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
@@ -51,6 +64,10 @@ const Shop = () => {
 
   // Filter states - only brands now
   const [selectedBrands, setSelectedBrands] = useState([]);
+
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(12); // 12 products per page
 
   // Contexts
   const { wishlist, addToWishlist, removeFromWishlist } = useContext(WishlistContext);
@@ -77,13 +94,20 @@ const Shop = () => {
       .get("/products")
       .then((res) => {
         setProducts(res.data);
-        setLoading(false);
+
+                setLoading(false);
+
       })
       .catch((err) => {
         console.error("Error fetching products:", err);
         setLoading(false);
       });
   }, []);
+
+  // Reset to first page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedBrands, searchTerm]);
 
   // Wishlist toggle
   const toggleWishlist = (product) => {
@@ -149,6 +173,67 @@ const Shop = () => {
     }
   };
 
+  // Pagination logic
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  // Next page
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  // Previous page
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  // Generate page numbers with ellipsis
+  const getPageNumbers = () => {
+    const pageNumbers = [];
+    const maxPagesToShow = 5;
+    
+    if (totalPages <= maxPagesToShow) {
+      for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(i);
+      }
+    } else {
+      if (currentPage <= 3) {
+        for (let i = 1; i <= 4; i++) {
+          pageNumbers.push(i);
+        }
+        pageNumbers.push('...');
+        pageNumbers.push(totalPages);
+      } else if (currentPage >= totalPages - 2) {
+        pageNumbers.push(1);
+        pageNumbers.push('...');
+        for (let i = totalPages - 3; i <= totalPages; i++) {
+          pageNumbers.push(i);
+        }
+      } else {
+        pageNumbers.push(1);
+        pageNumbers.push('...');
+        for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+          pageNumbers.push(i);
+        }
+        pageNumbers.push('...');
+        pageNumbers.push(totalPages);
+      }
+    }
+    
+    return pageNumbers;
+  };
+
   // Loading screen
   if (loading) {
     return (
@@ -156,7 +241,7 @@ const Shop = () => {
         <div className="flex flex-col items-center">
           <div className="w-16 h-16 sm:w-20 sm:h-20 border-4 border-[#FFEDA8] border-t-transparent rounded-full animate-spin mb-4 sm:mb-6 shadow-lg"></div>
           <p className="text-lg sm:text-xl font-light text-white tracking-wide text-center px-4">
-            Curating Luxury Collection...
+            product loading.....
           </p>
           <p className="text-xs sm:text-sm text-[#FFEDA8]/80 mt-2 text-center px-4">
             Experience timeless elegance
@@ -210,15 +295,6 @@ const Shop = () => {
             />
             <div className="absolute left-4 sm:left-5 lg:left-6 top-1/2 transform -translate-y-1/2 text-gray-400 group-focus-within:text-[#FFEDA8] transition-colors duration-300">
               <SearchIcon />
-            </div>
-            <div className="absolute right-3 sm:right-4 lg:right-6 top-1/2 transform -translate-y-1/2 flex items-center gap-2 sm:gap-4">
-              <button
-                onClick={() => setShowFilters(!showFilters)}
-                className="p-2 sm:p-2.5 rounded-lg bg-[#FFEDA8] text-[#003631] hover:bg-[#FFEDA8]/90 transition-colors duration-300"
-                aria-label="Toggle filters"
-              >
-                <FilterIcon />
-              </button>
             </div>
           </div>
         </div>
@@ -298,9 +374,21 @@ const Shop = () => {
       </div>
 
       {/* Product Grid */}
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 pb-16 sm:pb-20">
-        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
-          {filteredProducts.map((product) => {
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 pb-8">
+        {/* Results Count */}
+        <div className="flex justify-between items-center mb-6">
+          <p className="text-gray-300 text-sm">
+            Showing {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, filteredProducts.length)} of {filteredProducts.length} products
+          </p>
+          {totalPages > 1 && (
+            <p className="text-gray-300 text-sm">
+              Page {currentPage} of {totalPages}
+            </p>
+          )}
+        </div>
+
+        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-8">
+          {currentProducts.map((product) => {
             const isWishlisted = wishlist.some((item) => item.id === product.id);
             const isInCart = cart.some((item) => item.id === product.id);
             const isHovered = hoveredImage === product.id;
@@ -450,6 +538,58 @@ const Shop = () => {
               className="bg-[#FFEDA8] text-[#003631] px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-bold hover:bg-[#FFEDA8]/90 transition-colors duration-300 border border-[#FFEDA8] text-sm sm:text-base"
             >
               VIEW ALL COLLECTIONS
+            </button>
+          </div>
+        )}
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center space-x-2 py-8">
+            {/* Previous Button */}
+            <button
+              onClick={prevPage}
+              disabled={currentPage === 1}
+              className={`p-2 rounded-lg border transition-all duration-300 ${
+                currentPage === 1
+                  ? "bg-[#002822] text-gray-500 border-[#003631] cursor-not-allowed"
+                  : "bg-[#003631] text-white border-[#FFEDA8]/30 hover:bg-[#FFEDA8] hover:text-[#003631] hover:border-[#FFEDA8] cursor-pointer"
+              }`}
+              aria-label="Previous page"
+            >
+              <ChevronLeft />
+            </button>
+
+            {/* Page Numbers */}
+            {getPageNumbers().map((number, index) => (
+              <button
+                key={index}
+                onClick={() => typeof number === 'number' ? paginate(number) : null}
+                className={`px-3 py-2 rounded-lg border transition-all duration-300 text-sm font-medium ${
+                  number === currentPage
+                    ? "bg-[#FFEDA8] text-[#003631] border-[#FFEDA8] shadow-lg"
+                    : number === '...'
+                    ? "bg-transparent text-gray-400 border-transparent cursor-default"
+                    : "bg-[#003631] text-white border-[#003631] hover:bg-[#FFEDA8] hover:text-[#003631] hover:border-[#FFEDA8] cursor-pointer"
+                }`}
+                disabled={number === '...'}
+                aria-label={typeof number === 'number' ? `Go to page ${number}` : 'More pages'}
+              >
+                {number}
+              </button>
+            ))}
+
+            {/* Next Button */}
+            <button
+              onClick={nextPage}
+              disabled={currentPage === totalPages}
+              className={`p-2 rounded-lg border transition-all duration-300 ${
+                currentPage === totalPages
+                  ? "bg-[#002822] text-gray-500 border-[#003631] cursor-not-allowed"
+                  : "bg-[#003631] text-white border-[#FFEDA8]/30 hover:bg-[#FFEDA8] hover:text-[#003631] hover:border-[#FFEDA8] cursor-pointer"
+              }`}
+              aria-label="Next page"
+            >
+              <ChevronRight />
             </button>
           </div>
         )}
