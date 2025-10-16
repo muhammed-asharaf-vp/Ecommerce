@@ -1,22 +1,36 @@
 import Navbar from '../Component/Navbar';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const About = () => {
   const navigate = useNavigate();
-   const [touchDevice, setTouchDevice] = useState(false);
+  const [touchDevice, setTouchDevice] = useState(false);
+
+  // Initialize AOS with custom settings
+  useEffect(() => {
+    AOS.init({
+      duration: 1200,
+      easing: 'ease-out-cubic',
+      once: true,
+      mirror: false,
+      offset: 100,
+      delay: 0,
+    });
+  }, []);
 
   useEffect(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }, []);
-  
-     // Detect touch device
-      useEffect(() => {
-        const isTouchDevice = () => {
-          return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-        };
-        setTouchDevice(isTouchDevice());
-      }, []);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  // Detect touch device
+  useEffect(() => {
+    const isTouchDevice = () => {
+      return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    };
+    setTouchDevice(isTouchDevice());
+  }, []);
 
   return (
     <div className="min-h-screen bg-white">
@@ -26,32 +40,63 @@ const About = () => {
       <section className="relative h-[60vh] sm:h-[70vh] lg:h-screen flex items-center justify-center overflow-hidden bg-[#003631]">
         <div className="absolute inset-0">
           <img 
-            src="https://images.unsplash.com/photo-1547996160-81dfd58739c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-            alt="Luxury Watch Collection"
+            // src="https://images.unsplash.com/photo-1547996160-81dfd58739c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+            // alt="Luxury Watch Collection"
             className="w-full h-full object-cover opacity-40"
+            data-aos="zoom-out"
+            data-aos-duration="1500"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#003631]/80 via-[#003631]/50 to-[#003631]/80"></div>
         </div>
         
         <div className="relative z-10 text-center text-white px-4 sm:px-6 max-w-4xl mx-auto">
           <div className="mb-8 sm:mb-12">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto mb-6 sm:mb-8 border-2 border-[#FFEDA8] rounded-full flex items-center justify-center">
+            <div 
+              className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto mb-6 sm:mb-8 border-2 border-[#FFEDA8] rounded-full flex items-center justify-center"
+              data-aos="zoom-in"
+              data-aos-delay="300"
+              data-aos-duration="1000"
+            >
               <span className="text-[#FFEDA8] text-2xl sm:text-3xl font-bold font-serif">V</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-serif font-light mb-6 sm:mb-8 tracking-tight">
+            <h1 
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-serif font-light mb-6 sm:mb-8 tracking-tight"
+              data-aos="fade-up"
+              data-aos-delay="500"
+              data-aos-duration="1200"
+            >
               VELOCE
             </h1>
-            <div className="w-24 sm:w-28 lg:w-32 h-0.5 bg-[#FFEDA8] mx-auto mb-6 sm:mb-8"></div>
-            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-light tracking-widest uppercase text-gray-200">
+            <div 
+              className="w-24 sm:w-28 lg:w-32 h-0.5 bg-[#FFEDA8] mx-auto mb-6 sm:mb-8"
+              data-aos="fade-right"
+              data-aos-delay="700"
+              data-aos-duration="1000"
+            ></div>
+            <p 
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-light tracking-widest uppercase text-gray-200"
+              data-aos="fade-up"
+              data-aos-delay="900"
+              data-aos-duration="1000"
+            >
               Excellence Since 2023
             </p>
           </div>
-          <p className="text-base sm:text-lg md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed px-4">
+          <p 
+            className="text-base sm:text-lg md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed px-4"
+            data-aos="fade-up"
+            data-aos-delay="1100"
+            data-aos-duration="1000"
+          >
             Where heritage meets innovation, and every second is crafted with unparalleled precision
           </p>
         </div>
 
-        <div className="absolute bottom-6 sm:bottom-8 lg:bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div 
+          className="absolute bottom-6 sm:bottom-8 lg:bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce"
+          data-aos="fade-up"
+          data-aos-delay="1300"
+        >
           <div className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-[#FFEDA8] rounded-full flex justify-center">
             <div className="w-0.5 h-2 sm:h-3 bg-[#FFEDA8] rounded-full mt-2"></div>
           </div>
@@ -63,38 +108,68 @@ const About = () => {
         <div className="container mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 items-center">
             <div className="relative group order-2 lg:order-1">
-              <div className="absolute -top-4 -left-4 sm:-top-6 sm:-left-6 w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 border-t border-l border-[#FFEDA8]"></div>
-              <div className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 border-b border-r border-[#FFEDA8]"></div>
+              <div 
+                className="absolute -top-4 -left-4 sm:-top-6 sm:-left-6 w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 border-t border-l border-[#FFEDA8]"
+                data-aos="fade-right"
+                data-aos-delay="200"
+              ></div>
+              <div 
+                className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 border-b border-r border-[#FFEDA8]"
+                data-aos="fade-left"
+                data-aos-delay="200"
+              ></div>
               <div className="relative overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1180&q=80"
                   alt="Watchmaking Craft"
                   className="w-full h-64 sm:h-80 lg:h-96 xl:h-[500px] 2xl:h-[700px] object-cover transform group-hover:scale-105 transition-transform duration-700"
+                  data-aos="zoom-in"
+                  data-aos-delay="300"
                 />
                 <div className="absolute inset-0 bg-[#003631]/10 group-hover:bg-transparent transition-colors duration-300"></div>
               </div>
             </div>
             
             <div className="lg:pl-8 xl:pl-12 order-1 lg:order-2">
-              <div className="flex items-center mb-6 sm:mb-8">
+              <div 
+                className="flex items-center mb-6 sm:mb-8"
+                data-aos="fade-right"
+                data-aos-delay="100"
+              >
                 <div className="w-12 sm:w-14 lg:w-16 h-0.5 bg-[#FFEDA8] mr-3 sm:mr-4"></div>
                 <span className="text-[#FFEDA8] uppercase tracking-widest text-xs sm:text-sm font-semibold">Our Heritage</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-light text-[#003631] mb-6 sm:mb-8 leading-tight">
+              <h2 
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-light text-[#003631] mb-6 sm:mb-8 leading-tight"
+                data-aos="fade-up"
+                data-aos-delay="200"
+              >
                 Crafting <span className="text-[#FFEDA8]">Legends</span> <br className="hidden sm:block" />
                 For Generations
               </h2>
-              <p className="text-[#003631] text-base sm:text-lg leading-relaxed mb-6 sm:mb-8">
+              <p 
+                className="text-[#003631] text-base sm:text-lg leading-relaxed mb-6 sm:mb-8"
+                data-aos="fade-up"
+                data-aos-delay="300"
+              >
                 For over five decades, Veloce has stood as the pinnacle of horological excellence. 
                 Our Geneva atelier brings together the world's most skilled artisans, each timepiece 
                 a symphony of Swiss precision and artistic mastery.
               </p>
-              <p className="text-[#003631] text-base sm:text-lg leading-relaxed mb-8 sm:mb-12">
+              <p 
+                className="text-[#003631] text-base sm:text-lg leading-relaxed mb-8 sm:mb-12"
+                data-aos="fade-up"
+                data-aos-delay="400"
+              >
                 Every mechanism tells a story of innovation, every design whispers legacy, and every 
                 finished watch becomes an heirloom waiting to begin its journey.
               </p>
               
-              <div className="grid grid-cols-3 gap-4 sm:gap-6 lg:gap-8 text-center">
+              <div 
+                className="grid grid-cols-3 gap-4 sm:gap-6 lg:gap-8 text-center"
+                data-aos="fade-up"
+                data-aos-delay="500"
+              >
                 <div className="group hover:transform hover:scale-105 transition-transform duration-300">
                   <div className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#FFEDA8] mb-1 sm:mb-2 group-hover:text-[#FFEDA8]/80">2+</div>
                   <div className="text-[#003631] text-xs sm:text-sm uppercase tracking-widest">Years Excellence</div>
@@ -120,16 +195,32 @@ const About = () => {
             src="https://images.unsplash.com/photo-1434056886845-dac89ffe9b56?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
             alt="Watch Mechanism"
             className="w-full h-full object-cover opacity-20"
+            data-aos="zoom-out"
+            data-aos-duration="1500"
           />
         </div>
         
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
-          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+          <div 
+            className="text-center mb-12 sm:mb-16 lg:mb-20"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
             <div className="flex justify-center mb-4 sm:mb-6">
               <div className="w-12 sm:w-14 lg:w-16 h-0.5 bg-[#FFEDA8]"></div>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-light mb-4 sm:mb-6">The Art of Precision</h2>
-            <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto px-4">
+            <h2 
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-light mb-4 sm:mb-6"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              The Art of Precision
+            </h2>
+            <p 
+              className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto px-4"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
               Where engineering excellence meets timeless artistry
             </p>
           </div>
@@ -164,7 +255,13 @@ const About = () => {
                 description: "We source only the finest materials: 18k gold, platinum, and ethically sourced diamonds of exceptional quality."
               }
             ].map((item, index) => (
-              <div key={index} className="group text-center p-6 sm:p-8 lg:p-12 bg-[#002822]/50 rounded-lg hover:bg-[#002822]/70 transition-all duration-500 border border-[#003631] hover:border-[#FFEDA8]/30">
+              <div 
+                key={index} 
+                className="group text-center p-6 sm:p-8 lg:p-12 bg-[#002822]/50 rounded-lg hover:bg-[#002822]/70 transition-all duration-500 border border-[#003631] hover:border-[#FFEDA8]/30"
+                data-aos="flip-up"
+                data-aos-delay={index * 200}
+                data-aos-duration="1000"
+              >
                 <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto mb-6 sm:mb-8 bg-[#FFEDA8]/10 rounded-full flex items-center justify-center group-hover:bg-[#FFEDA8]/20 transition-colors duration-300 border border-[#FFEDA8]/20">
                   {item.icon}
                 </div>
@@ -182,12 +279,26 @@ const About = () => {
       <section className="py-12 sm:py-16 lg:py-20 xl:py-24 bg-white">
         <div className="container mx-auto px-4 sm:px-6">
           {/* Section Title */}
-          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+          <div 
+            className="text-center mb-12 sm:mb-16 lg:mb-20"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
             <div className="flex justify-center mb-4 sm:mb-6">
               <div className="w-12 sm:w-14 lg:w-16 h-0.5 bg-[#FFEDA8]"></div>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-light mb-4 sm:mb-6 text-[#003631]">Our Collections</h2>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto px-4">
+            <h2 
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-light mb-4 sm:mb-6 text-[#003631]"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              Our Collections
+            </h2>
+            <p 
+              className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto px-4"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
               Timeless pieces for every occasion and style
             </p>
           </div>
@@ -217,6 +328,9 @@ const About = () => {
               <div
                 key={index}
                 className="bg-white rounded-lg shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 overflow-hidden flex flex-col"
+                data-aos="fade-up"
+                data-aos-delay={index * 200}
+                data-aos-duration="800"
               >
                 {/* Image */}
                 <div className="relative w-full h-48 sm:h-56 lg:h-64 overflow-hidden">
@@ -255,19 +369,35 @@ const About = () => {
         <div className="container mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="order-2 lg:order-1">
-              <div className="flex items-center mb-6 sm:mb-8">
+              <div 
+                className="flex items-center mb-6 sm:mb-8"
+                data-aos="fade-right"
+                data-aos-delay="100"
+              >
                 <div className="w-12 sm:w-14 lg:w-16 h-0.5 bg-[#FFEDA8] mr-3 sm:mr-4"></div>
                 <span className="text-[#FFEDA8] uppercase tracking-widest text-xs sm:text-sm font-semibold">Innovation</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-light text-[#003631] mb-6 sm:mb-8">
+              <h2 
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-light text-[#003631] mb-6 sm:mb-8"
+                data-aos="fade-up"
+                data-aos-delay="200"
+              >
                 Pushing <span className="text-[#FFEDA8]">Boundaries</span>
               </h2>
-              <p className="text-[#003631] text-base sm:text-lg leading-relaxed mb-6 sm:mb-8">
+              <p 
+                className="text-[#003631] text-base sm:text-lg leading-relaxed mb-6 sm:mb-8"
+                data-aos="fade-up"
+                data-aos-delay="300"
+              >
                 At Veloce, we continuously innovate while respecting traditional watchmaking. 
                 Our research and development team works tirelessly to introduce new technologies 
                 that enhance precision, durability, and beauty.
               </p>
-              <div className="space-y-3 sm:space-y-4">
+              <div 
+                className="space-y-3 sm:space-y-4"
+                data-aos="fade-up"
+                data-aos-delay="400"
+              >
                 {[
                   "Advanced anti-magnetic technology",
                   "Proprietary lubrication systems",
@@ -284,7 +414,12 @@ const About = () => {
             
             {/* Video Section */}
             <div className="relative order-1 lg:order-2">
-              <div className="relative rounded-lg shadow-2xl overflow-hidden group">
+              <div 
+                className="relative rounded-lg shadow-2xl overflow-hidden group"
+                data-aos="zoom-in"
+                data-aos-delay="500"
+                data-aos-duration="1200"
+              >
                 <video 
                   className="w-full h-64 sm:h-80 lg:h-96 xl:h-[500px] object-cover"
                   autoPlay
@@ -320,7 +455,11 @@ const About = () => {
                   </div>
                 </button>
               </div>
-              <div className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 bg-[#FFEDA8] rounded-full opacity-20"></div>
+              <div 
+                className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 bg-[#FFEDA8] rounded-full opacity-20"
+                data-aos="fade-up"
+                data-aos-delay="700"
+              ></div>
             </div>
           </div>
         </div>
@@ -331,20 +470,40 @@ const About = () => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#FFEDA8]/5 via-transparent to-transparent"></div>
         
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto mb-8 sm:mb-12 border-2 border-[#FFEDA8] rounded-full flex items-center justify-center">
+          <div 
+            className="max-w-4xl mx-auto text-center"
+            data-aos="zoom-in"
+            data-aos-duration="1500"
+          >
+            <div 
+              className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto mb-8 sm:mb-12 border-2 border-[#FFEDA8] rounded-full flex items-center justify-center"
+              data-aos="rotate-c"
+              data-aos-delay="200"
+            >
               <span className="text-[#FFEDA8] text-2xl sm:text-3xl lg:text-4xl font-bold font-serif">V</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif font-light mb-6 sm:mb-8 leading-tight">
+            <h2 
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif font-light mb-6 sm:mb-8 leading-tight"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
               A Legacy <span className="text-[#FFEDA8]">Perfected</span> <br className="hidden sm:block" />
               Through Time
             </h2>
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-200 mb-8 sm:mb-12 leading-relaxed max-w-3xl mx-auto px-4">
+            <p 
+              className="text-lg sm:text-xl md:text-2xl text-gray-200 mb-8 sm:mb-12 leading-relaxed max-w-3xl mx-auto px-4"
+              data-aos="fade-up"
+              data-aos-delay="600"
+            >
               Every Veloce watch carries five decades of heritage, innovation, and uncompromising quality. 
               It's more than a timekeeper—it's a story of excellence that accompanies you through life's most precious moments.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
+            <div 
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center"
+              data-aos="fade-up"
+              data-aos-delay="800"
+            >
               <button onClick={() => navigate("/shop")}
                 className="bg-[#FFEDA8] text-[#003631] px-8 sm:px-12 lg:px-16 py-3 sm:py-4 lg:py-5 text-sm sm:text-base lg:text-lg font-semibold uppercase tracking-widest hover:bg-[#FFEDA8]/90 transition-colors duration-300 transform hover:scale-105 border-2 border-[#FFEDA8] w-full sm:w-auto"
               >
@@ -357,13 +516,29 @@ const About = () => {
 
       {/* Signature Section */}
       <section className="py-12 sm:py-16 lg:py-20 bg-[#003631] text-white">
-        <div className="container mx-auto px-4 sm:px-6 text-center">
+        <div 
+          className="container mx-auto px-4 sm:px-6 text-center"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+        >
           <div className="max-w-2xl mx-auto">
-            <div className="w-12 sm:w-14 lg:w-16 h-0.5 bg-[#FFEDA8] mx-auto mb-6 sm:mb-8"></div>
-            <p className="text-xl sm:text-2xl italic text-gray-200 leading-relaxed mb-8 sm:mb-12">
+            <div 
+              className="w-12 sm:w-14 lg:w-16 h-0.5 bg-[#FFEDA8] mx-auto mb-6 sm:mb-8"
+              data-aos="fade-right"
+              data-aos-delay="200"
+            ></div>
+            <p 
+              className="text-xl sm:text-2xl italic text-gray-200 leading-relaxed mb-8 sm:mb-12"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
               "We don't just tell time. We craft the moments that define lifetimes."
             </p>
-            <div className="text-[#FFEDA8] font-serif text-base sm:text-lg">
+            <div 
+              className="text-[#FFEDA8] font-serif text-base sm:text-lg"
+              data-aos="fade-up"
+              data-aos-delay="600"
+            >
               — Veloce , india
             </div>
           </div>

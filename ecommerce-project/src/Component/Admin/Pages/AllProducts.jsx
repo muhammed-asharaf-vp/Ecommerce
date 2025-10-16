@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import api from '../../../Api/Axios';
 import AdminLayout from '../AdminLayout';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const AllProductsPage = () => {
   const [products, setProducts] = useState([]);
@@ -22,6 +24,22 @@ const AllProductsPage = () => {
     warranty: '',
     isActive: true
   });
+
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+      offset: 100
+    });
+  }, []);
+
+  // Refresh AOS when products or filtered products change
+  useEffect(() => {
+    AOS.refresh();
+  }, [products, filteredProducts]);
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -196,14 +214,18 @@ const AllProductsPage = () => {
     <AdminLayout>
       <div className="min-h-screen bg-gray-50 p-6">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-8" data-aos="fade-up">
           <h1 className="text-3xl font-bold text-gray-900">All Products</h1>
           <p className="text-gray-600 mt-2">Manage your product inventory and listings</p>
         </div>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+          <div 
+            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Total Products</p>
@@ -217,7 +239,11 @@ const AllProductsPage = () => {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+          <div 
+            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
+            data-aos="fade-up"
+            data-aos-delay="150"
+          >
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Active Products</p>
@@ -233,7 +259,11 @@ const AllProductsPage = () => {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+          <div 
+            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Men's Watches</p>
@@ -249,7 +279,11 @@ const AllProductsPage = () => {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+          <div 
+            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
+            data-aos="fade-up"
+            data-aos-delay="250"
+          >
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Women's Watches</p>
@@ -267,7 +301,11 @@ const AllProductsPage = () => {
         </div>
 
         {/* Filters Section */}
-        <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 mb-6">
+        <div 
+          className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 mb-6"
+          data-aos="fade-up"
+          data-aos-delay="300"
+        >
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -320,7 +358,11 @@ const AllProductsPage = () => {
         </div>
 
         {/* Products Table */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div 
+          className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden"
+          data-aos="fade-up"
+          data-aos-delay="400"
+        >
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
@@ -346,8 +388,13 @@ const AllProductsPage = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {filteredProducts.map((product) => (
-                  <tr key={product.id} className="hover:bg-gray-50 transition-colors">
+                {filteredProducts.map((product, index) => (
+                  <tr 
+                    key={product.id} 
+                    className="hover:bg-gray-50 transition-colors"
+                    data-aos="fade-up"
+                    data-aos-delay={index * 50}
+                  >
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="h-12 w-12 flex-shrink-0">
@@ -419,7 +466,10 @@ const AllProductsPage = () => {
           </div>
 
           {filteredProducts.length === 0 && (
-            <div className="text-center py-12">
+            <div 
+              className="text-center py-12"
+              data-aos="fade-up"
+            >
               <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-16" />
               </svg>
@@ -431,8 +481,14 @@ const AllProductsPage = () => {
 
         {/* Product Details Modal */}
         {isModalOpen && selectedProduct && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+            data-aos="fade-in"
+          >
+            <div 
+              className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+              data-aos="zoom-in"
+            >
               <div className="p-6">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-2xl font-bold text-gray-900">Product Details</h2>
@@ -447,7 +503,7 @@ const AllProductsPage = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
+                  <div data-aos="fade-right">
                     <img
                       src={selectedProduct.images[0]}
                       alt={selectedProduct.name}
@@ -455,7 +511,7 @@ const AllProductsPage = () => {
                     />
                   </div>
 
-                  <div className="space-y-4">
+                  <div className="space-y-4" data-aos="fade-left">
                     <div>
                       <h3 className="text-lg font-semibold text-gray-900">{selectedProduct.name}</h3>
                       <p className="text-sm text-gray-500">ID: {selectedProduct.id}</p>
@@ -466,25 +522,25 @@ const AllProductsPage = () => {
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                      <div>
+                      <div data-aos="fade-up" data-aos-delay="100">
                         <p className="text-sm font-medium text-gray-500">Price</p>
                         <p className="text-lg font-semibold text-gray-900">{formatPrice(selectedProduct.price)}</p>
                       </div>
-                      <div>
+                      <div data-aos="fade-up" data-aos-delay="150">
                         <p className="text-sm font-medium text-gray-500">Stock</p>
                         <p className="text-lg font-semibold text-gray-900">{selectedProduct.count}</p>
                       </div>
-                      <div>
+                      <div data-aos="fade-up" data-aos-delay="200">
                         <p className="text-sm font-medium text-gray-500">Category</p>
                         <p className="text-sm font-semibold text-gray-900 capitalize">{selectedProduct.category}</p>
                       </div>
-                      <div>
+                      <div data-aos="fade-up" data-aos-delay="250">
                         <p className="text-sm font-medium text-gray-500">Warranty</p>
                         <p className="text-sm font-semibold text-gray-900">{selectedProduct.warranty}</p>
                       </div>
                     </div>
 
-                    <div>
+                    <div data-aos="fade-up" data-aos-delay="300">
                       <p className="text-sm font-medium text-gray-500">Status</p>
                       <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
                         selectedProduct.isActive
@@ -495,7 +551,7 @@ const AllProductsPage = () => {
                       </span>
                     </div>
 
-                    <div>
+                    <div data-aos="fade-up" data-aos-delay="350">
                       <p className="text-sm font-medium text-gray-500">Created</p>
                       <p className="text-sm text-gray-900">{formatDate(selectedProduct.created_at)}</p>
                     </div>
@@ -506,12 +562,16 @@ const AllProductsPage = () => {
                   <button
                     onClick={() => handleEditProduct(selectedProduct)}
                     className="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 transition-colors"
+                    data-aos="fade-up"
+                    data-aos-delay="100"
                   >
                     Edit Product
                   </button>
                   <button
                     onClick={() => handleDeleteProduct(selectedProduct.id)}
                     className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors"
+                    data-aos="fade-up"
+                    data-aos-delay="150"
                   >
                     Delete Product
                   </button>
@@ -522,12 +582,16 @@ const AllProductsPage = () => {
                         ? 'bg-orange-600 hover:bg-orange-700'
                         : 'bg-green-600 hover:bg-green-700'
                     }`}
+                    data-aos="fade-up"
+                    data-aos-delay="200"
                   >
                     {selectedProduct.isActive ? 'Deactivate' : 'Activate'}
                   </button>
                   <button
                     onClick={() => setIsModalOpen(false)}
                     className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                    data-aos="fade-up"
+                    data-aos-delay="250"
                   >
                     Close
                   </button>
@@ -539,8 +603,14 @@ const AllProductsPage = () => {
 
         {/* Edit Product Modal */}
         {isEditModalOpen && editingProduct && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+            data-aos="fade-in"
+          >
+            <div 
+              className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+              data-aos="zoom-in"
+            >
               <div className="p-6">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-2xl font-bold text-gray-900">Edit Product</h2>
@@ -556,7 +626,7 @@ const AllProductsPage = () => {
 
                 <form onSubmit={handleUpdateProduct} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
+                    <div data-aos="fade-up" data-aos-delay="100">
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Product Name
                       </label>
@@ -570,7 +640,7 @@ const AllProductsPage = () => {
                       />
                     </div>
 
-                    <div>
+                    <div data-aos="fade-up" data-aos-delay="150">
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Price ($)
                       </label>
@@ -586,7 +656,7 @@ const AllProductsPage = () => {
                       />
                     </div>
 
-                    <div>
+                    <div data-aos="fade-up" data-aos-delay="200">
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Stock Quantity
                       </label>
@@ -601,7 +671,7 @@ const AllProductsPage = () => {
                       />
                     </div>
 
-                    <div>
+                    <div data-aos="fade-up" data-aos-delay="250">
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Category
                       </label>
@@ -617,7 +687,7 @@ const AllProductsPage = () => {
                       </select>
                     </div>
 
-                    <div>
+                    <div data-aos="fade-up" data-aos-delay="300">
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Warranty
                       </label>
@@ -632,7 +702,7 @@ const AllProductsPage = () => {
                       />
                     </div>
 
-                    <div className="flex items-center">
+                    <div className="flex items-center" data-aos="fade-up" data-aos-delay="350">
                       <input
                         type="checkbox"
                         name="isActive"
@@ -646,7 +716,7 @@ const AllProductsPage = () => {
                     </div>
                   </div>
 
-                  <div>
+                  <div data-aos="fade-up" data-aos-delay="400">
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Description
                     </label>
@@ -665,12 +735,16 @@ const AllProductsPage = () => {
                       type="button"
                       onClick={() => setIsEditModalOpen(false)}
                       className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                      data-aos="fade-up"
+                      data-aos-delay="100"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
                       className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
+                      data-aos="fade-up"
+                      data-aos-delay="150"
                     >
                       Update Product
                     </button>

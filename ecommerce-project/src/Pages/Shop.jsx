@@ -5,7 +5,8 @@ import api from "../Api/Axios";
 import { WishlistContext } from "../Context/WishListContext";
 import { CartContext } from "../Context/CartContext";
 import { FaHeart } from "react-icons/fa";
-// import Loader from "../effects/loading";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 // Icons
 const SearchIcon = () => (
@@ -76,6 +77,17 @@ const Shop = () => {
   // Brands only
   const brands = ["ALL", "RADO", "ROLEX", "OMEGA", "TAG HEUER", "CARTIER"];
 
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+      mirror: false,
+      offset: 100
+    });
+  }, []);
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
@@ -94,9 +106,12 @@ const Shop = () => {
       .get("/products")
       .then((res) => {
         setProducts(res.data);
-
-                setLoading(false);
-
+        setLoading(false);
+        
+        // Refresh AOS after products load
+        setTimeout(() => {
+          AOS.refresh();
+        }, 100);
       })
       .catch((err) => {
         console.error("Error fetching products:", err);
@@ -148,6 +163,17 @@ const Shop = () => {
     return matchesSearch && matchesBrand;
   });
 
+  // Pagination logic
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
+  // Refresh AOS when current products change
+  useEffect(() => {
+    AOS.refresh();
+  }, [currentProducts]);
+
   // Clear all filters
   const clearAllFilters = () => {
     setSelectedBrands([]);
@@ -172,12 +198,6 @@ const Shop = () => {
       setHoveredImage(hoveredImage === productId ? null : productId);
     }
   };
-
-  // Pagination logic
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
-  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -261,21 +281,33 @@ const Shop = () => {
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1547996160-81dfd9c4b1cd?auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-10"></div>
 
         <div className="relative max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 sm:gap-3 bg-white/5 backdrop-blur-lg px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-full mb-6 sm:mb-8 border border-[#FFEDA8]/20">
+          <div 
+            className="inline-flex items-center gap-2 sm:gap-3 bg-white/5 backdrop-blur-lg px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-full mb-6 sm:mb-8 border border-[#FFEDA8]/20"
+            data-aos="fade-down"
+            data-aos-delay="100"
+          >
             <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[#FFEDA8] rounded-full animate-pulse"></div>
             <span className="text-xs sm:text-sm font-light tracking-widest text-[#FFEDA8]">
               LUXURY TIMEPIECES
             </span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-thin mb-4 sm:mb-6 tracking-tight text-white">
+          <h1 
+            className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-thin mb-4 sm:mb-6 tracking-tight text-white"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
             veloce
             <span className="block text-lg sm:text-xl lg:text-2xl text-[#FFEDA8] mt-2 sm:mt-3 lg:mt-4 font-light tracking-widest">
               MASTERPIECE COLLECTION
             </span>
           </h1>
 
-          <p className="text-base sm:text-lg lg:text-xl font-light max-w-2xl sm:max-w-3xl mx-auto leading-relaxed text-gray-300 px-4">
+          <p 
+            className="text-base sm:text-lg lg:text-xl font-light max-w-2xl sm:max-w-3xl mx-auto leading-relaxed text-gray-300 px-4"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
             Where Swiss precision meets timeless elegance. Discover watches that define luxury.
           </p>
         </div>
@@ -284,7 +316,11 @@ const Shop = () => {
       {/* Search and Filters Section */}
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-6 sm:py-8 -mt-8 sm:-mt-10 relative z-10">
         {/* Search Bar */}
-        <div className="max-w-2xl mx-auto mb-6 sm:mb-8">
+        <div 
+          className="max-w-2xl mx-auto mb-6 sm:mb-8"
+          data-aos="fade-up"
+          data-aos-delay="400"
+        >
           <div className="relative group">
             <input
               type="text"
@@ -301,7 +337,11 @@ const Shop = () => {
 
         {/* Filters */}
         {showFilters && (
-          <div className="bg-[#003631]/80 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 border border-[#FFEDA8]/20 shadow-xl sm:shadow-2xl">
+          <div 
+            className="bg-[#003631]/80 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 border border-[#FFEDA8]/20 shadow-xl sm:shadow-2xl"
+            data-aos="fade-up"
+            data-aos-delay="500"
+          >
             {/* Active Filters */}
             {selectedBrands.length > 0 && (
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0 mb-4 sm:mb-6">
@@ -353,7 +393,11 @@ const Shop = () => {
         )}
 
         {/* Quick Filter Tabs */}
-        <div className="flex flex-wrap gap-2 sm:gap-3 lg:gap-4 justify-center mb-6 sm:mb-8">
+        <div 
+          className="flex flex-wrap gap-2 sm:gap-3 lg:gap-4 justify-center mb-6 sm:mb-8"
+          data-aos="fade-up"
+          data-aos-delay="600"
+        >
           {/* Brand Quick Filters */}
           <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center">
             {brands.filter(brand => brand !== "ALL").map((brand) => (
@@ -376,7 +420,11 @@ const Shop = () => {
       {/* Product Grid */}
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 pb-8">
         {/* Results Count */}
-        <div className="flex justify-between items-center mb-6">
+        <div 
+          className="flex justify-between items-center mb-6"
+          data-aos="fade-up"
+          data-aos-delay="700"
+        >
           <p className="text-gray-300 text-sm">
             Showing {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, filteredProducts.length)} of {filteredProducts.length} products
           </p>
@@ -388,7 +436,7 @@ const Shop = () => {
         </div>
 
         <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-8">
-          {currentProducts.map((product) => {
+          {currentProducts.map((product, index) => {
             const isWishlisted = wishlist.some((item) => item.id === product.id);
             const isInCart = cart.some((item) => item.id === product.id);
             const isHovered = hoveredImage === product.id;
@@ -400,6 +448,9 @@ const Shop = () => {
                 onMouseEnter={() => handleProductHover(product.id)}
                 onMouseLeave={handleProductLeave}
                 onTouchStart={() => handleProductTouch(product.id)}
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
+                data-aos-duration="800"
               >
                 {/* Product Image */}
                 <div className="relative overflow-hidden bg-gradient-to-br from-[#002822] to-[#003631]">
@@ -523,7 +574,11 @@ const Shop = () => {
 
         {/* Empty State */}
         {filteredProducts.length === 0 && (
-          <div className="text-center py-12 sm:py-16 lg:py-20">
+          <div 
+            className="text-center py-12 sm:py-16 lg:py-20"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
             <div className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto mb-4 sm:mb-6 bg-gradient-to-br from-[#003631] to-[#002822] rounded-full flex items-center justify-center shadow-xl sm:shadow-2xl border border-[#FFEDA8]/20">
               <div className="text-2xl sm:text-3xl lg:text-4xl text-[#FFEDA8]">⌚</div>
             </div>
@@ -544,7 +599,11 @@ const Shop = () => {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex justify-center items-center space-x-2 py-8">
+          <div 
+            className="flex justify-center items-center space-x-2 py-8"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
             {/* Previous Button */}
             <button
               onClick={prevPage}

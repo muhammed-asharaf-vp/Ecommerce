@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import api from '../../../Api/Axios';
 import AdminLayout from '../AdminLayout';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const ManageUsersPage = () => {
   const [users, setUsers] = useState([]);
@@ -21,6 +23,21 @@ const ManageUsersPage = () => {
     status: 'active'
   });
 
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+      offset: 100
+    });
+  }, []);
+
+  // Refresh AOS when users data changes
+  useEffect(() => {
+    AOS.refresh();
+  }, [users, filteredUsers]);
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -36,6 +53,7 @@ const ManageUsersPage = () => {
     };
     fetchUsers();
   }, []);
+
   // Filter users
   useEffect(() => {
     let filtered = users;
@@ -69,6 +87,7 @@ const ManageUsersPage = () => {
     admins: users.filter(u => u.role === 'admin').length,
     customers: users.filter(u => u.role === 'user').length
   };
+
   const handleViewDetails = (user) => {
     setSelectedUser(user);
     setIsModalOpen(true);
@@ -229,13 +248,17 @@ const ManageUsersPage = () => {
     <AdminLayout>
       <div className="min-h-screen bg-gray-50 p-6">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-8" data-aos="fade-up">
           <h1 className="text-3xl font-bold text-gray-900">Manage Users</h1>
         </div>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+          <div 
+            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Total Users</p>
@@ -249,12 +272,16 @@ const ManageUsersPage = () => {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+          <div 
+            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
+            data-aos="fade-up"
+            data-aos-delay="150"
+          >
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Active Users</p>
                 <p className="text-2xl font-bold text-green-600 mt-1">{userStats.active}</p>
-                 </div>
+              </div>
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
                 <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -263,7 +290,11 @@ const ManageUsersPage = () => {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+          <div 
+            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Administrators</p>
@@ -277,12 +308,15 @@ const ManageUsersPage = () => {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+          <div 
+            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
+            data-aos="fade-up"
+            data-aos-delay="250"
+          >
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Customers</p>
                 <p className="text-2xl font-bold text-blue-600 mt-1">{userStats.customers}</p>
-        
               </div>
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
                 <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -294,7 +328,11 @@ const ManageUsersPage = () => {
         </div>
 
         {/* Filters Section */}
-        <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 mb-6">
+        <div 
+          className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 mb-6"
+          data-aos="fade-up"
+          data-aos-delay="300"
+        >
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -347,7 +385,11 @@ const ManageUsersPage = () => {
         </div>
 
         {/* Users Table */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div 
+          className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden"
+          data-aos="fade-up"
+          data-aos-delay="400"
+        >
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
@@ -370,8 +412,13 @@ const ManageUsersPage = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {filteredUsers.map((user) => (
-                  <tr key={user.id} className="hover:bg-gray-50 transition-colors">
+                {filteredUsers.map((user, index) => (
+                  <tr 
+                    key={user.id} 
+                    className="hover:bg-gray-50 transition-colors"
+                    data-aos="fade-up"
+                    data-aos-delay={index * 50}
+                  >
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="w-10 h-10 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center">
@@ -412,17 +459,17 @@ const ManageUsersPage = () => {
                         <span className="text-gray-400">orders</span>
                       </div>
                     </td>
-                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    <div className="flex space-x-3">
-                       {/* Show View only if user is NOT admin */}
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                      <div className="flex space-x-3">
+                        {/* Show View only if user is NOT admin */}
                         {user.role !== "admin" && (
                           <button
-                           onClick={() => handleViewDetails(user)}
+                            onClick={() => handleViewDetails(user)}
                             className="text-blue-600 hover:text-blue-900"
-                           >
-                           View
-                              </button>
-                       )}
+                          >
+                            View
+                          </button>
+                        )}
                         <button
                           onClick={() => handleEditUser(user)}
                           className="text-green-600 hover:text-green-900 font-medium transition-colors"
@@ -455,7 +502,10 @@ const ManageUsersPage = () => {
           </div>
 
           {filteredUsers.length === 0 && (
-            <div className="text-center py-12">
+            <div 
+              className="text-center py-12"
+              data-aos="fade-up"
+            >
               <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
               </svg>
@@ -467,8 +517,14 @@ const ManageUsersPage = () => {
 
         {/* User Details Modal */}
         {isModalOpen && selectedUser && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+            data-aos="fade-in"
+          >
+            <div 
+              className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+              data-aos="zoom-in"
+            >
               <div className="p-6">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-2xl font-bold text-gray-900">User Details</h2>
@@ -483,7 +539,7 @@ const ManageUsersPage = () => {
                 </div>
 
                 <div className="space-y-6">
-                  <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-4" data-aos="fade-right">
                     <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center">
                       <span className="text-lg font-bold text-blue-600">
                         {selectedUser?.firstname?.[0]}{selectedUser?.lastname?.[0]}
@@ -499,31 +555,31 @@ const ManageUsersPage = () => {
                   </div>
 
                   <div className="grid grid-cols-2 gap-6">
-                    <div>
+                    <div data-aos="fade-up" data-aos-delay="100">
                       <p className="text-sm font-medium text-gray-500">Role</p>
                       <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getRoleBadgeColor(selectedUser.role)}`}>
                         {getRoleDisplayName(selectedUser.role)}
                       </span>
                     </div>
-                    <div>
+                    <div data-aos="fade-up" data-aos-delay="150">
                       <p className="text-sm font-medium text-gray-500">Status</p>
                       <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusBadgeColor(selectedUser.status)}`}>
                         {selectedUser.status === 'active' ? 'Active' : 'Inactive'}
                       </span>
                     </div>
-                    <div>
+                    <div data-aos="fade-up" data-aos-delay="200">
                       <p className="text-sm font-medium text-gray-500">Total Orders</p>
                       <p className="text-sm font-semibold text-gray-900">{selectedUser.order?.length || 0}</p>
                     </div>
-                    <div>
+                    <div data-aos="fade-up" data-aos-delay="250">
                       <p className="text-sm font-medium text-gray-500">Wishlist Items</p>
                       <p className="text-sm font-semibold text-gray-900">{selectedUser.wishlist?.length || 0}</p>
                     </div>
-                    <div>
+                    <div data-aos="fade-up" data-aos-delay="300">
                       <p className="text-sm font-medium text-gray-500">Cart Items</p>
                       <p className="text-sm font-semibold text-gray-900">{selectedUser.cart?.length || 0}</p>
                     </div>
-                    <div>
+                    <div data-aos="fade-up" data-aos-delay="350">
                       <p className="text-sm font-medium text-gray-500">Shipping Addresses</p>
                       <p className="text-sm font-semibold text-gray-900">{selectedUser.shippingAddress?.length || 0}</p>
                     </div>
@@ -534,6 +590,8 @@ const ManageUsersPage = () => {
                   <button
                     onClick={() => handleEditUser(selectedUser)}
                     className="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 transition-colors"
+                    data-aos="fade-up"
+                    data-aos-delay="100"
                   >
                     Edit User
                   </button>
@@ -545,6 +603,8 @@ const ManageUsersPage = () => {
                         ? 'bg-gray-400 cursor-not-allowed'
                         : 'bg-red-600 hover:bg-red-700'
                     }`}
+                    data-aos="fade-up"
+                    data-aos-delay="150"
                   >
                     Delete User
                   </button>
@@ -555,12 +615,16 @@ const ManageUsersPage = () => {
                         ? 'bg-orange-600 hover:bg-orange-700'
                         : 'bg-green-600 hover:bg-green-700'
                     }`}
+                    data-aos="fade-up"
+                    data-aos-delay="200"
                   >
                     {selectedUser.status === 'active' ? 'Deactivate' : 'Activate'}
                   </button>
                   <button
                     onClick={() => setIsModalOpen(false)}
                     className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                    data-aos="fade-up"
+                    data-aos-delay="250"
                   >
                     Close
                   </button>
@@ -572,8 +636,14 @@ const ManageUsersPage = () => {
 
         {/* Edit User Modal */}
         {isEditModalOpen && editingUser && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+            data-aos="fade-in"
+          >
+            <div 
+              className="bg-white rounded-xl max-w-md w-full max-h-[90vh] overflow-y-auto"
+              data-aos="zoom-in"
+            >
               <div className="p-6">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-2xl font-bold text-gray-900">Edit User</h2>
@@ -588,7 +658,7 @@ const ManageUsersPage = () => {
                 </div>
 
                 <form onSubmit={handleUpdateUser} className="space-y-6">
-                  <div>
+                  <div data-aos="fade-up" data-aos-delay="100">
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       First Name
                     </label>
@@ -602,7 +672,7 @@ const ManageUsersPage = () => {
                     />
                   </div>
 
-                  <div>
+                  <div data-aos="fade-up" data-aos-delay="150">
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Last Name
                     </label>
@@ -616,7 +686,7 @@ const ManageUsersPage = () => {
                     />
                   </div>
 
-                  <div>
+                  <div data-aos="fade-up" data-aos-delay="200">
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Email Address
                     </label>
@@ -630,7 +700,7 @@ const ManageUsersPage = () => {
                     />
                   </div>
 
-                  <div>
+                  <div data-aos="fade-up" data-aos-delay="250">
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Role
                     </label>
@@ -646,7 +716,7 @@ const ManageUsersPage = () => {
                     </select>
                   </div>
 
-                  <div>
+                  <div data-aos="fade-up" data-aos-delay="300">
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Status
                     </label>
@@ -667,12 +737,16 @@ const ManageUsersPage = () => {
                       type="button"
                       onClick={() => setIsEditModalOpen(false)}
                       className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                      data-aos="fade-up"
+                      data-aos-delay="100"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
                       className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
+                      data-aos="fade-up"
+                      data-aos-delay="150"
                     >
                       Update User
                     </button>

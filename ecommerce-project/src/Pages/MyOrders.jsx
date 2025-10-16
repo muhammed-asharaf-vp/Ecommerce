@@ -17,12 +17,25 @@ import {
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function MyOrders() {
   const [user, setUser] = useState(null);
   const [orders, setOrders] = useState([]);
   const [filter, setFilter] = useState("all");
   const navigate = useNavigate();
+
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+      mirror: false,
+      offset: 100
+    });
+  }, []);
 
   // Load user and orders from localStorage
   useEffect(() => {
@@ -31,6 +44,11 @@ function MyOrders() {
     
     if (storedUser && storedUser.order) {
       setOrders(storedUser.order);
+      
+      // Refresh AOS after orders load
+      setTimeout(() => {
+        AOS.refresh();
+      }, 100);
     }
   }, []);
 
@@ -39,6 +57,11 @@ function MyOrders() {
     if (filter === "all") return true;
     return order.status === filter;
   });
+
+  // Refresh AOS when filter or orders change
+  useEffect(() => {
+    AOS.refresh();
+  }, [filter, orders]);
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -187,15 +210,37 @@ function MyOrders() {
       <>
         <Navbar />
         <div className="min-h-screen bg-gradient-to-br from-[#003631] to-[#002822] flex items-center justify-center">
-          <div className="text-center">
-            <div className="w-24 h-24 bg-[#002822]/80 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6 border border-[#FFEDA8]/20">
+          <div 
+            className="text-center"
+            data-aos="zoom-in"
+            data-aos-delay="200"
+          >
+            <div 
+              className="w-24 h-24 bg-[#002822]/80 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6 border border-[#FFEDA8]/20"
+              data-aos="pulse"
+              data-aos-delay="400"
+            >
               <FaShoppingBag className="text-3xl text-[#FFEDA8]" />
             </div>
-            <h3 className="text-2xl font-light text-white mb-4">Please Login</h3>
-            <p className="text-gray-300 max-w-sm mb-6">Sign in to view your order history</p>
+            <h3 
+              className="text-2xl font-light text-white mb-4"
+              data-aos="fade-up"
+              data-aos-delay="600"
+            >
+              Please Login
+            </h3>
+            <p 
+              className="text-gray-300 max-w-sm mb-6"
+              data-aos="fade-up"
+              data-aos-delay="800"
+            >
+              Sign in to view your order history
+            </p>
             <button 
               onClick={() => navigate("/login")}
-              className="bg-[#FFEDA8] text-[#003631] px-6 py-3 rounded-lg hover:bg-[#FFEDA8]/90 transition-colors font-medium border border-[#FFEDA8]"
+              className="bg-[#FFEDA8] text-[#003631] px-6 py-3 rounded-lg hover:bg-[#FFEDA8]/90 transition-colors font-medium border border-[#FFEDA8] transform hover:scale-105"
+              data-aos="zoom-in"
+              data-aos-delay="1000"
             >
               Sign In
             </button>
@@ -211,8 +256,16 @@ function MyOrders() {
       <div className="min-h-screen bg-gradient-to-br from-[#003631] to-[#002822] py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-lg px-6 py-3 rounded-full mb-6 border border-[#FFEDA8]/20">
+          <div 
+            className="text-center mb-12"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div 
+              className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-lg px-6 py-3 rounded-full mb-6 border border-[#FFEDA8]/20"
+              data-aos="fade-down"
+              data-aos-delay="200"
+            >
               <div className="w-2 h-2 bg-[#FFEDA8] rounded-full animate-pulse"></div>
               <span className="text-sm font-light tracking-widest text-[#FFEDA8]">
                 ORDER HISTORY
@@ -220,24 +273,44 @@ function MyOrders() {
             </div>
 
             <div className="flex items-center justify-center mb-4">
-              <div className="w-12 h-12 bg-[#FFEDA8]/10 rounded-full flex items-center justify-center mr-4 border border-[#FFEDA8]/20">
+              <div 
+                className="w-12 h-12 bg-[#FFEDA8]/10 rounded-full flex items-center justify-center mr-4 border border-[#FFEDA8]/20"
+                data-aos="zoom-in"
+                data-aos-delay="300"
+              >
                 <FaShoppingBag className="text-[#FFEDA8] text-xl" />
               </div>
               <div className="text-left">
-                <h1 className="text-2xl lg:text-3xl font-light text-white">My Orders</h1>
-                <p className="text-gray-300 text-sm mt-1">Track and manage your luxury purchases</p>
+                <h1 
+                  className="text-2xl lg:text-3xl font-light text-white"
+                  data-aos="fade-up"
+                  data-aos-delay="400"
+                >
+                  My Orders
+                </h1>
+                <p 
+                  className="text-gray-300 text-sm mt-1"
+                  data-aos="fade-up"
+                  data-aos-delay="500"
+                >
+                  Track and manage your luxury purchases
+                </p>
               </div>
             </div>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-2 gap-6 mb-8 items-center">
-            <div className="bg-[#002822]/80 backdrop-blur-sm rounded-xl border border-white/10 p-6 text-center">
+          <div 
+            className="grid grid-cols-2 md:grid-cols-2 gap-6 mb-8 items-center"
+            data-aos="fade-up"
+            data-aos-delay="600"
+          >
+            <div className="bg-[#002822]/80 backdrop-blur-sm rounded-xl border border-white/10 p-6 text-center transform hover:scale-105 transition-all duration-300">
               <div className="text-2xl font-light text-[#FFEDA8] mb-2">{orders.length}</div>
               <div className="text-gray-300 text-sm">Total Orders</div>
             </div>
             
-            <div className="bg-[#002822]/80 backdrop-blur-sm rounded-xl border border-white/10 p-6 text-center">
+            <div className="bg-[#002822]/80 backdrop-blur-sm rounded-xl border border-white/10 p-6 text-center transform hover:scale-105 transition-all duration-300">
               <div className="text-2xl font-light text-[#FFEDA8] mb-2">
                 ${orders.reduce((total, order) => total + (order.payment?.grandTotal || 0), 0).toFixed(2)}
               </div>
@@ -246,7 +319,11 @@ function MyOrders() {
           </div>
 
           {/* Filter Tabs */}
-          <div className="bg-[#002822]/80 backdrop-blur-sm rounded-xl border border-white/10 p-4 mb-8">
+          <div 
+            className="bg-[#002822]/80 backdrop-blur-sm rounded-xl border border-white/10 p-4 mb-8"
+            data-aos="fade-up"
+            data-aos-delay="700"
+          >
             <div className="flex flex-wrap gap-2">
               {[
                 { id: "all", label: "All Orders", count: orders.length },
@@ -254,15 +331,17 @@ function MyOrders() {
                 { id: "shipped", label: "Shipped", count: orders.filter(o => o.status === 'shipped').length },
                 { id: "delivered", label: "Delivered", count: orders.filter(o => o.status === 'delivered').length },
                 { id: "cancelled", label: "Cancelled", count: orders.filter(o => o.status === 'cancelled').length }
-              ].map(tab => (
+              ].map((tab, index) => (
                 <button
                   key={tab.id}
                   onClick={() => setFilter(tab.id)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 border ${
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 border transform hover:scale-105 ${
                     filter === tab.id
                       ? "bg-[#FFEDA8] text-[#003631] border-[#FFEDA8]"
                       : "bg-[#003631] text-gray-300 border-white/10 hover:border-[#FFEDA8]/30"
                   }`}
+                  data-aos="fade-right"
+                  data-aos-delay={800 + (index * 100)}
                 >
                   <span className="text-sm font-medium">{tab.label}</span>
                   {tab.count > 0 && (
@@ -280,12 +359,22 @@ function MyOrders() {
           {/* Orders List */}
           <div className="space-y-6">
             {filteredOrders.length > 0 ? (
-              filteredOrders.map((order) => {
+              filteredOrders.map((order, index) => {
                 const StatusIcon = getStatusIcon(order.status);
                 return (
-                  <div key={order.id} className="bg-[#002822]/80 backdrop-blur-sm rounded-xl border border-white/10 overflow-hidden hover:border-[#FFEDA8]/30 transition-all duration-300">
+                  <div 
+                    key={order.id} 
+                    className="bg-[#002822]/80 backdrop-blur-sm rounded-xl border border-white/10 overflow-hidden hover:border-[#FFEDA8]/30 transition-all duration-300 transform hover:scale-[1.02]"
+                    data-aos="fade-up"
+                    data-aos-delay={index * 100}
+                    data-aos-duration="800"
+                  >
                     {/* Order Header */}
-                    <div className="bg-[#003631] px-6 py-4 border-b border-white/10">
+                    <div 
+                      className="bg-[#003631] px-6 py-4 border-b border-white/10"
+                      data-aos="fade-down"
+                      data-aos-delay={index * 100 + 100}
+                    >
                       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div className="flex items-center gap-4">
                           <div className="w-12 h-12 bg-[#FFEDA8]/10 rounded-xl flex items-center justify-center border border-[#FFEDA8]/20">
@@ -314,8 +403,12 @@ function MyOrders() {
                     {/* Order Content */}
                     <div className="p-6">
                       {/* Shipping Info */}
-                      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-                        <div className="flex items-start gap-3">
+                      <div 
+                        className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6"
+                        data-aos="fade-up"
+                        data-aos-delay={index * 100 + 200}
+                      >
+                        <div className="flex items-start gap-3 transform hover:scale-105 transition-all duration-300">
                           <FaMapMarkerAlt className="text-[#FFEDA8] mt-1 flex-shrink-0" />
                           <div>
                             <h4 className="font-medium text-white mb-1 text-sm">Shipping Address</h4>
@@ -326,7 +419,7 @@ function MyOrders() {
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-3">
+                        <div className="flex items-start gap-3 transform hover:scale-105 transition-all duration-300">
                           <FaCreditCard className="text-[#FFEDA8] mt-1 flex-shrink-0" />
                           <div>
                             <h4 className="font-medium text-white mb-1 text-sm">Payment</h4>
@@ -336,7 +429,7 @@ function MyOrders() {
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-3">
+                        <div className="flex items-start gap-3 transform hover:scale-105 transition-all duration-300">
                           <FaTruck className="text-[#FFEDA8] mt-1 flex-shrink-0" />
                           <div>
                             <h4 className="font-medium text-white mb-1 text-sm">Delivery</h4>
@@ -352,11 +445,20 @@ function MyOrders() {
                       </div>
 
                       {/* Order Items */}
-                      <div className="border-t border-white/10 pt-6">
+                      <div 
+                        className="border-t border-white/10 pt-6"
+                        data-aos="fade-up"
+                        data-aos-delay={index * 100 + 300}
+                      >
                         <h4 className="font-medium text-white mb-4 text-sm">Order Items</h4>
                         <div className="space-y-4">
-                          {order.items?.map((item, index) => (
-                            <div key={index} className="flex items-center gap-4 p-4 bg-[#003631]/50 rounded-lg border border-white/10 hover:border-[#FFEDA8]/20 transition-all duration-300">
+                          {order.items?.map((item, itemIndex) => (
+                            <div 
+                              key={itemIndex} 
+                              className="flex items-center gap-4 p-4 bg-[#003631]/50 rounded-lg border border-white/10 hover:border-[#FFEDA8]/20 transition-all duration-300 transform hover:scale-105"
+                              data-aos="fade-right"
+                              data-aos-delay={index * 100 + 400 + (itemIndex * 50)}
+                            >
                               <div className="flex-shrink-0">
                                 <img
                                   src={item.images?.[0]}
@@ -386,17 +488,21 @@ function MyOrders() {
                       </div>
 
                       {/* Order Actions */}
-                      <div className="flex flex-wrap gap-3 mt-6 pt-6 border-t border-white/10">
+                      <div 
+                        className="flex flex-wrap gap-3 mt-6 pt-6 border-t border-white/10"
+                        data-aos="fade-up"
+                        data-aos-delay={index * 100 + 500}
+                      >
                         <button 
                           onClick={() => handleViewDetails(order)}
-                          className="flex items-center gap-2 bg-[#FFEDA8] text-[#003631] px-4 py-2 rounded-lg hover:bg-[#FFEDA8]/90 transition-colors text-sm font-medium border border-[#FFEDA8]"
+                          className="flex items-center gap-2 bg-[#FFEDA8] text-[#003631] px-4 py-2 rounded-lg hover:bg-[#FFEDA8]/90 transition-colors text-sm font-medium border border-[#FFEDA8] transform hover:scale-105"
                         >
                           <FaEye className="w-3 h-3" />
                           View Details
                         </button>
                         <button 
                           onClick={() => handleDownloadInvoice(order)}
-                          className="flex items-center gap-2 bg-[#003631] text-white px-4 py-2 rounded-lg hover:bg-white/10 transition-colors text-sm font-medium border border-white/10 hover:border-[#FFEDA8]/30"
+                          className="flex items-center gap-2 bg-[#003631] text-white px-4 py-2 rounded-lg hover:bg-white/10 transition-colors text-sm font-medium border border-white/10 hover:border-[#FFEDA8]/30 transform hover:scale-105"
                         >
                           <FaDownload className="w-3 h-3" />
                           Download Invoice
@@ -404,7 +510,7 @@ function MyOrders() {
                         {order.status === 'delivered' && (
                           <button 
                             onClick={() => handleRateProduct(order)}
-                            className="flex items-center gap-2 bg-green-500/20 text-green-400 px-4 py-2 rounded-lg hover:bg-green-500/30 transition-colors text-sm font-medium border border-green-500/30 hover:border-green-400"
+                            className="flex items-center gap-2 bg-green-500/20 text-green-400 px-4 py-2 rounded-lg hover:bg-green-500/30 transition-colors text-sm font-medium border border-green-500/30 hover:border-green-400 transform hover:scale-105"
                           >
                             <FaStar className="w-3 h-3" />
                             Rate Product
@@ -413,7 +519,7 @@ function MyOrders() {
                         {order.status === 'confirmed' && (
                           <button 
                             onClick={() => handleCancelOrder(order.id)}
-                            className="flex items-center gap-2 bg-red-500/20 text-red-400 px-4 py-2 rounded-lg hover:bg-red-500/30 transition-colors text-sm font-medium border border-red-500/30 hover:border-red-400"
+                            className="flex items-center gap-2 bg-red-500/20 text-red-400 px-4 py-2 rounded-lg hover:bg-red-500/30 transition-colors text-sm font-medium border border-red-500/30 hover:border-red-400 transform hover:scale-105"
                           >
                             <FaUndo className="w-3 h-3" />
                             Cancel Order
@@ -425,14 +531,30 @@ function MyOrders() {
                 );
               })
             ) : (
-              <div className="text-center py-16">
-                <div className="w-24 h-24 bg-[#002822]/80 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6 border border-[#FFEDA8]/20">
+              <div 
+                className="text-center py-16"
+                data-aos="zoom-in"
+                data-aos-delay="300"
+              >
+                <div 
+                  className="w-24 h-24 bg-[#002822]/80 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6 border border-[#FFEDA8]/20"
+                  data-aos="pulse"
+                  data-aos-delay="500"
+                >
                   <FaShoppingBag className="text-3xl text-[#FFEDA8]" />
                 </div>
-                <h3 className="text-xl font-light text-white mb-4">
+                <h3 
+                  className="text-xl font-light text-white mb-4"
+                  data-aos="fade-up"
+                  data-aos-delay="700"
+                >
                   {filter === 'all' ? 'No Orders Yet' : `No ${filter} Orders`}
                 </h3>
-                <p className="text-gray-300 max-w-md mx-auto mb-8 text-sm">
+                <p 
+                  className="text-gray-300 max-w-md mx-auto mb-8 text-sm"
+                  data-aos="fade-up"
+                  data-aos-delay="900"
+                >
                   {filter === 'all' 
                     ? "You haven't placed any orders yet. Start shopping to see your order history here."
                     : `You don't have any ${filter} orders at the moment.`
@@ -441,7 +563,9 @@ function MyOrders() {
                 {filter === 'all' && (
                   <button 
                     onClick={() => navigate("/shop")}
-                    className="bg-[#FFEDA8] text-[#003631] px-6 py-3 rounded-lg hover:bg-[#FFEDA8]/90 transition-colors font-medium border border-[#FFEDA8]"
+                    className="bg-[#FFEDA8] text-[#003631] px-6 py-3 rounded-lg hover:bg-[#FFEDA8]/90 transition-colors font-medium border border-[#FFEDA8] transform hover:scale-105"
+                    data-aos="zoom-in"
+                    data-aos-delay="1100"
                   >
                     Start Shopping
                   </button>
