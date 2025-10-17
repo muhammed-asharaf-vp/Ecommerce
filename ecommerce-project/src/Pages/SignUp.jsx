@@ -1,4 +1,3 @@
-
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../Api/Axios";
@@ -16,7 +15,7 @@ export default function Signup() {
     wishlist: [],
     order: [],
     shippingAddress: [],
-    status:"active"
+    status: "active"
   });
 
   const navigate = useNavigate();
@@ -52,7 +51,7 @@ export default function Signup() {
     }
 
     try {
-      //  json-server already filters with ?email
+      // json-server already filters with ?email
       const { data: users } = await api.get(`/users?email=${email}`);
 
       if (users.length > 0) {
@@ -87,19 +86,19 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md border border-gray-200">
-        <h2 className="text-2xl font-bold text-center text-gray-800">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#003631] to-[#002822] px-4">
+      <div className="bg-white/10 backdrop-blur-md p-8 rounded-xl shadow-2xl w-full max-w-md border border-[#FFEDA8]/20">
+        <h2 className="text-2xl font-bold text-center text-[#FFEDA8]">
           Create Your Account
         </h2>
-        <p className="text-sm text-gray-500 text-center mt-2">
+        <p className="text-sm text-[#FFEDA8]/80 text-center mt-2">
           Please fill in the details to sign up
         </p>
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-5">
           {/* First Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-[#FFEDA8]">
               First Name
             </label>
             <input
@@ -108,12 +107,13 @@ export default function Signup() {
               value={formData.firstname}
               onChange={handleChange}
               required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm"
+              className="mt-1 block w-full px-3 py-2 bg-white/5 border border-[#FFEDA8]/30 rounded-lg shadow-sm text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#FFEDA8] focus:border-transparent"
+              placeholder="Enter your first name"
             />
           </div>
           {/* Last Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-[#FFEDA8]">
               Last Name
             </label>
             <input
@@ -122,12 +122,13 @@ export default function Signup() {
               value={formData.lastname}
               onChange={handleChange}
               required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm"
+              className="mt-1 block w-full px-3 py-2 bg-white/5 border border-[#FFEDA8]/30 rounded-lg shadow-sm text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#FFEDA8] focus:border-transparent"
+              placeholder="Enter your last name"
             />
           </div>
           {/* Email */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-[#FFEDA8]">
               Email Address
             </label>
             <input
@@ -136,12 +137,13 @@ export default function Signup() {
               value={formData.email}
               onChange={handleChange}
               required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm"
+              className="mt-1 block w-full px-3 py-2 bg-white/5 border border-[#FFEDA8]/30 rounded-lg shadow-sm text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#FFEDA8] focus:border-transparent"
+              placeholder="Enter your email"
             />
           </div>
           {/* Password */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-[#FFEDA8]">
               Password
             </label>
             <input
@@ -150,12 +152,13 @@ export default function Signup() {
               value={formData.password}
               onChange={handleChange}
               required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm"
+              className="mt-1 block w-full px-3 py-2 bg-white/5 border border-[#FFEDA8]/30 rounded-lg shadow-sm text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#FFEDA8] focus:border-transparent"
+              placeholder="Enter your password"
             />
           </div>
           {/* Confirm Password */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-[#FFEDA8]">
               Confirm Password
             </label>
             <input
@@ -164,20 +167,24 @@ export default function Signup() {
               value={formData.confirmPassword}
               onChange={handleChange}
               required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm"
+              className="mt-1 block w-full px-3 py-2 bg-white/5 border border-[#FFEDA8]/30 rounded-lg shadow-sm text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#FFEDA8] focus:border-transparent"
+              placeholder="Confirm your password"
             />
           </div>
           <button
             type="submit"
-            className="w-full py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700"
+            className="w-full py-3 bg-[#FFEDA8] text-[#003631] font-semibold rounded-lg hover:bg-[#FFEDA8]/90 hover:shadow-lg transform hover:scale-105 transition-all duration-200 shadow-md"
           >
             Sign Up
           </button>
         </form>
 
-        <p className="text-sm text-center text-gray-600 mt-6">
+        <p className="text-sm text-center text-[#FFEDA8]/80 mt-6">
           Already have an account?{" "}
-          <Link to="/login" className="text-indigo-600 hover:underline">
+          <Link 
+            to="/login" 
+            className="text-[#FFEDA8] hover:text-[#FFEDA8]/90 hover:underline font-medium transition-colors duration-200"
+          >
             Login
           </Link>
         </p>
