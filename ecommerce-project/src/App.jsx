@@ -329,7 +329,7 @@ function App() {
 
   useEffect(() => {
     // ✅ Pages that should SKIP loading
-    const noLoadingPages = ["/","/about","/contact","/wishlist","/cart","/my-profile","/my-orders","/confirm-order","/payment","/login","/admin-allproducts","/admin-newproducts","/admin-allorders","/admin-pendingorders","/admin-completedorders","/admin-manageusers"];
+    const noLoadingPages = ["/","/about","/contact","/wishlist","/cart","/my-profile","/my-orders","/confirm-order","/payment","/login","/admin-allproducts","/admin-newproducts","/admin-allorders","/admin-pendingorders","/admin-completedorders","/admin-manageusers","/signup"];
 
     if (noLoadingPages.includes(location.pathname)) {
       setIsLoading(false);
