@@ -9,14 +9,10 @@ import {
   FaMinus,
   FaPlus,
   FaBolt,
-  FaShieldAlt,
-  FaTruck,
   FaUndo,
-  FaAward,
   FaCheck,
   FaGem,
   FaCrown,
-  FaEye,
   FaExpand,
   FaFire,
   FaRocket,
@@ -27,7 +23,6 @@ import { useAuth } from "../Context/AuthContext";
 import { CartContext } from "../Context/CartContext";
 import { WishlistContext } from "../Context/WishListContext";
 import api from "../Api/Axios";
-import Navbar from "../Component/Navbar";
 
 function Product() {
   const { id } = useParams();
@@ -45,6 +40,7 @@ function Product() {
   const [selectedImage, setSelectedImage] = useState(0);
   const [isImageZoomed, setIsImageZoomed] = useState(false);
   const [counter, setCounter] = useState(0);
+   const [touchDevice, setTouchDevice] = useState(false);
 
   const productRef = useRef(null);
   const imageRef = useRef(null);
@@ -75,6 +71,18 @@ function Product() {
     };
     fetchProduct();
   }, [id, location.state]);
+
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, []);
+  
+    // Detect touch device
+    useEffect(() => {
+      const isTouchDevice = () => {
+        return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      };
+      setTouchDevice(isTouchDevice());
+    }, []);
 
   // Auto-increment counter for impressive stats
   useEffect(() => {

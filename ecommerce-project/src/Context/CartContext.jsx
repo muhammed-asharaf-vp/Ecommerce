@@ -56,7 +56,7 @@ export const CartProvider = ({ children }) => {
   const removeFromCart = async (id) => {
     const updatedCart = cart.filter((item) => item.id !== id);
     setCart(updatedCart);
-    toast.warning("Item removed from cart.");
+    // toast.warning("Item removed from cart.");
 
     try {
       await api.patch(`/users/${userId}`, { cart: updatedCart });
@@ -108,7 +108,7 @@ export const CartProvider = ({ children }) => {
     }
 
     setCart([]);
-    toast.info("Cart cleared.");
+    // toast.info("Cart cleared.");
 
     try {
       await api.patch(`/users/${userId}`, { cart: [] });

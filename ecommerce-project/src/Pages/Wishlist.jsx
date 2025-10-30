@@ -28,13 +28,13 @@ function Wishlist() {
 
     if (window.confirm("Are you sure you want to clear your entire wishlist? This action cannot be undone.")) {
       clearWishlist();
-      toast.success("Wishlist cleared successfully");
+      // toast.success("Wishlist cleared successfully");
     }
   };
 
   const handleRemoveItem = (item) => {
     removeFromWishlist(item.id);
-    toast.info(`"${item.name}" removed from wishlist`);
+    // toast.info(`"${item.name}" removed from wishlist`);
   };
   
   const navigate = useNavigate();

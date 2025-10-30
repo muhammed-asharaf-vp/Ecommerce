@@ -328,8 +328,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // ✅ Pages that should SKIP loading
-    const noLoadingPages = ["/","/about","/contact","/wishlist","/cart","/my-profile","/my-orders","/confirm-order","/payment","/login","/admin-allproducts","/admin-newproducts","/admin-allorders","/admin-pendingorders","/admin-completedorders","/admin-manageusers","/signup","/shop"];
+    //  Pages that should SKIP loading
+    const noLoadingPages = ["/","/about","/contact","/wishlist","/cart","/my-profile","/my-orders","/confirm-order","/payment","/login","/admin-allproducts","/admin-newproducts","/admin-allorders","/admin-pendingorders","/admin-completedorders","/admin-manageusers","/signup","/shop","/Shop","/products"];
 
     if (noLoadingPages.includes(location.pathname)) {
       setIsLoading(false);
@@ -337,10 +337,10 @@ function App() {
     }
 
     // Show loading for all other pages
-    setIsLoading(true);
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+    // setIsLoading(true);
+    // const timer = setTimeout(() => {
+    //   setIsLoading(false);
+    // }, 2000);
 
     return () => clearTimeout(timer);
   }, [location.pathname]);
