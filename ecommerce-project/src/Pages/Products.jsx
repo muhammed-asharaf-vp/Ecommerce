@@ -247,7 +247,7 @@ function Product() {
         <div className="container mx-auto">
           <div className="flex items-center justify-between">
             <button
-              onClick={() => navigate(-1)}
+              onClick={() => navigate('/shop')}
               className="flex items-center gap-4 text-gray-300 hover:text-[#FFEDA8] transition-all duration-500 group"
             >
               <div className="w-12 h-12 bg-gradient-to-br from-[#004D44] to-[#003631] rounded-2xl flex items-center justify-center group-hover:from-[#FFEDA8] group-hover:to-[#FFD700] group-hover:scale-110 transition-all duration-500 shadow-2xl">
